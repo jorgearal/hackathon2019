@@ -1,58 +1,97 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit,ViewChild, Inject, ElementRef, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, IonList, LoadingController, ModalController, ToastController, Config } from '@ionic/angular';
 import { ScheduleFilterPage } from '../schedule-filter/schedule-filter';
 import { ConferenceData } from '../../providers/conference-data';
 import { UserData } from '../../providers/user-data';
+import { DOCUMENT } from '@angular/common';
+
+import { darkStyle } from './map-dark-style';
 
 @Component({
   selector: 'bienvenido',
   templateUrl: './bienvenido.page.html',
   styleUrls: ['./bienvenido.page.scss'],
 })
-export class BienvenidoPage implements OnInit {
+export class BienvenidoPage implements OnInit, AfterViewInit {
 
  // Gets a reference to the list element
- @ViewChild('scheduleList', { static: true }) scheduleList: IonList;
+ @ViewChild('mapCanvas', { static: true }) mapElement: ElementRef;
 
  ios: boolean;
- dayIndex = 0;
- queryText = '';
- segment = 'all';
- excludeTracks: any = [];
- shownSessions: any = [];
- groups: any = [];
- confDate: string;
+ markerDestination: google.maps.Marker;
 
  constructor(
+  @Inject(DOCUMENT) private doc: Document,
    public alertCtrl: AlertController,
-   public confData: ConferenceData,
    public loadingCtrl: LoadingController,
    public modalCtrl: ModalController,
    public router: Router,
    public toastCtrl: ToastController,
+   public confData: ConferenceData,
    public user: UserData,
    public config: Config
  ) { }
 
  ngOnInit() {
-   this.updateSchedule();
-
    this.ios = this.config.get('mode') === 'ios';
  }
 
- updateSchedule() {
-   // Close any open sliding items when the schedule updates
-   if (this.scheduleList) {
-     this.scheduleList.closeSlidingItems();
-   }
+ async ngAfterViewInit() {
+  const appEl = this.doc.querySelector('ion-app');
+  let isDark = false;
+  let style = [];
+  if (appEl.classList.contains('dark-theme')) {
+    style = darkStyle;
+  }
 
-   this.confData.getTimeline(this.dayIndex, this.queryText, this.excludeTracks, this.segment).subscribe((data: any) => {
-     this.shownSessions = data.shownSessions;
-     this.groups = data.groups;
-   });
+  const googleMaps = await getGoogleMaps(
+    'AIzaSyB8pf6ZdFQj5qw7rc_HSGrhUwQKfIe9ICw'
+  );
+
+  let map;
+
+  this.confData.getMap().subscribe((mapData: any) => {
+    const mapEle = this.mapElement.nativeElement;
+
+    map = new googleMaps.Map(mapEle, {
+      streetViewControl: false,
+      fullscreenControl: false,
+      mapTypeControl: false,
+      center: mapData.find((d: any) => d.center),
+      zoom: 15,
+      styles: style
+    });
+
+    map.addListener('click', (e) => {
+      this.markerDestination = placeMarkerAndPanTo(e.latLng, map, this.markerDestination);
+      console.log(this.markerDestination.position);
+    });
+
+    googleMaps.event.addListenerOnce(map, 'idle', () => {
+      mapEle.classList.add('show-map');
+    });
+  });
+
+  const observer = new MutationObserver(function (mutations) {
+    mutations.forEach((mutation) => {
+      if (mutation.attributeName === 'class') {
+        const el = mutation.target as HTMLElement;
+        isDark = el.classList.contains('dark-theme');
+        if (map && isDark) {
+          map.setOptions({styles: darkStyle});
+        } else if (map) {
+          map.setOptions({styles: []});
+        }
+      }
+    });
+  });
+  observer.observe(appEl, {
+    attributes: true
+  });
  }
 
+ /*
  async presentFilter() {
    const modal = await this.modalCtrl.create({
      component: ScheduleFilterPage,
@@ -63,73 +102,44 @@ export class BienvenidoPage implements OnInit {
    const { data } = await modal.onWillDismiss();
    if (data) {
      this.excludeTracks = data;
-     this.updateSchedule();
+     // this.updateSchedule();
    }
  }
+ */
+}
 
- async addFavorite(slidingItem: HTMLIonItemSlidingElement, sessionData: any) {
-   if (this.user.hasFavorite(sessionData.name)) {
-     // woops, they already favorited it! What shall we do!?
-     // prompt them to remove it
-     this.removeFavorite(slidingItem, sessionData, 'Favorite already added');
-   } else {
-     // remember this session as a user favorite
-     this.user.addFavorite(sessionData.name);
+function getGoogleMaps(apiKey: string): Promise<any> {
+  const win = window as any;
+  const googleModule = win.google;
+  if (googleModule && googleModule.maps) {
+    return Promise.resolve(googleModule.maps);
+  }
 
-     // create an alert instance
-     const alert = await this.alertCtrl.create({
-       header: 'Favorite Added',
-       buttons: [{
-         text: 'OK',
-         handler: () => {
-           // close the sliding item
-           slidingItem.close();
-         }
-       }]
-     });
-     // now present the alert on top of all other content
-     await alert.present();
-   }
+  return new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&v=3.31`;
+    script.async = true;
+    script.defer = true;
+    document.body.appendChild(script);
+    script.onload = () => {
+      const googleModule2 = win.google;
+      if (googleModule2 && googleModule2.maps) {
+        resolve(googleModule2.maps);
+      } else {
+        reject('google maps not available');
+      }
+    };
+  });
+}
 
- }
-
- async removeFavorite(slidingItem: HTMLIonItemSlidingElement, sessionData: any, title: string) {
-   const alert = await this.alertCtrl.create({
-     header: title,
-     message: 'Would you like to remove this session from your favorites?',
-     buttons: [
-       {
-         text: 'Cancel',
-         handler: () => {
-           // they clicked the cancel button, do not remove the session
-           // close the sliding item and hide the option buttons
-           slidingItem.close();
-         }
-       },
-       {
-         text: 'Remove',
-         handler: () => {
-           // they want to remove this session from their favorites
-           this.user.removeFavorite(sessionData.name);
-           this.updateSchedule();
-
-           // close the sliding item and hide the option buttons
-           slidingItem.close();
-         }
-       }
-     ]
-   });
-   // now present the alert on top of all other content
-   await alert.present();
- }
-
- async openSocial(network: string, fab: HTMLIonFabElement) {
-   const loading = await this.loadingCtrl.create({
-     message: `Posting to ${network}`,
-     duration: (Math.random() * 1000) + 500
-   });
-   await loading.present();
-   await loading.onWillDismiss();
-   fab.close();
- }
+function placeMarkerAndPanTo(latLng, map, marker) {
+  if(marker) {
+    marker.setMap(null);
+  }
+  
+  map.panTo(latLng);
+  return new google.maps.Marker({
+    position: latLng,
+    map: map
+  });
 }
