@@ -2,15 +2,21 @@ package co.com.sky.mobility.skyMobility.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table (name = "vehiculo")
+@NamedNativeQueries({
+@NamedNativeQuery(name = "Vehiculo.updatePersona", query = "UPDATE vehiculo SET persona_id =?1 WHERE placa =?2")
+})
 public class Vehiculo {
 	
 	@Id
@@ -44,8 +50,8 @@ public class Vehiculo {
 	@Column(name = "matricula", nullable = false, length = 100)
 	private String matricula;
 	
-	@OneToOne
-	@JoinColumn(name = "id", updatable = false, nullable = false)
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id", insertable = false, updatable = false)
 	private Persona persona;
 
 	public int getId() {

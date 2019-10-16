@@ -120,7 +120,8 @@ public class AdapterUtil {
 		vehiculo.setMatricula(vehiculoDto.getMatricula());
 		vehiculo.setModelo(vehiculoDto.getModelo());
 		vehiculo.setNumeroPuestos(vehiculoDto.getNumPuestos());
-		//vehiculo.setPersona(persona);
+		
+		vehiculo.setPersona(convertirDtoToPersona(vehiculoDto.getPersona()));
 		vehiculo.setPlaca(vehiculoDto.getPlaca());
 		vehiculo.setReferencia(vehiculoDto.getReferencia());
 		
