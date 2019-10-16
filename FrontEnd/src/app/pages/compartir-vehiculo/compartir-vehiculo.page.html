@@ -4,11 +4,42 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
 
-    <ion-title>Compartir Vehiculo</ion-title>
+    <ion-title>Compartir Ruta</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
 
-    
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-toolbar>
+          <ion-searchbar [(ngModel)]="queryText" (ionChange)="updateSchedule()" placeholder="A donde vas">
+          </ion-searchbar>
+        </ion-toolbar>
+      </ion-col>
+    </ion-row>
+    <ion-row>
 
+      <ion-col>
+        <ion-list>
+          <ion-item>
+            <ion-label color="primary" stacked>Cupos</ion-label>
+            <ion-input type="text" maxlength="2" placeholder="Asientos disponibles" [(ngModel)]="cupos"></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <div #mapCanvas class="map-canvas"></div>
+    </ion-row>
+
+    <div class="centrado">
+      <ion-button fill="clear" (click)="presentConfirm()" class="center-block btn btn-primary">
+        Registrar ruta
+      </ion-button>
+      <ion-button fill="clear" (click)="presentConfirmStarRuta()" class="center-block btn btn-primary">
+        Empezar viaje
+      </ion-button>
+    </div>
+  </ion-grid>
 </ion-content>

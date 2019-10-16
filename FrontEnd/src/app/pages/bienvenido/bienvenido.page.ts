@@ -67,6 +67,7 @@ export class BienvenidoPage implements OnInit, AfterViewInit {
 
     map.addListener('click', (e) => {
       this.markerDestination = placeMarkerAndPanTo(e.latLng, map, this.markerDestination);
+<<<<<<< HEAD
       var geocode = new google.maps.Geocoder();
       geocode.geocode({'location': this.markerDestination.position}, (results, status) => {
         if (status === 'OK') {
@@ -80,6 +81,11 @@ export class BienvenidoPage implements OnInit, AfterViewInit {
           }
         }
       });
+=======
+      console.log(this.markerDestination);
+      
+      //console.log(this.markerDestination.position);
+>>>>>>> 81ae1741d646e7a8acdf6c2fb01dfdf7bf111377
     });
 
     googleMaps.event.addListenerOnce(map, 'idle', () => {
