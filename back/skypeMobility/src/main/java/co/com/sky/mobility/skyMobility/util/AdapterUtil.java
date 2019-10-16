@@ -51,6 +51,28 @@ public class AdapterUtil {
 		
 		return personaDto;
 	}
+
+	/**
+	 *
+	 * @param personaDto
+	 * @return
+	 */
+	public static Persona convertirDtoToPersona(PersonaDTO personaDto){
+
+		Persona persona = new Persona();
+
+		persona.setCedula(personaDto.getCedula());
+		persona.setCelular(personaDto.getCelular());
+		persona.setCorreo(personaDto.getEmail());
+		persona.setFoto(personaDto.getFoto());
+		persona.setNombres(personaDto.getNombre());
+		persona.setId(personaDto.getId());
+		persona.setPuntaje(personaDto.getPuntaje());
+		persona.setEtiqueta(personaDto.getEtiqueta());
+		persona.setReputacion(personaDto.getReputacion());
+
+		return persona;
+	}
 	
 	public static List<VehiculoDTO> convertirVehiculosToDto(List<Vehiculo> vehiculos){
 		
