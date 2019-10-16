@@ -43,7 +43,8 @@ public class AdapterUtil {
 		personaDto.setCelular(persona.getCelular());
 		personaDto.setEmail(persona.getCorreo());
 		personaDto.setFoto(persona.getFoto());
-		personaDto.setNombre(persona.getNombres());
+		personaDto.setNombres(persona.getNombres());
+		personaDto.setApellidos(persona.getApellidos());
 		personaDto.setId(persona.getId());
 		personaDto.setPuntaje(persona.getPuntaje());
 		personaDto.setEtiqueta(persona.getEtiqueta());
@@ -53,11 +54,13 @@ public class AdapterUtil {
 	}
 
 	/**
-	 *
+	 * 
 	 * @param personaDto
+	 * @param updatePass
 	 * @return
+	 * @throws Exception
 	 */
-	public static Persona convertirDtoToPersona(PersonaDTO personaDto){
+	public static Persona convertirDtoToPersona(PersonaDTO personaDto, boolean updatePass) throws Exception {
 
 		Persona persona = new Persona();
 
@@ -65,11 +68,15 @@ public class AdapterUtil {
 		persona.setCelular(personaDto.getCelular());
 		persona.setCorreo(personaDto.getEmail());
 		persona.setFoto(personaDto.getFoto());
-		persona.setNombres(personaDto.getNombre());
+		persona.setNombres(personaDto.getNombres());
+		persona.setApellidos(personaDto.getApellidos());
 		persona.setId(personaDto.getId());
 		persona.setPuntaje(personaDto.getPuntaje());
 		persona.setEtiqueta(personaDto.getEtiqueta());
 		persona.setReputacion(personaDto.getReputacion());
+		
+		if (personaDto.getId() == 0 || updatePass)
+			persona.setContrasenia(SecurityUtil.encryptPassword(personaDto.getPassword()));
 
 		return persona;
 	}

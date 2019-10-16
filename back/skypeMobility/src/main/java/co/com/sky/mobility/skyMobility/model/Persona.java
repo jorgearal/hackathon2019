@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -20,16 +21,16 @@ public class Persona {
 	@Column(name = "cedula", nullable = false, length = 20)
 	private String cedula;
 	
-	@Column(name = "contraseña", nullable = false, length = 20)
+	@Column(name = "contraseña", nullable = false, length = 1000)
 	private String contrasenia;
 	
-	@Column(name = "nombres",length = 50)
+	@Column(name = "nombres", nullable = false, length = 50)
 	private String nombres;
 	
-	@Column(name = "apellidos",length = 50)
+	@Column(name = "apellidos", nullable = false,length = 50)
 	private String apellidos;
 	
-	@Column(name = "email",length = 50)
+	@Column(name = "email", nullable = false,length = 50)
 	private String correo;
 	
 	@Column(name = "celular",length = 20)
@@ -48,7 +49,8 @@ public class Persona {
 	@Column(name = "etiqueta")
 	private int etiqueta;
 	
-	@Column(name = "foto",length = 100)
+	@Lob
+	@Column(name = "foto", length=100000)
 	private String foto;
 
 	public int getId() {

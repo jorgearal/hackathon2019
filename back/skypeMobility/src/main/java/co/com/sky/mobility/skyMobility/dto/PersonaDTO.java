@@ -6,7 +6,11 @@ public class PersonaDTO {
 	 
 	 private String cedula;
 	 
-	 private String nombre;
+	 private String nombres;
+	 
+	 private String apellidos;
+	 
+	 private String password;
 	 
 	 private String email;
 	 
@@ -36,12 +40,12 @@ public class PersonaDTO {
 		this.cedula = cedula;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getNombres() {
+		return nombres;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombres(String nombres) {
+		this.nombres = nombres;
 	}
 
 	public String getEmail() {
@@ -91,7 +95,34 @@ public class PersonaDTO {
 	public void setReputacion(double reputacion) {
 		this.reputacion = reputacion;
 	}
-	 
+
+	/**
+	 * @return the apellidos
+	 */
+	public String getApellidos() {
+		return apellidos;
+	}
+
+	/**
+	 * @param apellidos the apellidos to set
+	 */
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
+	}
+
+	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * @param password the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	 
 
 }
