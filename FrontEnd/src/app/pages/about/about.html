@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Nosotros</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="presentPopover($event)">
+        <ion-icon slot="icon-only" name="more"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="about-header">
+    <img src="assets/img/ecosistema.png" alt="ionic logo">
+  </div>
+  <div class="about-info">
+    <h4 class="ion-padding-start">SkyMobility</h4>
+
+    <ion-list lines="none">
+      <ion-item>
+        <ion-icon name="calendar" slot="start"></ion-icon>
+        <ion-label position="stacked">Fecha</ion-label>
+        <ion-datetime displayFormat="MMM DD, YYYY" max="2056" [(ngModel)]="conferenceDate"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="pin" slot="start"></ion-icon>
+        <ion-label position="stacked">Ciudad</ion-label>
+        <ion-select>
+          <ion-select-option value="madison" selected>Medellín</ion-select-option>
+          <ion-select-option value="austin">Bogotá</ion-select-option>
+          <ion-select-option value="chicago">Cali</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <p class="ion-padding-start ion-padding-end">
+      En Medellín, pudes contactarnos en el teléfono (034) 55555
+    </p>
+  </div>
+</ion-content>

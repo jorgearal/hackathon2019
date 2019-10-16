@@ -1,0 +1,48 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button color='primary' (click)="startApp()" [hidden]="!showSkip">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-slides #slides (ionSlideWillChange)="onSlideChangeStart($event)" pager="false" style="background: #F1F1F1;">
+    <ion-slide>
+      <img src="assets/img/bintec.png" class="slide-image" />
+      <h2 class="slide-title">
+        Bienvenido a
+        <b>SkyMobility</b>
+      </h2>
+      <p>
+        Usar medios de transporte nunca fue tan facil, con SkyMobility, podrás moverte por la ciudad de una manera más inteligente y ágil. Ofrecemos servicios al alcance de todos los ciudadanos.<br>
+        Únete a nuestra red social y has ayudanos a generar cambio en nuestra sociedad.
+      </p>
+    </ion-slide>
+    <ion-slide>
+      <img src="assets/img/transporte.png" class="slide-image"/>
+      <h2 class="slide-title">Quienes somos?</h2>
+      <p>
+        <b>Dos</b> Mensaje</p>
+    </ion-slide>
+    <ion-slide>
+      <img src="assets/img/QR-B.png" class="slide-image" />
+      <h2 class="slide-title">Pagos al instante</h2>
+      <p>
+        Pagar nunca fue tan facil como usar el Qr de Bancolombia. Al integrarnos con Bancolombia, podrás realizar los pagos de parqueaderos, recargar tu targeta civica, alquilar medios de transporte amigables como patinetas y bicicletas públicas.
+      </p>
+    </ion-slide>
+    <ion-slide>
+      <img src="assets/img/network.png" class="slide-image" />
+      <h2 class="slide-title">Network</h2>
+      <p>
+        Trabajo colaborativo entre ciudadanos, permite la disminución de CO2, aprovechamiento de las vias, disminución de trancones, acceso y uso eficiente del transporte público y privado.
+      </p>
+      <ion-button fill="clear" (click)="startApp()" class="center-block btn btn-primary">
+        Continuar
+        <ion-icon slot="end" name="arrow-forward"></ion-icon>
+      </ion-button>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
+
