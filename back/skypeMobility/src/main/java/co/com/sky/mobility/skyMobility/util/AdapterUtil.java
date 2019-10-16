@@ -100,5 +100,25 @@ public class AdapterUtil {
 		return vehiculosDto;
 		
 	}
+	
+	public static Vehiculo convertirVehiculoDtoToVehiculo(VehiculoDTO vehiculoDto){
+		
+		Vehiculo vehiculo = new Vehiculo();
+		
+		vehiculo.setColor(vehiculoDto.getColor());
+		vehiculo.setDescripcion(vehiculoDto.getDescripcion());
+		vehiculo.setFoto(vehiculoDto.getImagen());
+		vehiculo.setId(vehiculoDto.getId());
+		vehiculo.setMarca(vehiculoDto.getMarca());
+		vehiculo.setMatricula(vehiculoDto.getMatricula());
+		vehiculo.setModelo(vehiculoDto.getModelo());
+		vehiculo.setNumeroPuestos(vehiculoDto.getNumPuestos());
+		//vehiculo.setPersona(persona);
+		vehiculo.setPlaca(vehiculoDto.getPlaca());
+		vehiculo.setReferencia(vehiculoDto.getReferencia());
+		
+		return vehiculo;
+		
+	}
 
 }
