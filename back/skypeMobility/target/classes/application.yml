@@ -1,0 +1,26 @@
+server:
+  port: 8080
+
+spring:
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+      ddl-auto: none
+  datasource:
+    url: jdbc:mysql://${BD_URL}:3306/${BD_SCHEMA}?useUnicode=true&characterEncoding=utf8&useSSL=false&requireSSL=false
+    username: ${BD_USER}
+    password: ${BD_PASSWORD}
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+      
+
+#logging:
+#  level:
+#    org:
+#      springframework:
+#        web: DEBUG
