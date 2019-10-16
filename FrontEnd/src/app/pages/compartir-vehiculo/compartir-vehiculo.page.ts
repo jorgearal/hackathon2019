@@ -38,7 +38,7 @@ export class CompartirVehiculoPage implements OnInit {
 
   registrarRuta() {
     console.log("*** Registrando ruta ***");
-    
+
   }
 
   iniciarViaje() {
@@ -65,8 +65,8 @@ export class CompartirVehiculoPage implements OnInit {
     }).then(alert => alert.present());
   }
 
-  
-  presentConfirmStarRuta(){
+
+  presentConfirmStarRuta() {
     const alert = this.alertCtrl.create({
       message: 'Esta seguro de iniciar la ruta?',
       subHeader: 'Confirmación',
