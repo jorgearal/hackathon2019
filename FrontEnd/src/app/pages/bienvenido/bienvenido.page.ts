@@ -7,6 +7,7 @@ import { UserData } from '../../providers/user-data';
 import { DOCUMENT } from '@angular/common';
 
 import { darkStyle } from './map-dark-style';
+import { timeInterval } from 'rxjs/operators';
 
 @Component({
   selector: 'bienvenido',
@@ -19,7 +20,8 @@ export class BienvenidoPage implements OnInit, AfterViewInit {
  @ViewChild('mapCanvas', { static: true }) mapElement: ElementRef;
 
  ios: boolean;
- markerDestination: google.maps.Marker;
+ markerDestination: googleMaps.Marker;
+ queryText: string;
 
  constructor(
   @Inject(DOCUMENT) private doc: Document,
@@ -65,9 +67,25 @@ export class BienvenidoPage implements OnInit, AfterViewInit {
 
     map.addListener('click', (e) => {
       this.markerDestination = placeMarkerAndPanTo(e.latLng, map, this.markerDestination);
+<<<<<<< HEAD
+      var geocode = new google.maps.Geocoder();
+      geocode.geocode({'location': this.markerDestination.position}, (results, status) => {
+        if (status === 'OK') {
+          if (results[0]) {
+            map.setZoom(18);
+            
+            this.queryText = results[0].formatted_address;
+            this.queryText = results[0].formatted_address;
+
+            console.log(results[0]);
+          }
+        }
+      });
+=======
       console.log(this.markerDestination);
       
       //console.log(this.markerDestination.position);
+>>>>>>> 81ae1741d646e7a8acdf6c2fb01dfdf7bf111377
     });
 
     googleMaps.event.addListenerOnce(map, 'idle', () => {
@@ -92,22 +110,6 @@ export class BienvenidoPage implements OnInit, AfterViewInit {
     attributes: true
   });
  }
-
- /*
- async presentFilter() {
-   const modal = await this.modalCtrl.create({
-     component: ScheduleFilterPage,
-     componentProps: { excludedTracks: this.excludeTracks }
-   });
-   await modal.present();
-
-   const { data } = await modal.onWillDismiss();
-   if (data) {
-     this.excludeTracks = data;
-     // this.updateSchedule();
-   }
- }
- */
 }
 
 function getGoogleMaps(apiKey: string): Promise<any> {
