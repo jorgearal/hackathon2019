@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PersonaService } from '../../providers/persona-service';
 
 @Component({
   selector: 'compartir-vehiculo',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompartirVehiculoPage implements OnInit {
 
-  constructor() { }
+  constructor(private personaService:PersonaService) { 
+    console.log("******************");
+    console.log(this.personaService.servicioPrueba());
+  }
 
   ngOnInit() {
   }
