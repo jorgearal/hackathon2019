@@ -65,7 +65,9 @@ export class BienvenidoPage implements OnInit, AfterViewInit {
 
     map.addListener('click', (e) => {
       this.markerDestination = placeMarkerAndPanTo(e.latLng, map, this.markerDestination);
-      console.log(this.markerDestination.position);
+      console.log(this.markerDestination);
+      
+      //console.log(this.markerDestination.position);
     });
 
     googleMaps.event.addListenerOnce(map, 'idle', () => {
