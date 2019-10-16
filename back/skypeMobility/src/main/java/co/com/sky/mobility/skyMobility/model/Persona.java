@@ -36,7 +36,7 @@ public class Persona {
 	private String celular;
 	
 	@OneToOne
-	(mappedBy = "persona", cascade = CascadeType.ALL)
+	(mappedBy = "persona")
 	private Vehiculo vehiculo;
 	
 	@Column(name = "reputacion")
