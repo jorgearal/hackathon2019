@@ -18,9 +18,9 @@
                 </ion-avatar>
               </ion-col>
               <ion-col size="9">
-                <!--&nbsp;{{persona.nombres}}
+                &nbsp;{{persona.nombres}}
                 <p style="font-size: 11px;"> &nbsp;Calificación : <label
-                    class="texto_verde">{{persona.reputacion}}</label></p>-->
+                    class="texto_verde">{{persona.reputacion}}</label></p>
               </ion-col>
             </ion-row>
           </ion-grid>
@@ -76,7 +76,7 @@
               &nbsp; &nbsp; &nbsp;Experiencia
           </ion-list-header>
           <div class="centrado">
-              <img src="assets/img/planta/planta1.PNG" alt="carro" class="pequeña" [hidden]="!(persona.puntaje<0)">
+              <img src="assets/img/planta/planta1.PNG" alt="carro" class="pequeña" [hidden]="!(persona.puntaje<=0)">
               <img src="assets/img/planta/planta2.PNG" alt="carro" class="pequeña" [hidden]="!(persona.puntaje>1000 && persona.puntaje<=4500)">
               <img src="assets/img/planta/planta3.PNG" alt="carro" class="pequeña" [hidden]="!(persona.puntaje>4500)">
           </div>
