@@ -35,7 +35,7 @@ guardarDatosPersonales() {
 }
 
   diligenciarVehiculo() {
-    this.router.navigateByUrl('/app/tabs/registrarVehiculo');
+    this.router.navigateByUrl('/registrarVehiculo');
   }
 
   salir() {

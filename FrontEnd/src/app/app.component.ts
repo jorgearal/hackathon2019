@@ -111,7 +111,7 @@ export class AppComponent implements OnInit {
       this.persona = data;
       console.log(JSON.stringify(data));
     }, (error) => {
-      alert('Los servicios no se encuentran disponibles');
+      console.log('Los servicios no se encuentran disponibles');
     });
   }
 

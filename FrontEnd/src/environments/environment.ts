@@ -4,7 +4,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 export const environment = {
   production: false,
-  endpint :"localhost"
+  endpint :"http://ec2-3-90-224-58.compute-1.amazonaws.com:8080/api/v1/mobility/"
 };
 
 
