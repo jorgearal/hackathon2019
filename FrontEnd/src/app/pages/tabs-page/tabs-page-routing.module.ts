@@ -5,6 +5,8 @@ import { SchedulePage } from '../schedule/schedule';
 import { CompartirVehiculoPage } from '../compartir-vehiculo/compartir-vehiculo.page';
 import { BienvenidoPage } from '../bienvenido/bienvenido.page';
 import { PlanearPage } from '../planear/planear.page';
+import { RegistrarPage } from '../registrar/registrar.page';
+import { RegistrarVehiculoPage } from '../registrar-vehiculo/registrar-vehiculo.page';
 
 
 const routes: Routes = [
@@ -31,6 +33,32 @@ const routes: Routes = [
           {
             path: '',
             component: CompartirVehiculoPage,
+          },
+          {
+            path: 'session/:sessionId',
+            loadChildren: () => import('../session-detail/session-detail.module').then(m => m.SessionDetailModule)
+          }
+        ]
+      },
+      {
+        path: 'registrar',
+        children: [
+          {
+            path: '',
+            component: RegistrarPage,
+          },
+          {
+            path: 'session/:sessionId',
+            loadChildren: () => import('../session-detail/session-detail.module').then(m => m.SessionDetailModule)
+          }
+        ]
+      },
+      {
+        path: 'registrarVehiculo',
+        children: [
+          {
+            path: '',
+            component: RegistrarVehiculoPage,
           },
           {
             path: 'session/:sessionId',

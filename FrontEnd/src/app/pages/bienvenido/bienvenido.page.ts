@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild, Inject, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject, ElementRef, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, IonList, LoadingController, ModalController, ToastController, Config } from '@ionic/angular';
 import { ScheduleFilterPage } from '../schedule-filter/schedule-filter';
@@ -19,7 +19,7 @@ export class BienvenidoPage implements OnInit, AfterViewInit {
  @ViewChild('mapCanvas', { static: true }) mapElement: ElementRef;
 
  ios: boolean;
- markerDestination: google.maps.Marker;
+// markerDestination: google.maps.Marker;
 
  constructor(
   @Inject(DOCUMENT) private doc: Document,
@@ -64,8 +64,8 @@ export class BienvenidoPage implements OnInit, AfterViewInit {
     });
 
     map.addListener('click', (e) => {
-      this.markerDestination = placeMarkerAndPanTo(e.latLng, map, this.markerDestination);
-      console.log(this.markerDestination.position);
+  //    this.markerDestination = placeMarkerAndPanTo(e.latLng, map, this.markerDestination);
+    //  console.log(this.markerDestination.position);
     });
 
     googleMaps.event.addListenerOnce(map, 'idle', () => {
@@ -133,13 +133,13 @@ function getGoogleMaps(apiKey: string): Promise<any> {
 }
 
 function placeMarkerAndPanTo(latLng, map, marker) {
-  if(marker) {
+/*
+  if (marker) {
     marker.setMap(null);
   }
-  
   map.panTo(latLng);
   return new google.maps.Marker({
     position: latLng,
     map: map
-  });
+  });*/
 }

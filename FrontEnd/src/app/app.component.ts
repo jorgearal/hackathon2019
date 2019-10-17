@@ -43,6 +43,11 @@ export class AppComponent implements OnInit {
       title: 'Ayuda',
       url: '/app/tabs/about',
       icon: 'information-circle'
+    },
+    {
+      title: 'Registrar',
+      url: '/app/tabs/registrar',
+      icon: 'information-circle'
     }
   ];
   loggedIn = false;
