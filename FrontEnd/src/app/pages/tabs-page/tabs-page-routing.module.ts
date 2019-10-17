@@ -8,6 +8,8 @@ import { PlanearPage } from '../planear/planear.page';
 import { BuscarRutaPage } from '../buscar-ruta/buscar-ruta.page';
 import { RegistrarPage } from '../registrar/registrar.page';
 import { RegistrarVehiculoPage } from '../registrar-vehiculo/registrar-vehiculo.page';
+import { IniciarViajePage } from '../iniciar-viaje/iniciar-viaje.page';
+import { BeneficiosPage } from '../beneficios/beneficios.page';
 
 const routes: Routes = [
   {
@@ -54,11 +56,24 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'registrar',
+        path: 'iniciarViaje/:id',
         children: [
           {
             path: '',
-            component: RegistrarPage,
+            component: IniciarViajePage,
+          },
+          {
+            path: 'session/:sessionId',
+            loadChildren: () => import('../session-detail/session-detail.module').then(m => m.SessionDetailModule)
+          }
+        ]
+      },
+      {
+        path: 'beneficios',
+        children: [
+          {
+            path: '',
+            component: BeneficiosPage,
           },
           {
             path: 'session/:sessionId',

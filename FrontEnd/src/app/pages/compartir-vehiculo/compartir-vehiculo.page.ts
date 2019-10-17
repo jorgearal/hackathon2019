@@ -5,6 +5,8 @@ import { UserData } from '../../providers/user-data';
 import { DOCUMENT } from '@angular/common';
 import { ConferenceData } from '../../providers/conference-data';
 import { darkStyle } from '../../../assets/js/map-dark-style';
+import { Router } from '@angular/router';
+import { Ruta } from '../../models/ruta-model';
 
 var map;
 
@@ -15,22 +17,25 @@ var map;
 })
 export class CompartirVehiculoPage implements OnInit {
 
-  cupos: number = 5;
+  cupos = 5;
   @ViewChild('mapCanvas', { static: true }) mapElement: ElementRef;
   ios: boolean;
   markerDestination: google.maps.Marker;
 
-  registrar: boolean = true;
+  registrar = true;
   queryText: string;
+  ruta: Ruta;
 
   constructor(
     @Inject(DOCUMENT) private doc: Document,
     private personaService: PersonaService,
     public config: Config,
     public confData: ConferenceData,
-    private alertCtrl: AlertController) {
+    private alertCtrl: AlertController, private router: Router) {
     console.log("******************");
     console.log(this.personaService.servicioPrueba());
+    this.ruta = new Ruta();
+    this.registrar =true;
   }
 
   ngOnInit() {
@@ -40,7 +45,7 @@ export class CompartirVehiculoPage implements OnInit {
 
 
   registrarRuta() {
-    console.log("*** Registrando ruta ***");
+    console.log('*** Registrando ruta ***');
 
   }
 
@@ -70,7 +75,15 @@ export class CompartirVehiculoPage implements OnInit {
 
 
   presentConfirmStarRuta() {
-    const alert = this.alertCtrl.create({
+    if (this.ruta.id) {
+      this.router.navigateByUrl('/iniciarViaje/' + this.ruta.id);
+    } else {
+      console.log(">>>> No hay ruta seleccionada..");
+      
+    }
+
+
+    /*const alert = this.alertCtrl.create({
       message: 'Esta seguro de iniciar la ruta?',
       subHeader: 'Confirmación',
       buttons: [{
@@ -82,7 +95,7 @@ export class CompartirVehiculoPage implements OnInit {
           console.log("Cancelar viaje..");
         }
       }]
-    }).then(alert => alert.present());
+    }).then(alert => alert.present());*/
   }
 
   buscarDireccion() {
@@ -92,6 +105,38 @@ export class CompartirVehiculoPage implements OnInit {
       codeAddress(map, this.queryText);
 
     }
+  }
+
+  calcularRuta() {
+    console.log("----------------------------------77 ------------------------------");
+    var directionsService = new google.maps.DirectionsService();
+    var directionsRenderer = new google.maps.DirectionsRenderer();
+    var haight = new google.maps.LatLng(6.2381291999999995, -75.5858772);
+    var oceanBeach = new google.maps.LatLng(37.7683909618184, -122.51089453697205);
+    var mapOptions = {
+      zoom: 14,
+      center: haight
+    }
+    //var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    directionsRenderer.setMap(map);
+
+    var selectedMode = 'DRIVING';// document.getElementById('mode').value;
+    var request = {
+      origin: haight,
+      destination: oceanBeach,
+      // Note that JavaScript allows us to access the constant
+      // using square brackets and a string value as its
+      // "property."
+      travelMode: google.maps.TravelMode[selectedMode]
+    };
+    console.log("----------------------------------88 ------------------------------");
+    directionsService.route(request, function (response, status) {
+      console.log(">>>>>>>>> status : " + status);
+      if (status == 'OK') {
+        directionsRenderer.setDirections(response);
+      }
+    });
+
   }
 
 
@@ -136,7 +181,7 @@ export class CompartirVehiculoPage implements OnInit {
               console.log(results[0]);
             }
           }
-        });
+        });*/
       });
 
       googleMaps.event.addListenerOnce(map, 'idle', () => {
@@ -162,7 +207,7 @@ export class CompartirVehiculoPage implements OnInit {
     });
 
     obtener();
-    pintarRuta();
+
   }
 
 }
@@ -219,7 +264,7 @@ function codeAddress(map, direccion) {
       });
       markers.push(marker);
       console.log("Encontre!! la ruta");
-      
+
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
     }
@@ -255,34 +300,36 @@ function gestionarErrores(error) {
   console.log("Error " + error);
 }
 
+var haight;
+var oceanBeach;
+
+function initMap() {
+  var directionsService = new google.maps.DirectionsService();
+  var directionsRenderer = new google.maps.DirectionsRenderer();
+  haight = new google.maps.LatLng(6.2381291999999995, -75.5858772);
+  oceanBeach = new google.maps.LatLng(37.7683909618184, -122.51089453697205);
+  var mapOptions = {
+    zoom: 14,
+    center: haight
+  }
+  //var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+  directionsRenderer.setMap(map);
+}
 
 
-function pintarRuta() {
-  var directionsService;
-  var directionsDisplay;
-  directionsService = new google.maps.DirectionsService();
-  directionsDisplay = new google.maps.DirectionsRenderer();
-  var bounds = new google.maps.LatLngBounds();
-
-  var waypoints = [
-    {
-      location: { lat: 6.2381291999999995, lng: -75.5858772 },
-      stopover: true,
-    },
-    {
-      location: { lat: 4.6247745, lng: -74.1698888 },
-      stopover: true,
-    },
-    {
-      location: { lat: 4.6212241, lng: -74.1631081 },
-      stopover: true,
-    },
-    {
-      location: { lat: 4.6222508, lng: -74.1667989 },
-      stopover: true,
+function calcRoute() {
+  var selectedMode = document.getElementById('mode').value;
+  var request = {
+    origin: haight,
+    destination: oceanBeach,
+    // Note that JavaScript allows us to access the constant
+    // using square brackets and a string value as its
+    // "property."
+    travelMode: google.maps.TravelMode[selectedMode]
+  };
+  directionsService.route(request, function (response, status) {
+    if (status == 'OK') {
+      directionsRenderer.setDirections(response);
     }
-  ];
-
-
-  
+  });
 }

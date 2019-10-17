@@ -1,7 +1,7 @@
 <ion-header>
     <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-menu-button *ngIf="registro_nuevo"></ion-menu-button>
     </ion-buttons>
   
     
@@ -41,7 +41,7 @@
   
          <ion-item>
           <ion-label position="stacked" color="primary">Linea</ion-label>
-          <ion-input [(ngModel)]="formularioVehiculo.linea" name="linea"  maxlength="6" type="text" #placa="ngModel" spellcheck="false" autocapitalize="off"
+          <ion-input [(ngModel)]="formularioVehiculo.referencia" name="referencia"  maxlength="6" type="text" #referencia="ngModel" spellcheck="false" autocapitalize="off"
             required>
           </ion-input>
         </ion-item>
@@ -91,9 +91,20 @@
           </ion-input>
         </ion-item>
         
+      <ion-item>
+          <ion-label position="stacked" color="primary">Fecha de Soat</ion-label>
+          <ion-datetime displayFormat="MM DD YY"   [(ngModel)]="formularioVehiculo.fechaSoat" name="fechaSoat" placeholder="Ingrese Fecha" required></ion-datetime>
+        </ion-item>
+
+
+      <ion-item>
+          <ion-label position="stacked" color="primary">Fecha de tecnico-mecanica</ion-label>
+          <ion-datetime  [(ngModel)]="formularioVehiculo.fotoMatricula" name="fotoMatricula" displayFormat="MM DD YY"  placeholder="Ingrese Fecha" required></ion-datetime>
+        </ion-item>
       <ion-row>
         <ion-col>
-          <ion-button (click)="onLogin(loginForm)" type="submit" expand="block">guardar</ion-button><br>
+          <ion-button (click)="guardarDatosVehiculo(loginForm)" type="submit" expand="block">Guardar</ion-button><br>
+          <ion-button (click)="salir()" color="light" expand="block"> Salir</ion-button><br>
         </ion-col>
       </ion-row>
     </form>

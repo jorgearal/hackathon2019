@@ -17,6 +17,8 @@ import { PlanearPageModule } from '../planear/planear.module';
 import { BuscarRutaPageModule } from '../buscar-ruta/buscar-ruta.module';
 import { RegistrarPageModule } from '../registrar/registrar.module';
 import { RegistrarVehiculoPageModule } from '../registrar-vehiculo/registrar-vehiculo.module';
+import { IniciarViajePageModule } from '../iniciar-viaje/iniciar-viaje.module';
+import { BeneficiosPageModule } from '../beneficios/beneficios.module';
 
 @NgModule({
   imports: [
@@ -34,7 +36,9 @@ import { RegistrarVehiculoPageModule } from '../registrar-vehiculo/registrar-veh
     BuscarRutaPageModule,
     PlanearPageModule,
     RegistrarPageModule,
-    RegistrarVehiculoPageModule
+    RegistrarVehiculoPageModule,
+    IniciarViajePageModule,
+    BeneficiosPageModule
   ],
   declarations: [
     TabsPage,
