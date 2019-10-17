@@ -55,14 +55,6 @@ public class RutaController {
 	 */
 	@PostMapping(value="api/v1/mobility/crearRuta", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity crearRuta(@RequestBody Ruta ruta){
-		
-		Edificio origen = edificioDao.findById(ruta.getOrigen().getId()).get();
-		Edificio destino = edificioDao.findById(ruta.getDestino().getId()).get();
-		Vehiculo vehiculo = vehiculoDao.findById(ruta.getVehiculo().getId()).get();
-		
-		Ruta nuevaRuta = new Ruta(ruta.getFechaPublicacion(), ruta.getFechaSalida(), vehiculo, ruta.getNumeroPersonas(), 
-				ruta.getEstado(), origen, destino, ruta.getCupo(), ruta.getPuntos());
-		
 		rutaDao.save(ruta);
 		return ResponseEntity.ok().build();
 			
