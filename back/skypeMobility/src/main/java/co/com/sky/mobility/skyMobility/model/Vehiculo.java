@@ -1,5 +1,6 @@
 package co.com.sky.mobility.skyMobility.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -50,7 +51,7 @@ public class Vehiculo {
 	@Column(name = "matricula", nullable = false, length = 100)
 	private String matricula;
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "id", insertable = false, updatable = false)
 	private Persona persona;
 	

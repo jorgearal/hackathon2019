@@ -18,6 +18,8 @@ public class RutaDTO {
     
     private EdificioDTO destino;
     
+    private VehiculoDTO vehiculo;
+    
     private int cupo;
 
 	public int getId() {
@@ -83,13 +85,19 @@ public class RutaDTO {
 	public void setDestino(EdificioDTO destino) {
 		this.destino = destino;
 	}
-	
-	
-    
-    
-	
-	
-	
-	
+
+	/**
+	 * @return the vehiculo
+	 */
+	public VehiculoDTO getVehiculo() {
+		return vehiculo;
+	}
+
+	/**
+	 * @param vehiculo the vehiculo to set
+	 */
+	public void setVehiculo(VehiculoDTO vehiculo) {
+		this.vehiculo = vehiculo;
+	}
 
 }
