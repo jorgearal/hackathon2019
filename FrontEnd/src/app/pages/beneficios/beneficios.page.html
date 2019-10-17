@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-toolbar >
+  <ion-buttons slot="start">
+    <ion-menu-button *ngIf="!registro_nuevo"></ion-menu-button>
+  </ion-buttons>
+
+  
+    <ion-title>Tus beneficios</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="about-header">
+    <img src="assets/img/ecosistema.png" alt="ionic logo">
+  </div>
+
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+          <ion-item>
+              <ion-label>Fecha: {{fecha}}</ion-label>
+             </ion-item>   
+             <ion-item>
+                <ion-label>Personas transportadas en el mes</ion-label>
+                <ion-badge slot="end">365</ion-badge>
+                <br>
+               </ion-item>             
+        <ion-item>
+          <ion-label>Viajes finalizados con éxito en el mes</ion-label>
+          <ion-badge slot="end">105</ion-badge>
+          <br>
+         </ion-item>   
+         <ion-item>
+          <ion-label>Meta Mensual</ion-label>
+          <ion-badge slot="end">200</ion-badge>
+          <br>
+         </ion-item>   
+         <ion-item>
+          <ion-label>% de meta alcanzada en el mes</ion-label>
+          <ion-badge slot="end">52 %</ion-badge>
+          <br>
+         </ion-item>  
+         <ion-item>
+            <ion-label>Historico de meta</ion-label>
+            <br>
+           </ion-item>
+
+         <ion-item>
+          <div class="igFrameBar" >
+            <div class="igData igData1"></div>
+            <div class="igData igData2"></div>
+            <div class="igData igData3"></div>
+            <div class="igData igData4"></div>
+            <div class="igData igData5"></div>
+            <div class="igData igData6"></div>
+            <div class="igData igData7"></div>
+            <div class="igData igData8"></div>
+            <div class="igData igData9"></div>
+            <div class="igData igData10"></div>
+          </div>  
+         </ion-item>
+   
+         <ion-item>
+          <ion-label>Puntos Colombia x mes</ion-label>
+          <ion-badge slot="end" color="secondary">670 Puntos</ion-badge>
+          <br>
+         </ion-item>
+              
+         <ion-item>
+            <ion-label>CO2 reducido</ion-label>
+            <ion-badge slot="end" color="tertiary">30% vs mes anterior</ion-badge>
+            <br>
+           </ion-item>     
+      </ion-col>
+    </ion-row>
+    <ion-row class="orro">
+      <ion-col>
+      </ion-col>
+    </ion-row>
+</ion-grid>  
+</ion-content>

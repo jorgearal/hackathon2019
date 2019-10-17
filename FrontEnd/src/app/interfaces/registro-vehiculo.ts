@@ -8,4 +8,6 @@ export interface RegistroVehiculo {
   puestos: number;
   fotoVehiculo: string;
   fotoMatricula: string;
+  fechaSoat: string;
+  fechaTecnicoMecanica: string;
 }

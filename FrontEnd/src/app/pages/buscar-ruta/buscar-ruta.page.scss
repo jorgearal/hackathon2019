@@ -1,7 +1,7 @@
 .map-canvas {
-    position: absolute;
+    position: relative;
   
-    height: 100%;
+    height: 40%;
     width: 100%;
   
     background-color: transparent;
@@ -14,13 +14,10 @@
     opacity: 1;
   }
 
-  .centrado {
-    top: 86%;
-    position: relative;
-    z-index: 998;
-  }
-
-  .centrado > .center-block {
-    min-width: 200px;
-    max-width: 200px;
-  }
+  ion-tab-button{
+    font-size: 10px;
+    --background-focused: rgb(0, 170, 0);
+    --color-selected: rgb(0, 170, 0);
+    ion-icon{
+        font-size: 67.5px;
+    }}

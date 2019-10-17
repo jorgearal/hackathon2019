@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: 'account',
-    loadChildren: () => import('./pages/account/account.module').then(m => m.AccountModule)
+    loadChildren: () => import('./pages/registrar/registrar.module').then(m => m.RegistrarPageModule)
   },
   {
     path: 'support',
@@ -37,6 +37,9 @@ const routes: Routes = [
   { path: 'bienvenido', loadChildren: './pages/bienvenido/bienvenido.module#BienvenidoPageModule' },
   { path: 'buscar-ruta', loadChildren: './pages/buscar-ruta/buscar-ruta.module#BuscarRutaPageModule' },
   { path: 'planear', loadChildren: './pages/planear/planear.module#PlanearPageModule' },
+  { path: 'registrar', loadChildren: './pages/registrar/registrar.module#RegistrarPageModule' },
+  { path: 'registrar-vehiculo', loadChildren: './pages/registrar-vehiculo/registrar-vehiculo.module#RegistrarVehiculoPageModule' },
+  { path: 'beneficios', loadChildren: './pages/beneficios/beneficios.module#BeneficiosPageModule' },
   { path: 'registrar', loadChildren: './pages/registrar/registrar.module#RegistrarPageModule' },
   { path: 'registrar-vehiculo', loadChildren: './pages/registrar-vehiculo/registrar-vehiculo.module#RegistrarVehiculoPageModule' },
   { path: 'iniciar-viaje/:id', loadChildren: './pages/iniciar-viaje/iniciar-viaje.module#IniciarViajePageModule' },

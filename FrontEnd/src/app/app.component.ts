@@ -40,15 +40,16 @@ export class AppComponent implements OnInit {
       icon: 'map'
     },
     {
+      title: 'Beneficios',
+      url: '/app/tabs/beneficios',
+      icon: 'information-circle'
+    },
+    {
       title: 'Ayuda',
       url: '/app/tabs/about',
       icon: 'information-circle'
     },
-    {
-      title: 'Registrar',
-      url: '/app/tabs/registrar',
-      icon: 'information-circle'
-    }
+
   ];
   loggedIn = false;
   dark = false;
@@ -124,7 +125,7 @@ export class AppComponent implements OnInit {
 
   logout() {
     this.userData.logout().then(() => {
-      return this.router.navigateByUrl('/app/tabs/bienvenido');
+      return this.router.navigateByUrl('/login');
     });
   }
 

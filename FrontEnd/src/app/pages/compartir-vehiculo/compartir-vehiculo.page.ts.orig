@@ -333,4 +333,8 @@ function initMap() {
       directionsRenderer.setDirections(response);
     }
   });
+<<<<<<< HEAD
 }*/
+=======
+}
+>>>>>>> b1f060e08ae8be53c08da9fb271c8858e2669b11
