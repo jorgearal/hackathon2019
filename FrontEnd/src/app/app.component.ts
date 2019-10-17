@@ -27,33 +27,38 @@ export class AppComponent implements OnInit {
 
   appPages = [
     {
-      title: 'Compartir Ruta',
-      url: '/app/tabs/compartirVehiculo',
+      title: 'Buscar ruta',
+      url: '/bienvenido',
       icon: 'car'
     },
     {
+      title: 'Compartir Ruta',
+      url: '/compartirVehiculo',
+      icon: 'add'
+    },
+    {
       title: 'Mis Viajes',
-      url: '/app/tabs/planear',
+      url: '/planear',
       icon: 'cash'
     },
     {
-      title: 'Puntaje',
-      url: '/app/tabs/puntaje',
-      icon: 'contacts'
+      title: 'Mis Logros',
+      url: '/puntaje',
+      icon: 'medal'
     },
     {
       title: 'Parqueadero',
-      url: '/app/tabs/map',
+      url: '/map',
       icon: 'map'
     },
     {
-      title: 'Beneficios',
-      url: '/app/tabs/beneficios',
-      icon: 'information-circle'
+      title: 'Meta Mensual',
+      url: '/beneficios',
+      icon: 'trending-up'
     },
     {
       title: 'Ayuda',
-      url: '/app/tabs/about',
+      url: '/about',
       icon: 'information-circle'
     },
 
