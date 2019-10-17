@@ -1,7 +1,6 @@
 package co.com.sky.mobility.skyMobility.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,10 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.com.sky.mobility.skyMobility.dao.IPersonaDAO;
 import co.com.sky.mobility.skyMobility.dao.IVehiculoDao;
 import co.com.sky.mobility.skyMobility.dto.VehiculoDTO;
-import co.com.sky.mobility.skyMobility.model.Persona;
 import co.com.sky.mobility.skyMobility.model.Vehiculo;
 import co.com.sky.mobility.skyMobility.util.AdapterUtil;
 
@@ -51,7 +48,6 @@ public class VehiculoController {
 			
 		} catch (Exception e) {
 			
-			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 			
 		}
