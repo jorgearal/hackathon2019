@@ -14,6 +14,7 @@ import { SpeakerListModule } from '../speaker-list/speaker-list.module';
 import { CompartirVehiculoPageModule } from '../compartir-vehiculo/compartir-vehiculo.module';
 import { BienvenidoPageModule } from '../bienvenido/bienvenido.module';
 import { PlanearPageModule } from '../planear/planear.module';
+import { BuscarRutaPageModule } from '../buscar-ruta/buscar-ruta.module';
 
 @NgModule({
   imports: [
@@ -28,6 +29,7 @@ import { PlanearPageModule } from '../planear/planear.module';
     TabsPageRoutingModule,
     CompartirVehiculoPageModule,
     BienvenidoPageModule,
+    BuscarRutaPageModule,
     PlanearPageModule
   ],
   declarations: [

@@ -12,11 +12,11 @@ import { timeInterval } from 'rxjs/operators';
 import {} from 'googlemaps';
 
 @Component({
-  selector: 'bienvenido',
-  templateUrl: './bienvenido.page.html',
-  styleUrls: ['./bienvenido.page.scss'],
+  selector: 'buscarRuta',
+  templateUrl: './buscar-ruta.page.html',
+  styleUrls: ['./buscar-ruta.page.scss'],
 })
-export class BienvenidoPage implements OnInit, AfterViewInit {
+export class BuscarRutaPage implements OnInit, AfterViewInit {
 
  // Gets a reference to the list element
  @ViewChild('mapCanvas', { static: true }) mapElement: ElementRef;

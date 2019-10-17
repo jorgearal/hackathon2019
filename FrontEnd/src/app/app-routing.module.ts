@@ -32,8 +32,10 @@ const routes: Routes = [
     path: 'tutorial',
     loadChildren: () => import('./pages/tutorial/tutorial.module').then(m => m.TutorialModule),
     canLoad: [CheckTutorial]
-  },  { path: 'compartir-vehiculo', loadChildren: './pages/compartir-vehiculo/compartir-vehiculo.module#CompartirVehiculoPageModule' },
+  },
+  { path: 'compartir-vehiculo', loadChildren: './pages/compartir-vehiculo/compartir-vehiculo.module#CompartirVehiculoPageModule' },
   { path: 'bienvenido', loadChildren: './pages/bienvenido/bienvenido.module#BienvenidoPageModule' },
+  { path: 'buscar-ruta', loadChildren: './pages/buscar-ruta/buscar-ruta.module#BuscarRutaPageModule' },
   { path: 'planear', loadChildren: './pages/planear/planear.module#PlanearPageModule' }
 
 ];
