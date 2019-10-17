@@ -151,7 +151,7 @@ function codeAddress(direccion, funcRetorno) {
   const geocoder = new google.maps.Geocoder();
   const address = direccion;
   geocoder.geocode({ 'address': address }, function (results, status) {
-    if (status === 'OK') {
+    if (false) {
       funcRetorno(results[0].geometry.location);
     }
   });

@@ -1,52 +1,79 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Login</ion-title>
-  </ion-toolbar>
-</ion-header>
+  <!-- Grid container -->
+  <div class="container my-5">
 
-<ion-content>
-  <div class="login-logo">
-    <img src="assets/img/Eco-Car.png" alt="Ionic logo">
+    <!--Grid row-->
+    <div class="row d-flex justify-content-center">
+
+      <!-- Mobile box -->
+      <div class="mobile-box view">
+        <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/6-col/img (122).jpg" class="bg-image"
+          alt="smaple image">
+        <div class="mask gradient-mask">
+
+          <!-- Navbar -->
+          <div class="mobile-navbar d-flex justify-content-between p-2">
+
+            <div>
+              <i class="fas fa-signal"></i>
+              <i class="far fa-bell-slash"></i>
+              <i class="fas fa-wifi"></i>
+            </div>
+
+            <span>4:28 PM</span>
+
+            <div>
+              <i class="fab fa-bluetooth-b"></i>
+              <small>100%</small>
+              <i class="fas fa-battery-full"></i>
+            </div>
+
+          </div>
+          <!-- Navbar -->
+
+          <a href="#" class="float-right font-weight-bold mr-4 mt-2">Skip
+          </a>
+
+          <!-- Content -->
+          <div class="mt-5 p-4 text-center animated fadeIn">
+
+            <div class="md-form form-md">
+              <input type="email" id="email-input" class="form-control form-control-lg text-white">
+              <label for="email-input">E-mail</label>
+            </div>
+
+            <div class="md-form form-md">
+              <input type="password" id="password-input" class="form-control form-control-lg text-white">
+              <label for="password-input">Password</label>
+            </div>
+
+            <a href="">Forgot password?</a>
+
+            <!-- Sign in button -->
+            <button class="btn btn-outline-white btn-rounded btn-block my-4 waves-light z-depth-0" type="submit">Sign
+              in</button>
+
+            <!-- Sign in button -->
+            <button class="btn btn-outline-white btn-rounded btn-block my-4 waves-light z-depth-0" type="submit"><i
+                class="fab fa-facebook-f mr-2"></i>Facebook</button>
+
+            <!-- Register -->
+            <p>Not a member?
+              <a target="_blank" href="https://mdbootstrap.com/snippets/jquery/ascensus/413416/side" class="font-weight-bold">Register</a>
+            </p>
+
+
+          </div>
+          <!-- Content -->
+
+        </div>
+      </div>
+      <!-- Mobile box -->
+
+
+
+
+    </div>
+    <!--Grid row-->
+
   </div>
-
-  <form #loginForm="ngForm" novalidate>
-    <ion-list>
-      <ion-item>
-        <ion-label position="stacked" color="primary">Usuario</ion-label>
-        <ion-input [(ngModel)]="login.username" name="username" type="text" #username="ngModel" spellcheck="false" autocapitalize="off"
-          required>
-        </ion-input>
-      </ion-item>
- 
-      <ion-text color="danger">
-        <p [hidden]="username.valid || submitted == false" class="ion-padding-start">
-          El usario es requerido 
-        </p>
-      </ion-text>
-
-      <ion-item>
-        <ion-label position="stacked" color="primary">Contraseña</ion-label>
-        <ion-input [(ngModel)]="login.password" name="password" type="password" #password="ngModel" required>
-        </ion-input>
-      </ion-item>
-
-      <ion-text color="danger">
-        <p [hidden]="password.valid || submitted == false" class="ion-padding-start">
-          La contraseña es requerida
-        </p>
-      </ion-text>
-    </ion-list>
-
-    <ion-row>
-      <ion-col>
-        <ion-button (click)="onLogin(loginForm)" type="submit" expand="block">Ingresar</ion-button><br>
-        <ion-button (click)="registrarse()" color="light" expand="block">Registrarse</ion-button>
-      </ion-col>
-    </ion-row>
-  </form>
-
-</ion-content>
-
-
-
-
+  <!-- Grid container -->
