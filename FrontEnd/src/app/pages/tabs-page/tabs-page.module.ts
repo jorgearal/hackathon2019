@@ -19,6 +19,7 @@ import { RegistrarPageModule } from '../registrar/registrar.module';
 import { RegistrarVehiculoPageModule } from '../registrar-vehiculo/registrar-vehiculo.module';
 import { IniciarViajePageModule } from '../iniciar-viaje/iniciar-viaje.module';
 import { BeneficiosPageModule } from '../beneficios/beneficios.module';
+import { PuntajePageModule } from '../puntaje/puntaje.module';
 
 @NgModule({
   imports: [
@@ -38,8 +39,7 @@ import { BeneficiosPageModule } from '../beneficios/beneficios.module';
     RegistrarPageModule,
     RegistrarVehiculoPageModule,
     IniciarViajePageModule,
-    BeneficiosPageModule,
-PuntajePageModule
+    BeneficiosPageModule,PuntajePageModule
   ],
   declarations: [
     TabsPage,
