@@ -19,10 +19,7 @@ import { Persona } from './models/persona-model';
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements OnInit {
-
-
-  persona:Persona;
-
+  persona: Persona;
 
   appPages = [
     {
@@ -76,14 +73,14 @@ export class AppComponent implements OnInit {
     private userData: UserData,
     private swUpdate: SwUpdate,
     private toastCtrl: ToastController,
-  ) {
+  ) { }
+
+  async ngOnInit() {
     this.initializeApp();
     this.persona = new Persona();
     this.persona.nombre="Carlos Cepeda";
     this.persona.puntaje =4.9;
-  }
-
-  async ngOnInit() {
+    
     this.checkLoginStatus();
     this.listenForLoginEvents();
 
