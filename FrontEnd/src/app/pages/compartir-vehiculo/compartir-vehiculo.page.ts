@@ -289,51 +289,12 @@ function obtener() { navigator.geolocation.getCurrentPosition(mostrar, gestionar
 
 
 function mostrar(posicion) {
-  console.log("Latitud " + posicion.coords.latitude);
-  console.log("Longitud " + posicion.coords.longitude);
-  console.log("Longitud " + posicion.coords.accuracy);
+  console.log('Latitud ' + posicion.coords.latitude);
+  console.log('Longitud ' + posicion.coords.longitude);
+  console.log('Longitud ' + posicion.coords.accuracy);
   agregarPuntoActual(posicion.coords.latitude, posicion.coords.longitude);
 }
 
 function gestionarErrores(error) {
-  console.log("Error " + error);
-<<<<<<< HEAD
+  console.log('Error ' + error);
 }
-
-
-/*var haight;
-var oceanBeach;
-
-function initMap() {
-  var directionsService = new google.maps.DirectionsService();
-  var directionsRenderer = new google.maps.DirectionsRenderer();
-  haight = new google.maps.LatLng(6.2381291999999995, -75.5858772);
-  oceanBeach = new google.maps.LatLng(37.7683909618184, -122.51089453697205);
-  var mapOptions = {
-    zoom: 14,
-    center: haight
-  }
-  
-  directionsRenderer.setMap(map);
-}*/
-
-
-/*function calcRoute() {
-  var selectedMode = document.getElementById('mode').value;
-  var request = {
-    origin: haight,
-    destination: oceanBeach,
-    // Note that JavaScript allows us to access the constant
-    // using square brackets and a string value as its
-    // "property."
-    travelMode: google.maps.TravelMode[selectedMode]
-  };
-  directionsService.route(request, function (response, status) {
-    if (status == 'OK') {
-      directionsRenderer.setDirections(response);
-    }
-  });
-}*/
-=======
-}
->>>>>>> devFront

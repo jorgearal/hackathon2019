@@ -44,6 +44,7 @@ const routes: Routes = [
   { path: 'registrar-vehiculo', loadChildren: './pages/registrar-vehiculo/registrar-vehiculo.module#RegistrarVehiculoPageModule' },
   { path: 'iniciar-viaje/:id', loadChildren: './pages/iniciar-viaje/iniciar-viaje.module#IniciarViajePageModule' },
   { path: 'puntaje', loadChildren: './pages/puntaje/puntaje.module#PuntajePageModule' },
+  { path: 'mis-rutas', loadChildren: './pages/mis-rutas/mis-rutas.module#MisRutasPageModule' },
 
 
 

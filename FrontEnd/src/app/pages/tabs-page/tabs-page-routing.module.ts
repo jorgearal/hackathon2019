@@ -57,6 +57,19 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'beneficios',
+        children: [
+          {
+            path: '',
+            component: BeneficiosPage,
+          },
+          {
+            path: 'session/:sessionId',
+            loadChildren: () => import('../session-detail/session-detail.module').then(m => m.SessionDetailModule)
+          }
+        ]
+      },
+      {
         path: 'iniciarViaje/:id',
         children: [
           {
