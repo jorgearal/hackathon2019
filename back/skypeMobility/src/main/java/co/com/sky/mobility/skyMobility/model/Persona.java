@@ -1,18 +1,22 @@
 package co.com.sky.mobility.skyMobility.model;
 
+import java.io.Serializable;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table (name = "persona")
-public class Persona {
+public class Persona implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,9 +40,8 @@ public class Persona {
 	@Column(name = "celular",length = 20)
 	private String celular;
 	
-	@OneToOne
-	(mappedBy = "persona")
-	private Vehiculo vehiculo;
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "persona")
+	private Set<Vehiculo> vehiculosPersona;
 	
 	@Column(name = "reputacion")
 	private double reputacion;
@@ -109,12 +112,19 @@ public class Persona {
 		this.celular = celular;
 	}
 
-	public Vehiculo getVehiculo() {
-		return vehiculo;
+
+	/**
+	 * @return the vehiculosPersona
+	 */
+	public Set<Vehiculo> getVehiculosPersona() {
+		return vehiculosPersona;
 	}
 
-	public void setVehiculo(Vehiculo vehiculo) {
-		this.vehiculo = vehiculo;
+	/**
+	 * @param vehiculosPersona the vehiculosPersona to set
+	 */
+	public void setVehiculosPersona(Set<Vehiculo> vehiculosPersona) {
+		this.vehiculosPersona = vehiculosPersona;
 	}
 
 	public double getReputacion() {

@@ -1,17 +1,22 @@
 package co.com.sky.mobility.skyMobility.model;
 
+import java.io.Serializable;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table (name = "edificio")
-public class Edificio {
+public class Edificio implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +30,12 @@ public class Edificio {
 	
 	@Column(name = "longitud", nullable = false, length = 50)
 	private String longitud;
+	
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "origen")
+	private Set<Ruta> rutasOrigen;
+	
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "destino")
+	private Set<Ruta> rutasDestino;
 	
 	public int getId() {
 		return id;
@@ -56,6 +67,34 @@ public class Edificio {
 
 	public void setLongitud(String longitud) {
 		this.longitud = longitud;
+	}
+
+	/**
+	 * @return the rutasOrigen
+	 */
+	public Set<Ruta> getRutasOrigen() {
+		return rutasOrigen;
+	}
+
+	/**
+	 * @param rutasOrigen the rutasOrigen to set
+	 */
+	public void setRutasOrigen(Set<Ruta> rutasOrigen) {
+		this.rutasOrigen = rutasOrigen;
+	}
+
+	/**
+	 * @return the rutasDestino
+	 */
+	public Set<Ruta> getRutasDestino() {
+		return rutasDestino;
+	}
+
+	/**
+	 * @param rutasDestino the rutasDestino to set
+	 */
+	public void setRutasDestino(Set<Ruta> rutasDestino) {
+		this.rutasDestino = rutasDestino;
 	}
 
 }

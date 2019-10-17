@@ -1,21 +1,20 @@
 package co.com.sky.mobility.skyMobility.model;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table (name = "ruta")
-public class Ruta {
+public class Ruta implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,8 +26,8 @@ public class Ruta {
 	@Column(name = "fecha_hora_salida", nullable = false)
 	private Date fechaSalida;
 	
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-	@JoinColumn(name = "id", insertable = false, updatable = false)
+	@ManyToOne
+	@JoinColumn(name = "vehiculo_id")
 	private Vehiculo vehiculo;
 	
 	@Column(name = "numeroPersonas")
@@ -37,12 +36,12 @@ public class Ruta {
 	@Column(name = "estado")
 	private int estado;
 	
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-	@JoinColumn(name = "id", insertable = false, updatable = false)
+	@ManyToOne
+	@JoinColumn(name = "edificio_origen_id")
 	private Edificio origen;
 	
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-	@JoinColumn(name = "id", insertable = false, updatable = false)
+	@ManyToOne
+	@JoinColumn(name = "edificio_destino_id")
 	private Edificio destino;
 	
 	@Column(name = "cupo")
@@ -50,6 +49,30 @@ public class Ruta {
 	
 	@Column(name = "puntos")
 	private int puntos;
+	
+	/**
+	 * 
+	 * @param fechaPublicacion
+	 * @param fechaSalida
+	 * @param vehiculo
+	 * @param numeroPersonas
+	 * @param estado
+	 * @param origen
+	 * @param destino
+	 * @param cupo
+	 * @param puntos
+	 */
+	public Ruta(Date fechaPublicacion, Date fechaSalida, Vehiculo vehiculo, int numeroPersonas, int estado, Edificio origen, Edificio destino, int cupo, int puntos) {
+		this.fechaPublicacion = fechaPublicacion; 
+		this.fechaSalida = fechaSalida;
+		this.vehiculo = vehiculo; 
+		this.numeroPersonas = numeroPersonas; 
+		this.estado = estado; 
+		this.origen = origen; 
+		this.destino = destino; 
+		this.cupo = cupo;
+		this.puntos = puntos;
+	}
 
 	public int getId() {
 		return id;

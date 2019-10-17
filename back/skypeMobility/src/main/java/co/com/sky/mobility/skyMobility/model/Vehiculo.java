@@ -1,5 +1,8 @@
 package co.com.sky.mobility.skyMobility.model;
 
+import java.io.Serializable;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,8 +11,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -18,7 +23,7 @@ import javax.persistence.Table;
 @NamedNativeQueries({
 @NamedNativeQuery(name = "Vehiculo.updatePersona", query = "UPDATE vehiculo SET persona_id =?1 WHERE placa =?2")
 })
-public class Vehiculo {
+public class Vehiculo implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,9 +56,12 @@ public class Vehiculo {
 	@Column(name = "matricula", nullable = false, length = 100)
 	private String matricula;
 	
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-	@JoinColumn(name = "id", insertable = false, updatable = false)
+	@ManyToOne
+	@JoinColumn(name = "persona_id")
 	private Persona persona;
+	
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "vehiculo")
+	private Set<Ruta> rutasVehiculo;
 	
 	public int getId() {
 		return id;
