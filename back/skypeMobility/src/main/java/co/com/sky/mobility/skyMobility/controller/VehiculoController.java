@@ -40,7 +40,7 @@ public class VehiculoController {
 		
 		try {
 			
-			Vehiculo vehiculoEntity =AdapterUtil.convertirVehiculoDtoToVehiculo(vehiculo);
+			Vehiculo vehiculoEntity = AdapterUtil.convertirVehiculoDtoToVehiculo(vehiculo);
 			
 			vehiculoDao.save(vehiculoEntity);
 			

@@ -2,9 +2,6 @@ package co.com.sky.mobility.skyMobility.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-
-import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import co.com.sky.mobility.skyMobility.dao.IEdificioDao;
 import co.com.sky.mobility.skyMobility.dao.IPersonaDAO;
 import co.com.sky.mobility.skyMobility.dao.IRutaDao;
 import co.com.sky.mobility.skyMobility.dao.IVehiculoDao;
@@ -41,6 +39,9 @@ public class RutaController {
 	
 	@Autowired
 	private IVehiculoDao vehiculoDao;
+	
+	@Autowired
+	private IEdificioDao edificioDao;
 
 	@GetMapping(value="api/v1/mobility/buscarRuta", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<RutaDTO>> buscarRuta(@RequestParam String latitudOrigen, @RequestParam String longitudOrigen,
@@ -94,19 +95,21 @@ public class RutaController {
 	 * @param idPersona
 	 * @return
 	 */
-	@GetMapping(value="api/v1/mobility/{idPersona}/misRutas", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Ruta>> misRutas(@PathVariable int idPersona){
+	@GetMapping(value="api/v1/mobility/misRutas/{idPersona}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<RutaDTO>> misRutas(@PathVariable int idPersona){
 		
 		Persona persona = personaDao.findById(idPersona).get();
-		List<Ruta> rutas = new ArrayList<>();
+		List<RutaDTO> rutasDto = new ArrayList<>();
 		List<Vehiculo> vehiculosPersona = vehiculoDao.findByPersonaId(persona.getId());
 		
-		for (Vehiculo v : vehiculosPersona) {
-			List<Ruta> vehiculoRutas = rutaDao.findByVehiculo(v.getId());
-			rutas.addAll(vehiculoRutas);
-		}
-		
-		return ResponseEntity.ok(rutas);
+		vehiculosPersona.forEach(x -> {
+			List<Ruta> vehiculoRutas = rutaDao.findByVehiculo(x.getId());
+			vehiculoRutas.forEach(y -> { 
+				rutasDto.add(AdapterUtil.buildRutaDTOView(y, edificioDao.findById(y.getOrigenId()).get(), edificioDao.findById(y.getDestinoId()).get()));
+			});
+		});
+
+		return ResponseEntity.ok(rutasDto);
 			
 	}
 
