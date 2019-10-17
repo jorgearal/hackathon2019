@@ -297,6 +297,7 @@ function mostrar(posicion) {
 
 function gestionarErrores(error) {
   console.log("Error " + error);
+<<<<<<< HEAD
 }
 
 
@@ -333,3 +334,6 @@ function initMap() {
     }
   });
 }*/
+=======
+}
+>>>>>>> devFront
