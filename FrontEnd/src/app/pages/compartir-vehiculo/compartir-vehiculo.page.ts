@@ -79,8 +79,7 @@ export class CompartirVehiculoPage implements OnInit {
       this.router.navigateByUrl('/iniciarViaje/' + this.ruta.id);
     } else {
       console.log(">>>> No hay ruta seleccionada..");
-      
-    }
+        }
 
 
     /*const alert = this.alertCtrl.create({
@@ -312,7 +311,7 @@ function initMap() {
     zoom: 14,
     center: haight
   }
-  //var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+  
   directionsRenderer.setMap(map);
 }
 
