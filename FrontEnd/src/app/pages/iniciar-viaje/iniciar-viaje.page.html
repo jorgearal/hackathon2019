@@ -1,0 +1,112 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>Iniciar Viaje</ion-title>
+    
+    
+  </ion-toolbar>
+   <ion-toolbar>
+      <div class="centrado">
+          <ion-button fill="clear" (click)="presentConfirm()" class="center-block btn btn-primary" [hidden]="!iniciar">
+            Comenzar
+          </ion-button>
+          <ion-button fill="clear" (click)="presentConfirmStarRuta()" class="center-block btn btn-primary" [hidden]="iniciar">
+            Terminar
+          </ion-button>
+        </div>
+   </ion-toolbar>
+</ion-header>
+<ion-content>
+
+
+  <!--Conductor-->
+  <ion-card>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="10">
+            Puntos
+            <p>Acumulado : 10+ puntos</p>
+          </ion-col>
+          <ion-col size="2">
+            <img src="assets/img/insignia.png" alt="carro" class="pequeña">
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  <!--Info vehiculo-->
+  <ion-card>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="2">
+            <ion-avatar item-start>
+              <img src="assets/img/carro.png" alt="carro" class="pequeña">
+            </ion-avatar>
+          </ion-col>
+          <ion-col size="10">
+            Spark GT
+            <p>Linea : spark, Modelo: 2006, Matrìcula: 4544444</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <!--Info Ruta-->
+  <ion-card>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="2">
+            <img src="assets/img/map.jpg" alt="carro" class="pequeña">
+          </ion-col>
+          <ion-col size="8">
+            <p>Origen : Calle 5# 12 - 25 Sabaneta</p>
+            <p>Destino : Calle 5# 12 - 58 Envigado</p>
+            <p>Hora Salida: 8:00am</p>
+            <p>Tiempo espera : 10 min</p>
+          </ion-col>
+        </ion-row>
+
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  <!--Lista de pasajeros-->
+  <ion-card>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row *ngFor="let speaker of speakers">
+          <ion-col size="2">
+            <ion-avatar item-start>
+              <img [src]="speaker.profilePic" [alt]="speaker.name + ' profile picture'" [hidden]="!speaker.profilePic"
+                class="pequeña">
+              <img src="assets/img/passenger.png" alt="user" [hidden]="speaker.profilePic" class="pequeña">
+            </ion-avatar>
+          </ion-col>
+          <ion-col size="8">
+            {{speaker.name}}
+            <p>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star-half"></ion-icon>
+            </p>
+          </ion-col>
+          <ion-col size="2">
+            <img src="assets/img/ok.png" alt="ok" class="pequeña" [hidden]="!speaker.confirmado">
+            <img src="assets/img/pending.png" alt="pending" [hidden]="speaker.confirmado" class="pequeña">
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+
+
+  </ion-card>
+
+</ion-content>

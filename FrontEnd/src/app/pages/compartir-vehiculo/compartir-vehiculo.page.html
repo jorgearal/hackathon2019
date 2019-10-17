@@ -9,6 +9,20 @@
 </ion-header>
 <ion-content>
 
+  <!--<div>
+      <ion-button fill="clear" (click)="calcularRuta()" class="center-block btn btn-primary">
+         Test
+        </ion-button>
+  </div>
+  <div>
+    <strong>Mode of Travel: </strong>
+    <select id="mode" (ionChange)="calcularRuta();">
+      <option value="DRIVING">Driving</option>
+      <option value="WALKING">Walking</option>
+      <option value="BICYCLING">Bicycling</option>
+      <option value="TRANSIT">Transit</option>
+    </select>
+  </div>-->
 
   <div class="centrado">
     <div class="row">
@@ -38,10 +52,10 @@
   </div>
   <br>
   <div class="centrado">
-    <ion-button fill="clear" (click)="presentConfirm()" class="center-block btn btn-primary">
+    <ion-button fill="clear" (click)="presentConfirm()" class="center-block btn btn-primary" [hidden]="!registrar">
       Registrar ruta
     </ion-button>
-    <ion-button fill="clear" (click)="presentConfirmStarRuta()" class="center-block btn btn-primary">
+    <ion-button fill="clear" (click)="presentConfirmStarRuta()" class="center-block btn btn-primary" [hidden]="registrar">
       Empezar viaje
     </ion-button>
   </div>

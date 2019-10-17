@@ -11,7 +11,7 @@ export class RegistrarVehiculoPage implements OnInit {
 
   constructor() { }
   // tslint:disable-next-line:max-line-length
-  formularioVehiculo: RegistroVehiculo = { 
+  formularioVehiculo: RegistroVehiculo = {
     color: '',
     marca: '',
     fotoMatricula: '',
