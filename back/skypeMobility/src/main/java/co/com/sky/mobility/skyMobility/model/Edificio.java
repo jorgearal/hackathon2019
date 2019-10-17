@@ -31,12 +31,6 @@ public class Edificio implements Serializable {
 	@Column(name = "longitud", nullable = false, length = 50)
 	private String longitud;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "origen")
-	private Set<Ruta> rutasOrigen;
-	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "destino")
-	private Set<Ruta> rutasDestino;
-	
 	public int getId() {
 		return id;
 	}
@@ -67,34 +61,6 @@ public class Edificio implements Serializable {
 
 	public void setLongitud(String longitud) {
 		this.longitud = longitud;
-	}
-
-	/**
-	 * @return the rutasOrigen
-	 */
-	public Set<Ruta> getRutasOrigen() {
-		return rutasOrigen;
-	}
-
-	/**
-	 * @param rutasOrigen the rutasOrigen to set
-	 */
-	public void setRutasOrigen(Set<Ruta> rutasOrigen) {
-		this.rutasOrigen = rutasOrigen;
-	}
-
-	/**
-	 * @return the rutasDestino
-	 */
-	public Set<Ruta> getRutasDestino() {
-		return rutasDestino;
-	}
-
-	/**
-	 * @param rutasDestino the rutasDestino to set
-	 */
-	public void setRutasDestino(Set<Ruta> rutasDestino) {
-		this.rutasDestino = rutasDestino;
 	}
 
 }

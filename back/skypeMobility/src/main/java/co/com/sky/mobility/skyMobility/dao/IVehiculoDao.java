@@ -20,4 +20,7 @@ public interface IVehiculoDao extends JpaRepository<Vehiculo, Integer> {
 	@Query(value ="UPDATE vehiculo SET persona_id= ?1 where placa = ?2", nativeQuery = true)
 	void updatePersona(int id, String cedula);
 	
+	@Query("SELECT v FROM Vehiculo v where v.personaId = ?1")
+	List<Vehiculo> findByPersonaId(int personaId);
+	
 }

@@ -14,8 +14,8 @@ import co.com.sky.mobility.skyMobility.model.Ruta;
 @Repository
 public interface IRutaDao extends JpaRepository<Ruta, Integer> {
 	
-	@Query("SELECT r FROM Ruta r where r.origen.latitud = ?1 and r.origen.longitud = ?2 "
-			+ "and r.destino.latitud = ?3 and r.destino.longitud = ?4 ")
+	@Query("SELECT r, e1, e2 FROM Ruta r, Edificio e1, Edificio e2 WHERE r.origenId = e1.id AND e1.latitud = ?1 and e1.longitud = ?2 AND r.destinoId = e2.id AND"
+			+ " e2.latitud = ?3 and e2.longitud = ?4 ")
 	List<Ruta> findByOrigenDestino(String latitudOrigen, String longitudOrigen, 
 			String latitudDestino, String longitudDestino );
 	
@@ -23,5 +23,8 @@ public interface IRutaDao extends JpaRepository<Ruta, Integer> {
 	@Transactional
 	@Query(value ="UPDATE ruta SET estado= ?1 where id = ?2", nativeQuery = true)
 	void updateEstado(int estado, int id);
+	
+	@Query("SELECT r FROM Ruta r where r.vehiculoId = ?1")
+	List<Ruta> findByVehiculo(int vehiculoId);
 
 }
