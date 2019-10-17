@@ -26,6 +26,7 @@ export class BuscarRutaPage implements OnInit, AfterViewInit {
   destinoSeleccionado: boolean = true;
 
   modo: boolean = true;
+  opciones: any;
 
  constructor(
   @Inject(DOCUMENT) private doc: Document,
@@ -40,12 +41,15 @@ export class BuscarRutaPage implements OnInit, AfterViewInit {
  ) { }
 
  ngOnInit() {
+   /*
     this.loadingCtrl.create({
       duration: 4000,
       message: 'Cargando rutas',
     }).then((a) => {
       a.present();
     });
+    */
+   this.listarOpciones();
     this.ios = this.config.get('mode') === 'ios';
  }
 
@@ -54,6 +58,19 @@ export class BuscarRutaPage implements OnInit, AfterViewInit {
     this.modo = true;
   } else if(modo === 'otros') {
     this.modo = false;
+  }
+  this.listarOpciones();
+ }
+
+ listarOpciones() {
+  if(!this.modo) {
+    this.confData.getTrivago().subscribe((otrosData: any) => {
+      this.opciones = otrosData;
+    });
+  } else {
+    this.confData.getOtros().subscribe((otrosData: any) => {
+      this.opciones = otrosData;
+    });
   }
  }
 

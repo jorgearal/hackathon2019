@@ -436,5 +436,47 @@
       "name": "Navigation",
       "icon": "compass"
     }
+  ],
+
+  "trivago" : [
+    {
+      "name": "Uber",
+      "imagen": "assets/img/logo_uber.png",
+      "basePrice": "$12.000",
+      "baseCo2": 6
+    },
+    {
+      "name": "Cabify",
+      "imagen": "assets/img/logo-cabify_.png",
+      "basePrice": "$15.000",
+      "baseCo2": 5
+    },
+    {
+      "name": "EasyTaxi",
+      "imagen": "assets/img/logo-easy-taxi.png",
+      "basePrice": "$10.000",
+      "baseCo2": 8
+    },
+    {
+      "name": "Picap",
+      "imagen": "assets/img/logo-picap_.png",
+      "basePrice": "$4.000",
+      "baseCo2": 2
+    }
+  ],
+
+  "otros" : [
+    {
+      "name": "Parque de Sabaneta",
+      "imagen": "assets/img/picanto.jpg",
+      "cuposDisponibles": "2",
+      "puntos": 3
+    },
+    {
+      "name": "Viva Envigado",
+      "imagen": "assets/img/logan.webp",
+      "cuposDisponibles": "4",
+      "puntos": 6
+    }
   ]
 }

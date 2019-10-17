@@ -1,6 +1,4 @@
 .map-canvas {
-    position: relative;
-  
     height: 40%;
     width: 100%;
   
@@ -12,6 +10,12 @@
   
   .show-map {
     opacity: 1;
+  }
+
+  .imgCircular {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
   }
 
   ion-tab-button{

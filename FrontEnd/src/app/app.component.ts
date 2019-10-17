@@ -11,6 +11,7 @@ import { Storage } from '@ionic/storage';
 
 import { UserData } from './providers/user-data';
 import { Persona } from './models/persona-model';
+import { PersonaService } from './providers/persona-service';
 
 @Component({
   selector: 'app-root',
@@ -26,33 +27,38 @@ export class AppComponent implements OnInit {
 
   appPages = [
     {
-      title: 'Compartir Ruta',
-      url: '/app/tabs/compartirVehiculo',
+      title: 'Buscar ruta',
+      url: '/bienvenido',
       icon: 'car'
     },
     {
+      title: 'Compartir Ruta',
+      url: '/compartirVehiculo',
+      icon: 'add'
+    },
+    {
       title: 'Mis Viajes',
-      url: '/app/tabs/planear',
+      url: '/planear',
       icon: 'cash'
     },
     {
-      title: 'Puntaje',
-      url: '/app/tabs/puntaje',
-      icon: 'contacts'
+      title: 'Mis Logros',
+      url: '/puntaje',
+      icon: 'medal'
     },
     {
       title: 'Parqueadero',
-      url: '/app/tabs/map',
+      url: '/map',
       icon: 'map'
     },
     {
-      title: 'Beneficios',
-      url: '/app/tabs/beneficios',
-      icon: 'information-circle'
+      title: 'Meta Mensual',
+      url: '/beneficios',
+      icon: 'trending-up'
     },
     {
       title: 'Ayuda',
-      url: '/app/tabs/about',
+      url: '/about',
       icon: 'information-circle'
     },
 
@@ -71,11 +77,9 @@ export class AppComponent implements OnInit {
     private userData: UserData,
     private swUpdate: SwUpdate,
     private toastCtrl: ToastController,
+    private personaService:PersonaService
   ) {
     this.initializeApp();
-    this.persona = new Persona();
-    this.persona.nombre="Carlos Cepeda";
-    this.persona.puntaje =4.9;
   }
 
   async ngOnInit() {
@@ -97,6 +101,16 @@ export class AppComponent implements OnInit {
         .then(() => this.swUpdate.activateUpdate())
         .then(() => window.location.reload());
     });
+    //se consulta los datos de la persona
+    this.personaService.consultarInfoPersonaXId(1).subscribe((data)=>{
+      this.persona = data;
+      console.log(JSON.stringify(data));
+    }, (error)=>{
+      alert("Los servicios no se encuentran disponibles");
+    });
+
+
+
   }
 
   initializeApp() {

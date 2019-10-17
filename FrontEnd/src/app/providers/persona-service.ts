@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Constantes } from '../shared/constantes';
+import { Persona } from '../models/persona-model';
 
 @Injectable()
 export class PersonaService {
@@ -26,5 +27,14 @@ export class PersonaService {
             }
         );
         return this.httpClient.get<any>(this.api + Constantes.URL_WS_INFO_VEHICULO + "?idPersona=" + idPersona, { headers });
+    }
+
+    consultarInfoPersonaXId(idPersona:number):Observable<Persona>{
+        let headers = new HttpHeaders(
+            {
+                'Referrer-Policy': 'origin-when-cross-origin'
+            }
+        );
+        return this.httpClient.get<Persona>(Constantes.URL_WS_CONSULTA_PERSONA + idPersona, { headers });
     }
 }
