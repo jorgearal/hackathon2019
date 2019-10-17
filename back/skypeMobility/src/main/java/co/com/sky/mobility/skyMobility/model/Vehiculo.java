@@ -59,6 +59,9 @@ public class Vehiculo implements Serializable {
 	@Column(name = "persona_id")
 	private int personaId;
 	
+	@Column(name = "tag")
+	private int tag;
+	
 	
 	public int getId() {
 		return id;

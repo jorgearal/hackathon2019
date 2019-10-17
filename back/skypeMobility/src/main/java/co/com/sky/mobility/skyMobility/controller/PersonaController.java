@@ -40,7 +40,7 @@ public class PersonaController {
 	 * @param id
 	 * @return
 	 */
-	@GetMapping(value="api/v1/mobility/{id}/buscarPersona", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value="api/v1/mobility/buscarPersona/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<PersonaDTO> buscarPersona(@PathVariable int id) {
 		Persona persona = personaDAO.findById(id).get();
 		return ResponseEntity.ok(AdapterUtil.convertirPersonaToDto(persona));
