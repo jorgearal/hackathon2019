@@ -13,6 +13,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { FormsModule } from '@angular/forms';
 import { PersonaService } from './providers/persona-service';
+import { RutaService } from './services/ruta.service';
 
 
 @NgModule({
@@ -28,7 +29,7 @@ import { PersonaService } from './providers/persona-service';
     })
   ],
   declarations: [AppComponent],
-  providers: [InAppBrowser, SplashScreen, StatusBar, PersonaService],
+  providers: [InAppBrowser, SplashScreen, StatusBar, PersonaService, RutaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
