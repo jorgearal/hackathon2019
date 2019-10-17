@@ -11,6 +11,7 @@ import { Storage } from '@ionic/storage';
 
 import { UserData } from './providers/user-data';
 import { Persona } from './models/persona-model';
+import { PersonaService } from './providers/persona-service';
 
 @Component({
   selector: 'app-root',
@@ -71,11 +72,9 @@ export class AppComponent implements OnInit {
     private userData: UserData,
     private swUpdate: SwUpdate,
     private toastCtrl: ToastController,
+    private personaService:PersonaService
   ) {
     this.initializeApp();
-    this.persona = new Persona();
-    this.persona.nombre="Carlos Cepeda";
-    this.persona.puntaje =4.9;
   }
 
   async ngOnInit() {
@@ -97,6 +96,16 @@ export class AppComponent implements OnInit {
         .then(() => this.swUpdate.activateUpdate())
         .then(() => window.location.reload());
     });
+    //se consulta los datos de la persona
+    this.personaService.consultarInfoPersonaXId(1).subscribe((data)=>{
+      this.persona = data;
+      console.log(JSON.stringify(data));
+    }, (error)=>{
+      alert("Los servicios no se encuentran disponibles");
+    });
+
+
+
   }
 
   initializeApp() {
