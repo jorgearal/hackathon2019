@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild, Inject, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject, ElementRef, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, IonList, LoadingController, ModalController, ToastController, Config } from '@ionic/angular';
 import { ScheduleFilterPage } from '../schedule-filter/schedule-filter';
@@ -137,10 +137,9 @@ function getGoogleMaps(apiKey: string): Promise<any> {
 }
 
 function placeMarkerAndPanTo(latLng, map, marker) {
-  if(marker) {
+  if (marker) {
     marker.setMap(null);
   }
-  
   map.panTo(latLng);
   return new google.maps.Marker({
     position: latLng,

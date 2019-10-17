@@ -13,6 +13,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { FormsModule } from '@angular/forms';
 import { PersonaService } from './providers/persona-service';
+import { Geolocation } from '@ionic-native/geolocation';
 
 @NgModule({
   imports: [
@@ -30,4 +31,4 @@ import { PersonaService } from './providers/persona-service';
   providers: [InAppBrowser, SplashScreen, StatusBar, PersonaService],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

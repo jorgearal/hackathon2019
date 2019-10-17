@@ -15,6 +15,8 @@ import { CompartirVehiculoPageModule } from '../compartir-vehiculo/compartir-veh
 import { BienvenidoPageModule } from '../bienvenido/bienvenido.module';
 import { PlanearPageModule } from '../planear/planear.module';
 import { BuscarRutaPageModule } from '../buscar-ruta/buscar-ruta.module';
+import { RegistrarPageModule } from '../registrar/registrar.module';
+import { RegistrarVehiculoPageModule } from '../registrar-vehiculo/registrar-vehiculo.module';
 
 @NgModule({
   imports: [
@@ -30,7 +32,9 @@ import { BuscarRutaPageModule } from '../buscar-ruta/buscar-ruta.module';
     CompartirVehiculoPageModule,
     BienvenidoPageModule,
     BuscarRutaPageModule,
-    PlanearPageModule
+    PlanearPageModule,
+    RegistrarPageModule,
+    RegistrarVehiculoPageModule
   ],
   declarations: [
     TabsPage,

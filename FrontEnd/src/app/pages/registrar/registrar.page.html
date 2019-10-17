@@ -1,0 +1,99 @@
+<ion-header>
+  <ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+
+  
+    <ion-title>Registrar persona</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="about-header">
+    <img src="assets/img/ecosistema.png" alt="ionic logo">
+  </div>
+
+
+  <form #loginForm="ngForm" novalidate>
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked" color="primary">Nombres</ion-label>
+        <ion-input [(ngModel)]="formularioPersona.nombres" name="nombres"  maxlength="20" type="text" #nombres="ngModel" spellcheck="false" autocapitalize="off"
+          required>
+        </ion-input>
+      </ion-item>
+ 
+      <ion-text color="danger">
+        <p [hidden]="nombres.valid || nombres.untouched || submitted == false" class="ion-padding-start">
+          Los nombres son requeridos
+        </p>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="stacked" color="primary">Apellidos</ion-label>
+        <ion-input [(ngModel)]="formularioPersona.apellidos" maxlength="20" name="password" type="text" #apellidos="ngModel" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-text color="danger">
+        <p [hidden]="apellidos.valid || apellidos.untouched || submitted == false" class="ion-padding-start">
+          Los apellidos son requeridos
+        </p>
+      </ion-text>
+
+
+      <ion-item>
+        <ion-label position="stacked" color="primary">Tipo de documento</ion-label>
+        <ion-select  [(ngModel)]="formularioPersona.tipoDocumento" name="tipoDocumento">
+          <ion-select-option value="1">Cedula de ciudadania</ion-select-option>
+          <ion-select-option value="2">Tarjeta de identidad</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label position="stacked" color="primary">Documento</ion-label>
+        <ion-input [(ngModel)]="formularioPersona.cedula" name="cedula" type="number" maxlength="12"  #cedula="ngModel" required>
+        </ion-input>
+      </ion-item>
+      <ion-text color="danger">
+        <p [hidden]="cedula.valid || cedula.untouched || submitted == false" class="ion-padding-start">
+          El numero de documento es necesario
+        </p>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="stacked" color="primary">Celular</ion-label>
+        <ion-input [(ngModel)]="formularioPersona.celular" name="celular" type="number"  maxlength="10" #celular="ngModel" required>
+        </ion-input>
+      </ion-item>
+      <ion-text color="danger">
+        <p [hidden]="celular.valid || celular.untouched || submitted == false" class="ion-padding-start">
+          El telefono celular es necesario
+        </p>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="stacked" color="primary">Correo Electronico</ion-label>
+        <ion-input [(ngModel)]="formularioPersona.correo" name="correo" type="text" maxlength="50" #correo="ngModel" required>
+        </ion-input>
+      </ion-item>
+      <ion-text color="danger">
+        <p [hidden]="correo.valid || correo.untouched|| submitted == false" class="ion-padding-start">
+          El correo electronico  es necesario
+        </p>
+      </ion-text>
+    </ion-list>
+
+    <ion-row>
+      <ion-col>
+        <ion-button (click)="diligenciarVehiculo()" color="light" expand="block"> Vehiculo</ion-button><br>
+
+        <ion-button (click)="onLogin(loginForm)" type="submit" expand="block">guardar</ion-button><br>
+      </ion-col>
+    </ion-row>
+  </form>
+
+
+</ion-content>
