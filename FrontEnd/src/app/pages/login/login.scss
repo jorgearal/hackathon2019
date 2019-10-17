@@ -1,70 +1,94 @@
-body, html {
-  height: 100%; }
+*{
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  box-sizing: border-box;
+}
 
-body {
-  background-image: url("https://mdbootstrap.com/wp-content/uploads/2019/02/back.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  -webkit-background-size: cover;
-  background-size: cover; }
- 
-.mobile-box {
-  width: 360px;
-  height: 640px;
-  color: #fff;
+.inner-scroll.scroll-y.overscroll {
+  background: red !important;
+}
+
+.login-form{
+  width: 85%;
+  background: #f1f1f1;
+  height: 580px;
+  padding: 80px 40px;
+  border-radius: 10px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+}
+
+.login-form h1{
   text-align: center;
-  -webkit-box-shadow: 0 27px 24px 0 rgba(0, 0, 0, 0.2), 0 40px 77px 0 rgba(0, 0, 0, 0.92) !important;
-  box-shadow: 0 27px 24px 0 rgba(0, 0, 0, 0.2), 0 40px 77px 0 rgba(0, 0, 0, 0.92) !important; }
-
-.view .bg-image {
-  height: 100%; }
-
-.view .gradient-mask {
-  background: -webkit-linear-gradient(rgba(0, 47, 75, 0.8) 0%, rgba(220, 66, 37, 0.8) 100%);
-  background: -o-linear-gradient(rgba(0, 47, 75, 0.8) 0%, rgba(220, 66, 37, 0.8) 100%);
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 47, 75, 0.8)), to(rgba(220, 66, 37, 0.8)));
-  background: linear-gradient(rgba(0, 47, 75, 0.8) 0%, rgba(220, 66, 37, 0.8) 100%);
-  /* Chrome10+,Safari5.1+ */
-  /* Opera 11.10+ */
-  /* IE10+ */
-  /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#002f4b', endColorstr='#00000000', GradientType=0); }
-
-.view a {
-  color: #fff; }
-  .view a:hover {
-    color: #dfdfdf; }
-
-.view input[type=text], .view input[type=password], .view input[type=email] {
-  border-bottom: 1px solid #fff; }
-
-.view .md-form input[type=text]:focus:not([readonly]), .view .md-form input[type=password]:focus:not([readonly]), .view .md-form input[type=email]:focus:not([readonly]) {
-  border-bottom: 1px solid #bbdefb !important;
-  -webkit-box-shadow: 0 1px 0 0 #bbdefb !important;
-  box-shadow: 0 1px 0 0 #bbdefb !important; }
-
-.view .md-form label {
-  color: #fff; }
-  .view .md-form label.active {
-    color: #bbdefb !important; }
-
-/* Remove chrome autofil background color */
-@-webkit-keyframes autofill {
-    to {
-      color: #fff;
-        background: transparent;
-    }
+  margin-bottom: 60px;
 }
 
-input:-webkit-autofill {
-    -webkit-animation-name: autofill;
-    -webkit-animation-fill-mode: both;
+.txtb{
+  border-bottom: 2px solid #adadad;
+  position: relative;
+  margin: 30px 0;
 }
-.md-form>input[type]:-webkit-autofill:not(.browser-default):not([type="search"])+label, 
-.md-form  >input[type=date]:not(.browser-default)+label, 
-.md-form  >input[type=time]:not(.browser-default)+label {
-    transform: translateY(-25px);
-    transform-origin: 0 0;
-      font-size: .8rem;
-  }
 
+.txtb input{
+  font-size: 15px;
+  color: #333;
+  border: none;
+  width: 100%;
+  outline: none;
+  background: none;
+  padding: 0 5px;
+  height: 40px;
+}
+
+.txtb span::before{
+  content: attr(data-placeholder);
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  color: #adadad;
+  transform: translateY(-50%);
+  z-index: -1;
+  transition: .5s;
+}
+
+.txtb span::after{
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(120deg,#3498db,#00AA00);
+  transition: .5s;
+}
+
+.focus + span::before{
+  top: -5px;
+}
+.focus + span::after{
+  width: 100%;
+}
+
+.logbtn{
+  display: block;
+  width: 100%;
+  height: 50px;
+  border: none;
+  background: linear-gradient(120deg,#3498db,#00AA00);
+  background-size: 200%;
+  color: #fff;
+  outline: none;
+  cursor: pointer;
+  transition: .5s;
+}
+
+.logbtn:hover{
+  background-position: right;
+}
+
+.bottom-text{
+  margin-top: 60px;
+  text-align: center;
+  font-size: 13px;
+}

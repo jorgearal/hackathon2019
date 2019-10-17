@@ -1,79 +1,35 @@
-  <!-- Grid container -->
-  <div class="container my-5">
+<ion-content>
 
-    <!--Grid row-->
-    <div class="row d-flex justify-content-center">
+  <form #loginForm="ngForm" class="login-form">
+    <h1>Login</h1>
 
-      <!-- Mobile box -->
-      <div class="mobile-box view">
-        <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/6-col/img (122).jpg" class="bg-image"
-          alt="smaple image">
-        <div class="mask gradient-mask">
-
-          <!-- Navbar -->
-          <div class="mobile-navbar d-flex justify-content-between p-2">
-
-            <div>
-              <i class="fas fa-signal"></i>
-              <i class="far fa-bell-slash"></i>
-              <i class="fas fa-wifi"></i>
-            </div>
-
-            <span>4:28 PM</span>
-
-            <div>
-              <i class="fab fa-bluetooth-b"></i>
-              <small>100%</small>
-              <i class="fas fa-battery-full"></i>
-            </div>
-
-          </div>
-          <!-- Navbar -->
-
-          <a href="#" class="float-right font-weight-bold mr-4 mt-2">Skip
-          </a>
-
-          <!-- Content -->
-          <div class="mt-5 p-4 text-center animated fadeIn">
-
-            <div class="md-form form-md">
-              <input type="email" id="email-input" class="form-control form-control-lg text-white">
-              <label for="email-input">E-mail</label>
-            </div>
-
-            <div class="md-form form-md">
-              <input type="password" id="password-input" class="form-control form-control-lg text-white">
-              <label for="password-input">Password</label>
-            </div>
-
-            <a href="">Forgot password?</a>
-
-            <!-- Sign in button -->
-            <button class="btn btn-outline-white btn-rounded btn-block my-4 waves-light z-depth-0" type="submit">Sign
-              in</button>
-
-            <!-- Sign in button -->
-            <button class="btn btn-outline-white btn-rounded btn-block my-4 waves-light z-depth-0" type="submit"><i
-                class="fab fa-facebook-f mr-2"></i>Facebook</button>
-
-            <!-- Register -->
-            <p>Not a member?
-              <a target="_blank" href="https://mdbootstrap.com/snippets/jquery/ascensus/413416/side" class="font-weight-bold">Register</a>
-            </p>
-
-
-          </div>
-          <!-- Content -->
-
-        </div>
-      </div>
-      <!-- Mobile box -->
-
-
-
-
+    <div class="txtb">
+      <input type="text" [(ngModel)]="login.username" name="username" type="text" #username="ngModel" placeholder="Usuario">
     </div>
-    <!--Grid row-->
 
-  </div>
-  <!-- Grid container -->
+    <div class="txtb">
+      <input [(ngModel)]="login.password" name="password" type="password" #password="ngModel" required placeholder="Contraseña">
+    </div>
+
+    <input  (click)="onLogin(loginForm)" type="submit" class="logbtn" value="Login">
+
+    <div class="bottom-text">
+      ¿No tienes cuenta? <a  (click)="registrarse()" >Registrate</a>
+    </div>
+
+  </form>
+
+  <script type="text/javascript">
+  $(".txtb input").on("focus",function(){
+    $(this).addClass("focus");
+  });
+
+  $(".txtb input").on("blur",function(){
+    if($(this).val() == "")
+    $(this).removeClass("focus");
+  });
+
+  </script>
+
+
+</ion-content>
