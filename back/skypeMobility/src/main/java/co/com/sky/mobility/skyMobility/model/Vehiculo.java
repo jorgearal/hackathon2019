@@ -53,7 +53,7 @@ public class Vehiculo {
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id", insertable = false, updatable = false)
 	private Persona persona;
-
+	
 	public int getId() {
 		return id;
 	}

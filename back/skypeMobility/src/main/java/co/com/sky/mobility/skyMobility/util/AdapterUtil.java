@@ -5,40 +5,97 @@ import java.util.List;
 
 import co.com.sky.mobility.skyMobility.dto.EdificioDTO;
 import co.com.sky.mobility.skyMobility.dto.PersonaDTO;
+import co.com.sky.mobility.skyMobility.dto.RutaDTO;
 import co.com.sky.mobility.skyMobility.dto.VehiculoDTO;
 import co.com.sky.mobility.skyMobility.model.Edificio;
 import co.com.sky.mobility.skyMobility.model.Persona;
+import co.com.sky.mobility.skyMobility.model.Ruta;
 import co.com.sky.mobility.skyMobility.model.Vehiculo;
 
-
 public class AdapterUtil {
-	
-	public static List<EdificioDTO> convertirEdificioToDto(List<Edificio> edificios){
-		
+
+	public static List<EdificioDTO> convertirEdificioToDto(List<Edificio> edificios) {
+
 		ArrayList<EdificioDTO> edificiosDto = new ArrayList<>();
-		
+
 		for (Edificio edificioEntity : edificios) {
-			
+
 			EdificioDTO edificio = new EdificioDTO();
-			
+
 			edificio.setNumber(edificioEntity.getId());
 			edificio.setNombre(edificioEntity.getNombre());
 			edificio.setLongitud(edificioEntity.getLongitud());
 			edificio.setLatitud(edificioEntity.getLatitud());
-		
-			
+
 			edificiosDto.add(edificio);
+
+		}
+
+		return edificiosDto;
+
+	}
+
+	public static EdificioDTO edificioToDto(Edificio edificio) {
+
+		EdificioDTO edificioDto = new EdificioDTO();
+
+		edificioDto.setNumber(edificio.getId());
+		edificioDto.setNombre(edificio.getNombre());
+		edificioDto.setLongitud(edificio.getLongitud());
+		edificioDto.setLatitud(edificio.getLatitud());
+
+		return edificioDto;
+
+	}
+
+	public static List<RutaDTO> convertirRutasToDto(List<Ruta> rutas) {
+
+		List<RutaDTO> rutasDto = new ArrayList<RutaDTO>();
+		
+		for (Ruta ruta : rutas) {
+			
+			RutaDTO rutaDto = new RutaDTO();
+			
+			rutaDto.setCupo(ruta.getCupo());
+			rutaDto.setEstado(ruta.getEstado());
+			rutaDto.setId(ruta.getId());
+			rutaDto.setNumPersonas(ruta.getNumeroPersonas());
+			rutaDto.setOrigen(edificioToDto(ruta.getOrigen()));
+			rutaDto.setDestino(edificioToDto(ruta.getDestino()));
+
+			rutaDto.setFechaReg(ruta.getFechaPublicacion().toString());
+			rutaDto.setFechaSalida(ruta.getFechaSalida().toString());
+			
+			rutasDto.add(rutaDto);
 			
 		}
-		
-		return edificiosDto;
-		
+
+		return rutasDto;
+
 	}
-	
-	public static PersonaDTO convertirPersonaToDto(Persona persona){
-		
+
+	public static RutaDTO convertirRutaToDto(Ruta ruta) {
+
+		RutaDTO rutaDto = new RutaDTO();
+
+		rutaDto.setCupo(ruta.getCupo());
+		rutaDto.setEstado(ruta.getEstado());
+		rutaDto.setId(ruta.getId());
+		rutaDto.setNumPersonas(ruta.getNumeroPersonas());
+		rutaDto.setOrigen(edificioToDto(ruta.getOrigen()));
+		rutaDto.setDestino(edificioToDto(ruta.getDestino()));
+
+		rutaDto.setFechaReg(ruta.getFechaPublicacion().toString());
+		rutaDto.setFechaSalida(ruta.getFechaSalida().toString());
+
+		return rutaDto;
+
+	}
+
+	public static PersonaDTO convertirPersonaToDto(Persona persona) {
+
 		PersonaDTO personaDto = new PersonaDTO();
-		
+
 		personaDto.setCedula(persona.getCedula());
 		personaDto.setCelular(persona.getCelular());
 		personaDto.setEmail(persona.getCorreo());
@@ -49,7 +106,7 @@ public class AdapterUtil {
 		personaDto.setPuntaje(persona.getPuntaje());
 		personaDto.setEtiqueta(persona.getEtiqueta());
 		personaDto.setReputacion(persona.getReputacion());
-		
+
 		return personaDto;
 	}
 
@@ -74,44 +131,44 @@ public class AdapterUtil {
 		persona.setPuntaje(personaDto.getPuntaje());
 		persona.setEtiqueta(personaDto.getEtiqueta());
 		persona.setReputacion(personaDto.getReputacion());
-		
+
 		if (personaDto.getId() == 0 || updatePass)
 			persona.setContrasenia(SecurityUtil.encryptPassword(personaDto.getPassword()));
 
 		return persona;
 	}
-	
-	public static List<VehiculoDTO> convertirVehiculosToDto(List<Vehiculo> vehiculos){
-		
+
+	public static List<VehiculoDTO> convertirVehiculosToDto(List<Vehiculo> vehiculos) {
+
 		ArrayList<VehiculoDTO> vehiculosDto = new ArrayList<>();
-		
+
 		for (Vehiculo vehiculoEntity : vehiculos) {
-			
+
 			VehiculoDTO vehiculo = new VehiculoDTO();
-			
-		     vehiculo.setColor(vehiculoEntity.getColor());
-		     vehiculo.setDescripcion(vehiculoEntity.getDescripcion());
-		     vehiculo.setImagen(vehiculoEntity.getFoto());
-		     vehiculo.setMarca(vehiculoEntity.getMarca());
-		     vehiculo.setModelo(vehiculoEntity.getModelo());
-		     vehiculo.setId(vehiculoEntity.getId());
-		     vehiculo.setNumPuestos(vehiculoEntity.getNumeroPuestos());
-		     vehiculo.setPlaca(vehiculoEntity.getPlaca());
-		     vehiculo.setReferencia(vehiculoEntity.getReferencia());
-		     vehiculo.setPersona(convertirPersonaToDto(vehiculoEntity.getPersona()));
-		     vehiculo.setMatricula(vehiculoEntity.getMatricula());
-		     
+
+			vehiculo.setColor(vehiculoEntity.getColor());
+			vehiculo.setDescripcion(vehiculoEntity.getDescripcion());
+			vehiculo.setImagen(vehiculoEntity.getFoto());
+			vehiculo.setMarca(vehiculoEntity.getMarca());
+			vehiculo.setModelo(vehiculoEntity.getModelo());
+			vehiculo.setId(vehiculoEntity.getId());
+			vehiculo.setNumPuestos(vehiculoEntity.getNumeroPuestos());
+			vehiculo.setPlaca(vehiculoEntity.getPlaca());
+			vehiculo.setReferencia(vehiculoEntity.getReferencia());
+			vehiculo.setPersona(convertirPersonaToDto(vehiculoEntity.getPersona()));
+			vehiculo.setMatricula(vehiculoEntity.getMatricula());
+
 			vehiculosDto.add(vehiculo);
 		}
-		
+
 		return vehiculosDto;
-		
+
 	}
-	
-	public static Vehiculo convertirVehiculoDtoToVehiculo(VehiculoDTO vehiculoDto){
-		
+
+	public static Vehiculo convertirVehiculoDtoToVehiculo(VehiculoDTO vehiculoDto) {
+
 		Vehiculo vehiculo = new Vehiculo();
-		
+
 		vehiculo.setColor(vehiculoDto.getColor());
 		vehiculo.setDescripcion(vehiculoDto.getDescripcion());
 		vehiculo.setFoto(vehiculoDto.getImagen());
@@ -120,7 +177,7 @@ public class AdapterUtil {
 		vehiculo.setMatricula(vehiculoDto.getMatricula());
 		vehiculo.setModelo(vehiculoDto.getModelo());
 		vehiculo.setNumeroPuestos(vehiculoDto.getNumPuestos());
-		
+
 		try {
 			vehiculo.setPersona(convertirDtoToPersona(vehiculoDto.getPersona(), false));
 		} catch (Exception e) {
@@ -128,9 +185,9 @@ public class AdapterUtil {
 		}
 		vehiculo.setPlaca(vehiculoDto.getPlaca());
 		vehiculo.setReferencia(vehiculoDto.getReferencia());
-		
+
 		return vehiculo;
-		
+
 	}
 
 }

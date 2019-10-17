@@ -27,8 +27,6 @@ public class VehiculoController {
 	
 	@Autowired
 	private IVehiculoDao vehiculoDao;
-	@Autowired
-	private IPersonaDAO personaDao;
 	
 	@GetMapping(value="api/v1/mobility/buscarVehiculo", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<VehiculoDTO>> buscarVehiculo(@RequestParam String placa){
@@ -44,11 +42,8 @@ public class VehiculoController {
 	public ResponseEntity<List<VehiculoDTO>> guardarVehiculo(@RequestBody VehiculoDTO vehiculo){
 		
 		try {
-			Optional<Persona> persona = personaDao.findById(vehiculo.getPersona().getId());
 			
 			Vehiculo vehiculoEntity =AdapterUtil.convertirVehiculoDtoToVehiculo(vehiculo);
-			
-			vehiculoEntity.setPersona(persona.get());
 			
 			vehiculoDao.save(vehiculoEntity);
 			
