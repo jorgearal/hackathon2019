@@ -12,7 +12,7 @@
   </ion-toolbar>
 
   <ion-toolbar>
-      <ion-searchbar [(ngModel)]="queryText" placeholder="Buscar..."></ion-searchbar>
+      <ion-searchbar [(ngModel)]="queryText" (keyup)="buscarDireccion()" placeholder="Buscar..."></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
@@ -20,7 +20,7 @@
   <div #mapCanvas class="map-canvas"></div>
 
   <div class="centrado">
-    <ion-button fill="clear" [hidden]="destinoSeleccionado" (click)="presentConfirm()" class="center-block btn btn-primary">
+    <ion-button fill="clear" [hidden]="destinoSeleccionado" (click)="buscarRuta()" class="center-block btn btn-primary">
       Llevame
     </ion-button>
   </div>

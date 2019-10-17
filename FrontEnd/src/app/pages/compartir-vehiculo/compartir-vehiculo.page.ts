@@ -125,7 +125,7 @@ export class CompartirVehiculoPage implements OnInit {
       map.addListener('click', (e) => {
         this.markerDestination = placeMarkerAndPanTo(e.latLng, map, this.markerDestination);
         var geocode = new google.maps.Geocoder();
-        geocode.geocode({ 'location': this.markerDestination.position }, (results, status) => {
+        geocode.geocode({ 'location': this.markerDestination.getPosition() }, (results, status) => {
           if (status === 'OK') {
             if (results[0]) {
               map.setZoom(18);

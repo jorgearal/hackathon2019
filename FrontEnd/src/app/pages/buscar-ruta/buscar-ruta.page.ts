@@ -1,13 +1,11 @@
 import { Component, OnInit,ViewChild, Inject, ElementRef, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, IonList, LoadingController, ModalController, ToastController, Config } from '@ionic/angular';
-import { ScheduleFilterPage } from '../schedule-filter/schedule-filter';
+import { AlertController, LoadingController, ModalController, ToastController, Config } from '@ionic/angular';
 import { ConferenceData } from '../../providers/conference-data';
 import { UserData } from '../../providers/user-data';
 import { DOCUMENT } from '@angular/common';
 
 import { darkStyle } from './map-dark-style';
-import { timeInterval } from 'rxjs/operators';
 
 import {} from 'googlemaps';
 
@@ -27,6 +25,8 @@ export class BuscarRutaPage implements OnInit, AfterViewInit {
   geocode: any;
   destinoSeleccionado: boolean = true;
 
+  modo: boolean = true;
+
  constructor(
   @Inject(DOCUMENT) private doc: Document,
    public alertCtrl: AlertController,
@@ -40,7 +40,21 @@ export class BuscarRutaPage implements OnInit, AfterViewInit {
  ) { }
 
  ngOnInit() {
-   this.ios = this.config.get('mode') === 'ios';
+    this.loadingCtrl.create({
+      duration: 4000,
+      message: 'Cargando rutas',
+    }).then((a) => {
+      a.present();
+    });
+    this.ios = this.config.get('mode') === 'ios';
+ }
+
+ cambiarModo(modo: string) {
+  if(modo === 'eco') {
+    this.modo = true;
+  } else if(modo === 'otros') {
+    this.modo = false;
+  }
  }
 
  async ngAfterViewInit() {
