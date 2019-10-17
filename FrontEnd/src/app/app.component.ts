@@ -79,12 +79,14 @@ export class AppComponent implements OnInit {
     private userData: UserData,
     private swUpdate: SwUpdate,
     private toastCtrl: ToastController,
-    private personaService:PersonaService
-  ) {
-    this.initializeApp();
-  }
+    private personaService: PersonaService
+  ) { }
 
   async ngOnInit() {
+    this.initializeApp();
+    this.persona = new Persona();
+    this.persona.nombres = 'Carlos Cepeda';
+    this.persona.puntaje = '4.9';
     this.checkLoginStatus();
     this.listenForLoginEvents();
 

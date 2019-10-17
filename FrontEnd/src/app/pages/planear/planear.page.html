@@ -3,19 +3,30 @@
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
-  
       <ion-title>Planear Viaje</ion-title>
-  
-      <ion-buttons slot="end">
-        <ion-button (click)="presentFilter()">
-          <span *ngIf="ios">Filter</span>
-          <span *ngIf="!ios">
-            <ion-icon slot="icon-only" name="options"></ion-icon>
-          </span>
-        </ion-button>
-      </ion-buttons>
     </ion-toolbar>
-  
+    <ion-item>
+      <div>
+        <ion-card *ngFor="let dato of datosRutas">
+          <ion-card-content>
+            <ion-grid>
+              <ion-row>
+                <ion-col size="10">
+                  <strong>Origen: </strong>{{dato.origen.nombre}} <br>
+                  <strong>Destino: </strong>{{dato.destino.nombre}}
+                  <p><b>Puntos:</b> 300</p>
+                </ion-col>
+                <ion-col size="2">
+                  <img src="{{opcion.imagen}}" alt="carro" class="imgCircular">
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </div>
+      
+      
+    </ion-item>
     <ion-toolbar>
       <ion-searchbar [(ngModel)]="queryText" (ionChange)="updateSchedule()" placeholder="Search"></ion-searchbar>
     </ion-toolbar>
