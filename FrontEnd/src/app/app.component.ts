@@ -48,7 +48,7 @@ export class AppComponent implements OnInit {
     },
     {
       title: 'Confirmar viaje',
-      url: '/puntaje',
+      url: '/qr',
       icon: 'ios-qr-scanner'
     },
     {
