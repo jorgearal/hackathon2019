@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,10 +28,16 @@ public class VehiculoController {
 	
 	@GetMapping(value="api/v1/mobility/buscarVehiculo", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<VehiculoDTO>> buscarVehiculo(@RequestParam String placa){
-		
 		List<Vehiculo> vehiculos = vehiculoDao.findByTitle(placa);
-		
 		return ResponseEntity.ok(AdapterUtil.convertirVehiculosToDto(vehiculos));
+		
+		
+	}
+
+	
+	@GetMapping(value="api/v1/mobility/buscarVehiculoPersona/{idPersona}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Vehiculo>> buscarVehiculo(@PathVariable int idPersona){
+		return ResponseEntity.ok(vehiculoDao.findByPersonaId(idPersona));
 		
 		
 	}
