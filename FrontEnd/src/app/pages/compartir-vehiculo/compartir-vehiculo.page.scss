@@ -1,0 +1,21 @@
+.centrado{
+    text-align: center;
+  }
+
+  .map-canvas {
+    position: absolute;
+  
+    height: 60%;
+    width: 90%;
+    background-color: transparent;
+    opacity: 0;
+    transition: opacity 150ms ease-in;
+  }
+  
+  .show-map {
+    opacity: 1;
+  }
+  
+  .gm-style-iw .gm-style-iw-c {
+    visibility: hidden;
+  }

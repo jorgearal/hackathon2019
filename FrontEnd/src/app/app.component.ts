@@ -20,7 +20,7 @@ import { UserData } from './providers/user-data';
 export class AppComponent implements OnInit {
   appPages = [
     {
-      title: 'Compartir vehiculo',
+      title: 'Compartir Ruta',
       url: '/app/tabs/compartirVehiculo',
       icon: 'car'
     },
