@@ -13,14 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.com.sky.mobility.skyMobility.dao.IEdificioDao;
 import co.com.sky.mobility.skyMobility.dao.IRutaDao;
-import co.com.sky.mobility.skyMobility.dao.IVehiculoDao;
 import co.com.sky.mobility.skyMobility.dto.EstadoDTO;
 import co.com.sky.mobility.skyMobility.dto.RutaDTO;
-import co.com.sky.mobility.skyMobility.model.Edificio;
 import co.com.sky.mobility.skyMobility.model.Ruta;
-import co.com.sky.mobility.skyMobility.model.Vehiculo;
 import co.com.sky.mobility.skyMobility.util.AdapterUtil;
 
 
@@ -30,13 +26,7 @@ public class RutaController {
 	
 	@Autowired
 	private IRutaDao rutaDao;
-	
-	@Autowired
-	private IEdificioDao edificioDao;
-	
-	@Autowired
-	private IVehiculoDao vehiculoDao;
-	
+
 	@GetMapping(value="api/v1/mobility/buscarRuta", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<RutaDTO>> buscarRuta(@RequestParam String latitudOrigen, @RequestParam String longitudOrigen,
 			@RequestParam String latitudDestino, @RequestParam String longitudDestino){

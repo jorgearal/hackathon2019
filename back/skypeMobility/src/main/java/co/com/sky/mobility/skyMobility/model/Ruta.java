@@ -50,6 +50,9 @@ public class Ruta implements Serializable {
 	@Column(name = "puntos")
 	private int puntos;
 	
+	public Ruta() {
+	}
+	
 	/**
 	 * 
 	 * @param fechaPublicacion
