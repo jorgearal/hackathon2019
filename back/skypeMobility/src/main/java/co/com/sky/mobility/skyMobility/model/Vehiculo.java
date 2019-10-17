@@ -56,12 +56,9 @@ public class Vehiculo implements Serializable {
 	@Column(name = "matricula", nullable = false, length = 100)
 	private String matricula;
 	
-	@ManyToOne
-	@JoinColumn(name = "persona_id")
-	private Persona persona;
+	@Column(name = "persona_id")
+	private int personaId;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "vehiculo")
-	private Set<Ruta> rutasVehiculo;
 	
 	public int getId() {
 		return id;
@@ -135,12 +132,20 @@ public class Vehiculo implements Serializable {
 		this.foto = foto;
 	}
 
-	public Persona getPersona() {
-		return persona;
+	
+
+	/**
+	 * @return the personaId
+	 */
+	public int getPersonaId() {
+		return personaId;
 	}
 
-	public void setPersona(Persona persona) {
-		this.persona = persona;
+	/**
+	 * @param personaId the personaId to set
+	 */
+	public void setPersonaId(int personaId) {
+		this.personaId = personaId;
 	}
 
 	public String getMatricula() {
@@ -150,9 +155,5 @@ public class Vehiculo implements Serializable {
 	public void setMatricula(String matricula) {
 		this.matricula = matricula;
 	}
-	
-	
-	
-	
 
 }

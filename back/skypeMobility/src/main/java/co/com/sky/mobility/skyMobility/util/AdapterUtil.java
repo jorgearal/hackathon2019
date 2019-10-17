@@ -34,6 +34,19 @@ public class AdapterUtil {
 		return edificiosDto;
 
 	}
+	
+	public static EdificioDTO convertirEdificioToDto(Edificio edificio) {
+
+		EdificioDTO edificioDto = new EdificioDTO();
+
+		edificioDto.setNumber(edificio.getId());
+		edificioDto.setNombre(edificio.getNombre());
+		edificioDto.setLongitud(edificio.getLongitud());
+		edificioDto.setLatitud(edificio.getLatitud());
+
+		return edificioDto;
+
+	}
 
 	public static EdificioDTO edificioToDto(Edificio edificio) {
 
@@ -60,8 +73,12 @@ public class AdapterUtil {
 			rutaDto.setEstado(ruta.getEstado());
 			rutaDto.setId(ruta.getId());
 			rutaDto.setNumPersonas(ruta.getNumeroPersonas());
-			rutaDto.setOrigen(edificioToDto(ruta.getOrigen()));
-			rutaDto.setDestino(edificioToDto(ruta.getDestino()));
+			
+			rutaDto.setOrigen(new EdificioDTO());
+			rutaDto.getOrigen().setNumber(ruta.getOrigenId());
+			
+			rutaDto.setDestino(new EdificioDTO());
+			rutaDto.getDestino().setNumber(ruta.getDestinoId());
 
 			rutaDto.setFechaReg(ruta.getFechaPublicacion().toString());
 			rutaDto.setFechaSalida(ruta.getFechaSalida().toString());
@@ -82,8 +99,11 @@ public class AdapterUtil {
 		rutaDto.setEstado(ruta.getEstado());
 		rutaDto.setId(ruta.getId());
 		rutaDto.setNumPersonas(ruta.getNumeroPersonas());
-		rutaDto.setOrigen(edificioToDto(ruta.getOrigen()));
-		rutaDto.setDestino(edificioToDto(ruta.getDestino()));
+		rutaDto.setOrigen(new EdificioDTO());
+		rutaDto.getOrigen().setNumber(ruta.getOrigenId());
+		
+		rutaDto.setDestino(new EdificioDTO());
+		rutaDto.getDestino().setNumber(ruta.getDestinoId());
 
 		rutaDto.setFechaReg(ruta.getFechaPublicacion().toString());
 		rutaDto.setFechaSalida(ruta.getFechaSalida().toString());
@@ -155,7 +175,8 @@ public class AdapterUtil {
 			vehiculo.setNumPuestos(vehiculoEntity.getNumeroPuestos());
 			vehiculo.setPlaca(vehiculoEntity.getPlaca());
 			vehiculo.setReferencia(vehiculoEntity.getReferencia());
-			vehiculo.setPersona(convertirPersonaToDto(vehiculoEntity.getPersona()));
+			vehiculo.setPersona(new PersonaDTO());
+			vehiculo.getPersona().setId(vehiculoEntity.getPersonaId());
 			vehiculo.setMatricula(vehiculoEntity.getMatricula());
 
 			vehiculosDto.add(vehiculo);
@@ -177,17 +198,61 @@ public class AdapterUtil {
 		vehiculo.setMatricula(vehiculoDto.getMatricula());
 		vehiculo.setModelo(vehiculoDto.getModelo());
 		vehiculo.setNumeroPuestos(vehiculoDto.getNumPuestos());
+		vehiculo.setPersonaId(vehiculoDto.getPersona().getId());
 
-		try {
-			vehiculo.setPersona(convertirDtoToPersona(vehiculoDto.getPersona(), false));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		vehiculo.setPlaca(vehiculoDto.getPlaca());
 		vehiculo.setReferencia(vehiculoDto.getReferencia());
 
 		return vehiculo;
 
+	}
+	
+	/**
+	 * 
+	 * @param result
+	 * @return
+	 */
+	public static List<RutaDTO> buildRutasDto(List<Object> result) {
+		
+		List<RutaDTO> rutasDto = new ArrayList<>();
+		
+		result.forEach(x -> {
+			Object[] data = (Object[]) x;
+			Ruta r = (Ruta) data[0];
+			Edificio o = (Edificio) data[1];
+			Edificio d = (Edificio) data[2];
+			
+			rutasDto.add(buildRutaDTOView(r, o, d));
+		});
+		
+		return rutasDto;
+	}
+	
+	/**
+	 * 
+	 * @param ruta
+	 * @param origen
+	 * @param destino
+	 * @return
+	 */
+	public static RutaDTO buildRutaDTOView (Ruta ruta, Edificio origen, Edificio destino) {
+		
+		RutaDTO rutaDto = new RutaDTO();
+		rutaDto.setCupo(ruta.getCupo());
+		rutaDto.setEstado(ruta.getEstado());
+		rutaDto.setFechaReg(ruta.getFechaPublicacion().toString());
+		rutaDto.setFechaSalida(ruta.getFechaSalida().toString());
+		rutaDto.setId(ruta.getId());
+		rutaDto.setNumPersonas(ruta.getNumeroPersonas());
+		
+		rutaDto.setVehiculo(new VehiculoDTO());
+		rutaDto.getVehiculo().setId(ruta.getVehiculoId());
+		
+		rutaDto.setOrigen(convertirEdificioToDto(origen));
+		rutaDto.setDestino(convertirEdificioToDto(destino));
+		
+		return rutaDto;
+		
 	}
 
 }

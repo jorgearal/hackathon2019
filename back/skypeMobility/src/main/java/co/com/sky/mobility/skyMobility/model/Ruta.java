@@ -8,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -26,9 +24,8 @@ public class Ruta implements Serializable {
 	@Column(name = "fecha_hora_salida", nullable = false)
 	private Date fechaSalida;
 	
-	@ManyToOne
-	@JoinColumn(name = "vehiculo_id")
-	private Vehiculo vehiculo;
+	@Column(name = "vehiculo_id")
+	private int vehiculoId;
 	
 	@Column(name = "numeroPersonas")
 	private int numeroPersonas;
@@ -36,13 +33,11 @@ public class Ruta implements Serializable {
 	@Column(name = "estado")
 	private int estado;
 	
-	@ManyToOne
-	@JoinColumn(name = "edificio_origen_id")
-	private Edificio origen;
+	@Column(name = "edificio_origen_id")
+	private int origenId;
 	
-	@ManyToOne
-	@JoinColumn(name = "edificio_destino_id")
-	private Edificio destino;
+	@Column(name = "edificio_destino_id")
+	private int destinoId;
 	
 	@Column(name = "cupo")
 	private int cupo;
@@ -57,7 +52,7 @@ public class Ruta implements Serializable {
 	 * 
 	 * @param fechaPublicacion
 	 * @param fechaSalida
-	 * @param vehiculo
+	 * @param vehiculoId
 	 * @param numeroPersonas
 	 * @param estado
 	 * @param origen
@@ -65,14 +60,14 @@ public class Ruta implements Serializable {
 	 * @param cupo
 	 * @param puntos
 	 */
-	public Ruta(Date fechaPublicacion, Date fechaSalida, Vehiculo vehiculo, int numeroPersonas, int estado, Edificio origen, Edificio destino, int cupo, int puntos) {
+	public Ruta(Date fechaPublicacion, Date fechaSalida, int vehiculoId, int numeroPersonas, int estado, int origenId, int destinoId, int cupo, int puntos) {
 		this.fechaPublicacion = fechaPublicacion; 
 		this.fechaSalida = fechaSalida;
-		this.vehiculo = vehiculo; 
+		this.vehiculoId = vehiculoId; 
 		this.numeroPersonas = numeroPersonas; 
 		this.estado = estado; 
-		this.origen = origen; 
-		this.destino = destino; 
+		this.origenId = origenId; 
+		this.destinoId = destinoId; 
 		this.cupo = cupo;
 		this.puntos = puntos;
 	}
@@ -101,12 +96,19 @@ public class Ruta implements Serializable {
 		this.fechaSalida = fechaSalida;
 	}
 
-	public Vehiculo getVehiculo() {
-		return vehiculo;
+
+	/**
+	 * @return the vehiculoId
+	 */
+	public int getVehiculoId() {
+		return vehiculoId;
 	}
 
-	public void setVehiculo(Vehiculo vehiculo) {
-		this.vehiculo = vehiculo;
+	/**
+	 * @param vehiculoId the vehiculoId to set
+	 */
+	public void setVehiculoId(int vehiculoId) {
+		this.vehiculoId = vehiculoId;
 	}
 
 	public int getNumeroPersonas() {
@@ -125,20 +127,33 @@ public class Ruta implements Serializable {
 		this.estado = estado;
 	}
 
-	public Edificio getOrigen() {
-		return origen;
+	
+	/**
+	 * @return the origenId
+	 */
+	public int getOrigenId() {
+		return origenId;
 	}
 
-	public void setOrigen(Edificio origen) {
-		this.origen = origen;
+	/**
+	 * @param origenId the origenId to set
+	 */
+	public void setOrigenId(int origenId) {
+		this.origenId = origenId;
 	}
 
-	public Edificio getDestino() {
-		return destino;
+	/**
+	 * @return the destinoId
+	 */
+	public int getDestinoId() {
+		return destinoId;
 	}
 
-	public void setDestino(Edificio destino) {
-		this.destino = destino;
+	/**
+	 * @param destinoId the destinoId to set
+	 */
+	public void setDestinoId(int destinoId) {
+		this.destinoId = destinoId;
 	}
 
 	public int getCupo() {

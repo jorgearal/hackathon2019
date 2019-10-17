@@ -40,9 +40,6 @@ public class Persona implements Serializable {
 	@Column(name = "celular",length = 20)
 	private String celular;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "persona")
-	private Set<Vehiculo> vehiculosPersona;
-	
 	@Column(name = "reputacion")
 	private double reputacion;
 	
@@ -110,21 +107,6 @@ public class Persona implements Serializable {
 
 	public void setCelular(String celular) {
 		this.celular = celular;
-	}
-
-
-	/**
-	 * @return the vehiculosPersona
-	 */
-	public Set<Vehiculo> getVehiculosPersona() {
-		return vehiculosPersona;
-	}
-
-	/**
-	 * @param vehiculosPersona the vehiculosPersona to set
-	 */
-	public void setVehiculosPersona(Set<Vehiculo> vehiculosPersona) {
-		this.vehiculosPersona = vehiculosPersona;
 	}
 
 	public double getReputacion() {
