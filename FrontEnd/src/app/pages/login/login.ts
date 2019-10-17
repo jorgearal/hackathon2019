@@ -28,13 +28,13 @@ export class LoginPage {
     if (form.valid) {
       localStorage.setItem('registroNuevo', 'NO' );
       this.userData.login(this.login.username);
-      this.router.navigateByUrl('/app/tabs/bienvenido');
+      this.router.navigateByUrl('/login');
     }
   }
 
   registrarse() {
     localStorage.setItem('registroNuevo', 'SI' );
-    this.router.navigateByUrl('/app/tabs/registrar');
+    this.router.navigateByUrl('/registrar');
   }
 
 }

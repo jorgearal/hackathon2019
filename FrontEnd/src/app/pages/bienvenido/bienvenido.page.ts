@@ -45,7 +45,7 @@ export class BienvenidoPage implements OnInit, AfterViewInit {
  }
 
  buscarRuta() {
-   this.router.navigate(['/app/tabs/buscarRuta']);
+   this.router.navigate(['/buscarRuta']);
  }
 
  buscarDireccion() {
