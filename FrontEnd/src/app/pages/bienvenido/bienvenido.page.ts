@@ -1,13 +1,12 @@
 import { Component, OnInit, ViewChild, Inject, ElementRef, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, IonList, LoadingController, ModalController, ToastController, Config } from '@ionic/angular';
-import { ScheduleFilterPage } from '../schedule-filter/schedule-filter';
+import { AlertController, LoadingController, ModalController, ToastController, Config } from '@ionic/angular';
 import { ConferenceData } from '../../providers/conference-data';
 import { UserData } from '../../providers/user-data';
+import { Destino } from '../../interfaces/destino';
 import { DOCUMENT } from '@angular/common';
 
 import { darkStyle } from './map-dark-style';
-import { timeInterval } from 'rxjs/operators';
 
 import {} from 'googlemaps';
 
@@ -26,6 +25,8 @@ export class BienvenidoPage implements OnInit, AfterViewInit {
   queryText: string;
   geocode: any;
   destinoSeleccionado: boolean = true;
+  destino: Destino;
+  map: google.maps.Map;
 
  constructor(
   @Inject(DOCUMENT) private doc: Document,
@@ -43,6 +44,35 @@ export class BienvenidoPage implements OnInit, AfterViewInit {
    this.ios = this.config.get('mode') === 'ios';
  }
 
+ buscarRuta() {
+   this.router.navigate(['/app/tabs/buscarRuta']);
+ }
+
+ buscarDireccion() {
+    if (this.queryText) {
+      console.log("buscanado direccion: " + this.queryText);
+      if (this.markerDestination) {
+        this.markerDestination.setMap(null);
+      }
+      codeAddress(this.queryText, (e) => {
+        this.markerDestination = placeMarkerAndPanTo(e, this.map);
+        if (this.markerDestination) {
+          this.escribirDestino(this.queryText);
+          this.destinoSeleccionado = false;
+        }
+      });
+    }
+ }
+
+ escribirDestino(direccion) {
+  this.destino = {
+    lat: this.markerDestination.getPosition().lat(),
+    lng: this.markerDestination.getPosition().lng(),
+    direccion: direccion
+  };
+  localStorage.setItem('destino', JSON.stringify(this.destino));
+ }
+
  async ngAfterViewInit() {
   const appEl = this.doc.querySelector('ion-app');
   let isDark = false;
@@ -54,13 +84,11 @@ export class BienvenidoPage implements OnInit, AfterViewInit {
   const googleMaps = await getGoogleMaps(
     'AIzaSyB8pf6ZdFQj5qw7rc_HSGrhUwQKfIe9ICw'
   );
-
-  let map;
-
+  
   this.confData.getMap().subscribe((mapData: any) => {
     const mapEle = this.mapElement.nativeElement;
 
-    map = new googleMaps.Map(mapEle, {
+    this.map = new googleMaps.Map(mapEle, {
       streetViewControl: false,
       fullscreenControl: false,
       mapTypeControl: false,
@@ -69,25 +97,32 @@ export class BienvenidoPage implements OnInit, AfterViewInit {
       styles: style
     });
 
-    map.addListener('click', (e) => {
-      this.markerDestination = placeMarkerAndPanTo(e.latLng, map, this.markerDestination);
-      if (!this.geocode) {
+    this.map.addListener('click', (e) => {
+      if (this.markerDestination) {
+        this.markerDestination.setMap(null);
+      }
+      this.markerDestination = placeMarkerAndPanTo(e.latLng, this.map);
+
+      if(!this.geocode) {
         this.geocode = new google.maps.Geocoder();
       }
-      console.log(this.markerDestination.getPosition().lat(), this.markerDestination.getPosition().lng());
+
+      // console.log(this.markerDestination.getPosition().lat(), this.markerDestination.getPosition().lng());
+
       this.geocode.geocode({'location': this.markerDestination.getPosition()}, (results, status) => {
         if (status === 'OK') {
           if (results[0]) {
-            map.setZoom(18);
+            this.map.setZoom(18);
             this.queryText = results[0].formatted_address;
             this.destinoSeleccionado = false;
+            this.escribirDestino(results[0].formatted_address);
             console.log(results[0].formatted_address);
           }
         }
       });
     });
 
-    googleMaps.event.addListenerOnce(map, 'idle', () => {
+    googleMaps.event.addListenerOnce(this.map, 'idle', () => {
       mapEle.classList.add('show-map');
     });
   });
@@ -97,10 +132,10 @@ export class BienvenidoPage implements OnInit, AfterViewInit {
       if (mutation.attributeName === 'class') {
         const el = mutation.target as HTMLElement;
         isDark = el.classList.contains('dark-theme');
-        if (map && isDark) {
-          map.setOptions({styles: darkStyle});
-        } else if (map) {
-          map.setOptions({styles: []});
+        if (this.map && isDark) {
+          this.map.setOptions({styles: darkStyle});
+        } else if (this.map) {
+          this.map.setOptions({styles: []});
         }
       }
     });
@@ -109,6 +144,16 @@ export class BienvenidoPage implements OnInit, AfterViewInit {
     attributes: true
   });
  }
+}
+
+function codeAddress(direccion, funcRetorno) {
+  var geocoder = new google.maps.Geocoder();
+  var address = direccion;
+  geocoder.geocode({ 'address': address }, function (results, status) {
+    if (status === 'OK') {
+      funcRetorno(results[0].geometry.location);
+    }
+  });
 }
 
 function getGoogleMaps(apiKey: string): Promise<any> {
@@ -135,10 +180,7 @@ function getGoogleMaps(apiKey: string): Promise<any> {
   });
 }
 
-function placeMarkerAndPanTo(latLng, map, marker) {
-  if (marker) {
-    marker.setMap(null);
-  }
+function placeMarkerAndPanTo(latLng, map) {
   map.panTo(latLng);
   return new google.maps.Marker({
     position: latLng,
