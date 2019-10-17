@@ -22,7 +22,7 @@ import { PersonaService } from './providers/persona-service';
 export class AppComponent implements OnInit {
 
 
-  persona:Persona;
+  persona: Persona;
 
 
   appPages = [
@@ -82,7 +82,7 @@ export class AppComponent implements OnInit {
     private userData: UserData,
     private swUpdate: SwUpdate,
     private toastCtrl: ToastController,
-    private personaService:PersonaService
+    private personaService: PersonaService
   ) {
     this.initializeApp();
   }
@@ -106,14 +106,14 @@ export class AppComponent implements OnInit {
         .then(() => this.swUpdate.activateUpdate())
         .then(() => window.location.reload());
     });
-    //se consulta los datos de la persona
-    this.personaService.consultarInfoPersonaXId(1).subscribe((data)=>{
+
+    // se consulta los datos de la persona
+    this.personaService.consultarInfoPersonaXId(1).subscribe((data) => {
       this.persona = data;
       console.log(JSON.stringify(data));
-    }, (error)=>{
-      alert("Los servicios no se encuentran disponibles");
+    }, (error) => {
+      alert('Los servicios no se encuentran disponibles');
     });
-    
   }
 
   initializeApp() {
