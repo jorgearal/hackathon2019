@@ -25,13 +25,13 @@ export class AppComponent implements OnInit {
       icon: 'car'
     },
     {
-      title: 'Planear viaje',
+      title: 'Mis Viajes',
       url: '/app/tabs/planear',
       icon: 'cash'
     },
     {
-      title: 'Compartir movilidad',
-      url: '/app/tabs/speakers',
+      title: 'Puntaje',
+      url: '/app/tabs/puntaje',
       icon: 'contacts'
     },
     {

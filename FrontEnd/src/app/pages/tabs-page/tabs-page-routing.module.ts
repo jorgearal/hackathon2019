@@ -9,6 +9,7 @@ import { BuscarRutaPage } from '../buscar-ruta/buscar-ruta.page';
 import { RegistrarPage } from '../registrar/registrar.page';
 import { RegistrarVehiculoPage } from '../registrar-vehiculo/registrar-vehiculo.page';
 import { IniciarViajePage } from '../iniciar-viaje/iniciar-viaje.page';
+import { PuntajePage } from '../puntaje/puntaje.page';
 
 const routes: Routes = [
   {
@@ -60,6 +61,19 @@ const routes: Routes = [
           {
             path: '',
             component: IniciarViajePage,
+          },
+          {
+            path: 'session/:sessionId',
+            loadChildren: () => import('../session-detail/session-detail.module').then(m => m.SessionDetailModule)
+          }
+        ]
+      },
+      {
+        path: 'puntaje',
+        children: [
+          {
+            path: '',
+            component: PuntajePage,
           },
           {
             path: 'session/:sessionId',

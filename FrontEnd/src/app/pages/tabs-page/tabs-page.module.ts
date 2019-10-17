@@ -18,6 +18,7 @@ import { BuscarRutaPageModule } from '../buscar-ruta/buscar-ruta.module';
 import { RegistrarPageModule } from '../registrar/registrar.module';
 import { RegistrarVehiculoPageModule } from '../registrar-vehiculo/registrar-vehiculo.module';
 import { IniciarViajePageModule } from '../iniciar-viaje/iniciar-viaje.module';
+import { PuntajePageModule } from '../puntaje/puntaje.module';
 
 @NgModule({
   imports: [
@@ -36,7 +37,8 @@ import { IniciarViajePageModule } from '../iniciar-viaje/iniciar-viaje.module';
     PlanearPageModule,
     RegistrarPageModule,
     RegistrarVehiculoPageModule,
-    IniciarViajePageModule
+    IniciarViajePageModule, 
+    PuntajePageModule
   ],
   declarations: [
     TabsPage,
