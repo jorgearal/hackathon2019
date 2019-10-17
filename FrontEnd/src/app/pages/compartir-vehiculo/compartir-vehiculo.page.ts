@@ -96,7 +96,7 @@ export class CompartirVehiculoPage implements OnInit {
 
 
   async ngAfterViewInit() {
-    
+
     const appEl = this.doc.querySelector('ion-app');
     let isDark = false;
     let style = [];
@@ -162,6 +162,7 @@ export class CompartirVehiculoPage implements OnInit {
     });
 
     obtener();
+    pintarRuta();
   }
 
 }
@@ -218,6 +219,7 @@ function codeAddress(map, direccion) {
       });
       markers.push(marker);
       console.log("Encontre!! la ruta");
+      
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
     }
@@ -229,7 +231,7 @@ function agregarPuntoActual(latitud, longitud) {
     map: map,
     draggable: true,
     animation: google.maps.Animation.DROP,
-    position: { lat:latitud, lng: longitud }
+    position: { lat: latitud, lng: longitud }
   });
 }
 
@@ -254,3 +256,33 @@ function gestionarErrores(error) {
 }
 
 
+
+function pintarRuta() {
+  var directionsService;
+  var directionsDisplay;
+  directionsService = new google.maps.DirectionsService();
+  directionsDisplay = new google.maps.DirectionsRenderer();
+  var bounds = new google.maps.LatLngBounds();
+
+  var waypoints = [
+    {
+      location: { lat: 6.2381291999999995, lng: -75.5858772 },
+      stopover: true,
+    },
+    {
+      location: { lat: 4.6247745, lng: -74.1698888 },
+      stopover: true,
+    },
+    {
+      location: { lat: 4.6212241, lng: -74.1631081 },
+      stopover: true,
+    },
+    {
+      location: { lat: 4.6222508, lng: -74.1667989 },
+      stopover: true,
+    }
+  ];
+
+
+  
+}
