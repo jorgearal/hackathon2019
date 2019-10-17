@@ -26,7 +26,7 @@ export class BuscarRutaPage implements OnInit, AfterViewInit {
   destinoSeleccionado: boolean = true;
   map: google.maps.Map;
 
-  modo: boolean = true;
+  modo: boolean = true; 
   opciones: any;
 
  constructor(
