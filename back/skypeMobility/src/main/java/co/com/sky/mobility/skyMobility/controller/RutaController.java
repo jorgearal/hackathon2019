@@ -146,6 +146,15 @@ public class RutaController {
 		return findActiveRoutes(vehiculo);
 	}
 	
+	/** 
+	 * @param idVehiculo
+	 * @return
+	 */
+	@GetMapping(value="api/v1/mobility/rutaPorId/{idRuta}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Ruta> rutaPorId(@PathVariable int idRuta){
+		return ResponseEntity.ok(rutaDao.findById(idRuta).get());
+	}
+	
 	/**
 	 * 
 	 * @param vehiculo
