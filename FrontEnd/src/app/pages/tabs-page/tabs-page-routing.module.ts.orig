@@ -9,8 +9,11 @@ import { BuscarRutaPage } from '../buscar-ruta/buscar-ruta.page';
 import { RegistrarPage } from '../registrar/registrar.page';
 import { RegistrarVehiculoPage } from '../registrar-vehiculo/registrar-vehiculo.page';
 import { IniciarViajePage } from '../iniciar-viaje/iniciar-viaje.page';
-import { BeneficiosPage } from '../beneficios/beneficios.page';
+<<<<<<< HEAD
 import { PuntajePage } from '../puntaje/puntaje.page';
+=======
+import { BeneficiosPage } from '../beneficios/beneficios.page';
+>>>>>>> b1f060e08ae8be53c08da9fb271c8858e2669b11
 
 const routes: Routes = [
   {
@@ -70,6 +73,7 @@ const routes: Routes = [
         ]
       },
       {
+<<<<<<< HEAD
         path: 'puntaje',
         children: [
           {
@@ -84,10 +88,13 @@ const routes: Routes = [
       },
       {
         path: 'registrar',
+=======
+        path: 'beneficios',
+>>>>>>> b1f060e08ae8be53c08da9fb271c8858e2669b11
         children: [
           {
             path: '',
-            component: RegistrarPage,
+            component: BeneficiosPage,
           },
           {
             path: 'session/:sessionId',

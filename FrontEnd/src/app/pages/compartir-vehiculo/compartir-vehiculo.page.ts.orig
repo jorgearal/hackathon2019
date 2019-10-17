@@ -79,7 +79,8 @@ export class CompartirVehiculoPage implements OnInit {
       this.router.navigateByUrl('/iniciarViaje/' + this.ruta.id);
     } else {
       console.log(">>>> No hay ruta seleccionada..");
-        }
+      
+    }
 
 
     /*const alert = this.alertCtrl.create({
@@ -312,7 +313,7 @@ function initMap() {
     zoom: 14,
     center: haight
   }
-  
+  //var map = new google.maps.Map(document.getElementById('map'), mapOptions);
   directionsRenderer.setMap(map);
 }*/
 
@@ -332,4 +333,8 @@ function initMap() {
       directionsRenderer.setDirections(response);
     }
   });
+<<<<<<< HEAD
 }*/
+=======
+}
+>>>>>>> b1f060e08ae8be53c08da9fb271c8858e2669b11

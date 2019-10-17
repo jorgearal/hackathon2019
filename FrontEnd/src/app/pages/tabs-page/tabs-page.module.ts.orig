@@ -18,7 +18,11 @@ import { BuscarRutaPageModule } from '../buscar-ruta/buscar-ruta.module';
 import { RegistrarPageModule } from '../registrar/registrar.module';
 import { RegistrarVehiculoPageModule } from '../registrar-vehiculo/registrar-vehiculo.module';
 import { IniciarViajePageModule } from '../iniciar-viaje/iniciar-viaje.module';
+<<<<<<< HEAD
+import { PuntajePageModule } from '../puntaje/puntaje.module';
+=======
 import { BeneficiosPageModule } from '../beneficios/beneficios.module';
+>>>>>>> b1f060e08ae8be53c08da9fb271c8858e2669b11
 
 @NgModule({
   imports: [
@@ -37,9 +41,13 @@ import { BeneficiosPageModule } from '../beneficios/beneficios.module';
     PlanearPageModule,
     RegistrarPageModule,
     RegistrarVehiculoPageModule,
+<<<<<<< HEAD
+    IniciarViajePageModule, 
+    PuntajePageModule
+=======
     IniciarViajePageModule,
-    BeneficiosPageModule,
-PuntajePageModule
+    BeneficiosPageModule
+>>>>>>> b1f060e08ae8be53c08da9fb271c8858e2669b11
   ],
   declarations: [
     TabsPage,
