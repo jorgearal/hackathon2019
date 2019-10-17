@@ -32,7 +32,7 @@
 
         <ion-list>
           <ion-list-header>
-              &nbsp; &nbsp; &nbsp;Colaboración
+            &nbsp; &nbsp; &nbsp;Colaboración
           </ion-list-header>
           <ion-menu-toggle autoHide="false" *ngFor="let p of appPages; let i = index">
             <ion-item [routerLink]="p.url" routerLinkActive="active" routerDirection="root">
@@ -68,6 +68,19 @@
             </ion-item>
           </ion-menu-toggle>
 
+        </ion-list>
+
+
+        <ion-list>
+          <ion-list-header>
+              &nbsp; &nbsp; &nbsp;Experiencia
+          </ion-list-header>
+          <div class="centrado">
+              <img src="assets/img/planta/planta1.PNG" alt="carro" class="pequeña" [hidden]="!(persona.puntaje<0)">
+              <img src="assets/img/planta/planta2.PNG" alt="carro" class="pequeña" [hidden]="!(persona.puntaje>1000 && persona.puntaje<=4500)">
+              <img src="assets/img/planta/planta3.PNG" alt="carro" class="pequeña" [hidden]="!(persona.puntaje>4500)">
+          </div>
+         
         </ion-list>
 
       </ion-content>
