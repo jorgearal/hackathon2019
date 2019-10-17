@@ -317,7 +317,7 @@ function initMap() {
 }
 
 
-function calcRoute() {
+/*function calcRoute() {
   var selectedMode = document.getElementById('mode').value;
   var request = {
     origin: haight,
@@ -332,4 +332,4 @@ function calcRoute() {
       directionsRenderer.setDirections(response);
     }
   });
-}
+}*/
