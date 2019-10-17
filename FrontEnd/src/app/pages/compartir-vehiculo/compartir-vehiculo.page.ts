@@ -35,7 +35,7 @@ export class CompartirVehiculoPage implements OnInit {
     console.log("******************");
     console.log(this.personaService.servicioPrueba());
     this.ruta = new Ruta();
-    this.registrar =true;
+    this.registrar = true;
   }
 
   ngOnInit() {
@@ -180,7 +180,7 @@ export class CompartirVehiculoPage implements OnInit {
               console.log(results[0]);
             }
           }
-        });*/
+        });
       });
 
       googleMaps.event.addListenerOnce(map, 'idle', () => {
