@@ -15,12 +15,12 @@ var map;
 })
 export class CompartirVehiculoPage implements OnInit {
 
-  cupos: number = 5;
+  cupos = 5;
   @ViewChild('mapCanvas', { static: true }) mapElement: ElementRef;
   ios: boolean;
   markerDestination: google.maps.Marker;
 
-  registrar: boolean = true;
+  registrar = true;
   queryText: string;
 
   constructor(
@@ -29,7 +29,7 @@ export class CompartirVehiculoPage implements OnInit {
     public config: Config,
     public confData: ConferenceData,
     private alertCtrl: AlertController) {
-    console.log("******************");
+    console.log('******************');
     console.log(this.personaService.servicioPrueba());
   }
 
@@ -40,7 +40,7 @@ export class CompartirVehiculoPage implements OnInit {
 
 
   registrarRuta() {
-    console.log("*** Registrando ruta ***");
+    console.log('*** Registrando ruta ***');
 
   }
 
@@ -124,8 +124,8 @@ export class CompartirVehiculoPage implements OnInit {
 
       map.addListener('click', (e) => {
         this.markerDestination = placeMarkerAndPanTo(e.latLng, map, this.markerDestination);
-        var geocode = new google.maps.Geocoder();
-        geocode.geocode({ 'location': this.markerDestination.position }, (results, status) => {
+      //  var geocode = new google.maps.Geocoder();
+     /*   geocode.geocode({ 'location': this.markerDestination.position }, (results, status) => {
           if (status === 'OK') {
             if (results[0]) {
               map.setZoom(18);
@@ -136,7 +136,7 @@ export class CompartirVehiculoPage implements OnInit {
               console.log(results[0]);
             }
           }
-        });
+        });*/
       });
 
       googleMaps.event.addListenerOnce(map, 'idle', () => {
@@ -284,5 +284,4 @@ function pintarRuta() {
   ];
 
 
-  
 }

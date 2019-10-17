@@ -20,7 +20,7 @@ export class BienvenidoPage implements OnInit, AfterViewInit {
  @ViewChild('mapCanvas', { static: true }) mapElement: ElementRef;
 
  ios: boolean;
- markerDestination: googleMaps.Marker;
+//  markerDestination: googleMaps.Marker;
  queryText: string;
 
  constructor(
@@ -66,20 +66,19 @@ export class BienvenidoPage implements OnInit, AfterViewInit {
     });
 
     map.addListener('click', (e) => {
-      this.markerDestination = placeMarkerAndPanTo(e.latLng, map, this.markerDestination);
-      var geocode = new google.maps.Geocoder();
-      geocode.geocode({'location': this.markerDestination.position}, (results, status) => {
+   //   this.markerDestination = placeMarkerAndPanTo(e.latLng, map, this.markerDestination);
+      const geocode = new google.maps.Geocoder();
+     /* geocode.geocode({'location': this.markerDestination.position}, (results, status) => {
         if (status === 'OK') {
           if (results[0]) {
             map.setZoom(18);
-            
             this.queryText = results[0].formatted_address;
             this.queryText = results[0].formatted_address;
 
             console.log(results[0]);
           }
         }
-      });
+      }); */
     });
 
     googleMaps.event.addListenerOnce(map, 'idle', () => {

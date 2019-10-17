@@ -7,6 +7,7 @@ import { BienvenidoPage } from '../bienvenido/bienvenido.page';
 import { PlanearPage } from '../planear/planear.page';
 import { RegistrarPage } from '../registrar/registrar.page';
 import { RegistrarVehiculoPage } from '../registrar-vehiculo/registrar-vehiculo.page';
+import { BeneficiosPage } from '../beneficios/beneficios.page';
 
 
 const routes: Routes = [
@@ -41,11 +42,11 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'registrar',
+        path: 'beneficios',
         children: [
           {
             path: '',
-            component: RegistrarPage,
+            component: BeneficiosPage,
           },
           {
             path: 'session/:sessionId',

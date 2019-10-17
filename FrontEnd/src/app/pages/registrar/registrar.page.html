@@ -1,7 +1,7 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar >
   <ion-buttons slot="start">
-    <ion-menu-button></ion-menu-button>
+    <ion-menu-button *ngIf="!registro_nuevo"></ion-menu-button>
   </ion-buttons>
 
   
@@ -88,12 +88,17 @@
 
     <ion-row>
       <ion-col>
-        <ion-button (click)="diligenciarVehiculo()" color="light" expand="block"> Vehiculo</ion-button><br>
-
-        <ion-button (click)="onLogin(loginForm)" type="submit" expand="block">guardar</ion-button><br>
+        <ion-button (click)="guardarDatosPersonales(loginForm)" type="submit" expand="block">Guardar</ion-button><br>
+        <ion-button (click)="salir()" color="light" expand="block"> Salir</ion-button><br>
       </ion-col>
     </ion-row>
   </form>
+<br><br>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="mostrarVehiculo">
+    <ion-fab-button>
+      <ion-fab-button (click)="diligenciarVehiculo()"><ion-icon name="car"></ion-icon></ion-fab-button>
+    </ion-fab-button>
+  </ion-fab>
 
 
 </ion-content>

@@ -26,12 +26,15 @@ export class LoginPage {
     this.submitted = true;
 
     if (form.valid) {
+      localStorage.setItem('registroNuevo', 'NO' );
       this.userData.login(this.login.username);
       this.router.navigateByUrl('/app/tabs/bienvenido');
     }
   }
 
-  onSignup() {
-    this.router.navigateByUrl('/signup');
+  registrarse() {
+    localStorage.setItem('registroNuevo', 'SI' );
+    this.router.navigateByUrl('/app/tabs/registrar');
   }
+
 }
