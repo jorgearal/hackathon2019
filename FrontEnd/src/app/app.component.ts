@@ -47,6 +47,11 @@ export class AppComponent implements OnInit {
       icon: 'medal'
     },
     {
+      title: 'Confirmar viaje',
+      url: '/puntaje',
+      icon: 'ios-qr-scanner'
+    },
+    {
       title: 'Parqueadero',
       url: '/map',
       icon: 'map'
@@ -108,9 +113,7 @@ export class AppComponent implements OnInit {
     }, (error)=>{
       alert("Los servicios no se encuentran disponibles");
     });
-
-
-
+    
   }
 
   initializeApp() {
