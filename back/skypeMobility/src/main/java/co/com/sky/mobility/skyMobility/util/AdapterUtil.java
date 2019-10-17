@@ -26,6 +26,7 @@ public class AdapterUtil {
 			edificio.setNombre(edificioEntity.getNombre());
 			edificio.setLongitud(edificioEntity.getLongitud());
 			edificio.setLatitud(edificioEntity.getLatitud());
+			edificio.setDireccion(edificioEntity.getDireccion());
 
 			edificiosDto.add(edificio);
 
@@ -43,6 +44,7 @@ public class AdapterUtil {
 		edificioDto.setNombre(edificio.getNombre());
 		edificioDto.setLongitud(edificio.getLongitud());
 		edificioDto.setLatitud(edificio.getLatitud());
+		edificioDto.setDireccion(edificio.getDireccion());
 
 		return edificioDto;
 
@@ -56,6 +58,7 @@ public class AdapterUtil {
 		edificioDto.setNombre(edificio.getNombre());
 		edificioDto.setLongitud(edificio.getLongitud());
 		edificioDto.setLatitud(edificio.getLatitud());
+		edificioDto.setDireccion(edificio.getDireccion());
 
 		return edificioDto;
 
@@ -72,6 +75,7 @@ public class AdapterUtil {
 			rutaDto.setCupo(ruta.getCupo());
 			rutaDto.setEstado(ruta.getEstado());
 			rutaDto.setId(ruta.getId());
+			rutaDto.setDuracion(ruta.getDuracion());
 			rutaDto.setNumPersonas(ruta.getNumeroPersonas());
 			
 			rutaDto.setOrigen(new EdificioDTO());
@@ -98,6 +102,7 @@ public class AdapterUtil {
 		rutaDto.setCupo(ruta.getCupo());
 		rutaDto.setEstado(ruta.getEstado());
 		rutaDto.setId(ruta.getId());
+		rutaDto.setDuracion(ruta.getDuracion());
 		rutaDto.setNumPersonas(ruta.getNumeroPersonas());
 		rutaDto.setOrigen(new EdificioDTO());
 		rutaDto.getOrigen().setNumber(ruta.getOrigenId());
@@ -207,6 +212,28 @@ public class AdapterUtil {
 
 	}
 	
+	public static VehiculoDTO convertirVehiculoToDto(Vehiculo vehiculo) {
+
+		VehiculoDTO vehiculoDto = new VehiculoDTO();
+
+		vehiculoDto.setColor(vehiculo.getColor());
+		vehiculoDto.setDescripcion(vehiculo.getDescripcion());
+		vehiculoDto.setImagen(vehiculo.getFoto());
+		vehiculoDto.setId(vehiculo.getId());
+		vehiculoDto.setMarca(vehiculo.getMarca());
+		vehiculoDto.setMatricula(vehiculo.getMatricula());
+		vehiculoDto.setModelo(vehiculo.getModelo());
+		vehiculoDto.setNumPuestos(vehiculo.getNumeroPuestos());
+		vehiculoDto.setPersona(new PersonaDTO());
+		vehiculoDto.getPersona().setId(vehiculo.getId());
+
+		vehiculoDto.setPlaca(vehiculo.getPlaca());
+		vehiculoDto.setReferencia(vehiculo.getReferencia());
+
+		return vehiculoDto;
+
+	}
+	
 	/**
 	 * 
 	 * @param result
@@ -244,6 +271,7 @@ public class AdapterUtil {
 		rutaDto.setFechaSalida(ruta.getFechaSalida().toString());
 		rutaDto.setId(ruta.getId());
 		rutaDto.setNumPersonas(ruta.getNumeroPersonas());
+		rutaDto.setDuracion(ruta.getDuracion());
 		
 		rutaDto.setVehiculo(new VehiculoDTO());
 		rutaDto.getVehiculo().setId(ruta.getVehiculoId());

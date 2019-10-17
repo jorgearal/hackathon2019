@@ -21,6 +21,7 @@ import co.com.sky.mobility.skyMobility.dao.IRutaDao;
 import co.com.sky.mobility.skyMobility.dao.IVehiculoDao;
 import co.com.sky.mobility.skyMobility.dto.EstadoDTO;
 import co.com.sky.mobility.skyMobility.dto.RutaDTO;
+import co.com.sky.mobility.skyMobility.dto.VehiculoDTO;
 import co.com.sky.mobility.skyMobility.model.Persona;
 import co.com.sky.mobility.skyMobility.model.Ruta;
 import co.com.sky.mobility.skyMobility.model.Vehiculo;
@@ -43,6 +44,14 @@ public class RutaController {
 	@Autowired
 	private IEdificioDao edificioDao;
 
+	/**
+	 * 
+	 * @param latitudOrigen
+	 * @param longitudOrigen
+	 * @param latitudDestino
+	 * @param longitudDestino
+	 * @return
+	 */
 	@GetMapping(value="api/v1/mobility/buscarRuta", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<RutaDTO>> buscarRuta(@RequestParam String latitudOrigen, @RequestParam String longitudOrigen,
 			@RequestParam String latitudDestino, @RequestParam String longitudDestino){
@@ -111,6 +120,53 @@ public class RutaController {
 
 		return ResponseEntity.ok(rutasDto);
 			
+	}
+	
+
+	/**
+	 * 
+	 * @param idVehiculo
+	 * @return
+	 */
+	@GetMapping(value="api/v1/mobility/vehiculoViajeActivo/{idVehiculo}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<VehiculoDTO> vehiculoViajeActivo(@PathVariable int idVehiculo){
+		Vehiculo vehiculo = vehiculoDao.findById(idVehiculo).get();
+		return findActiveRoutes(vehiculo);
+	}
+	
+
+	/**
+	 * 
+	 * @param idVehiculo
+	 * @return
+	 */
+	@GetMapping(value="api/v1/mobility/vehiculoViajeActivo", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<VehiculoDTO> vehiculoViajeActivo(@RequestParam String placa){
+		Vehiculo vehiculo = vehiculoDao.findByTitle(placa).get(0);
+		return findActiveRoutes(vehiculo);
+	}
+	
+	/**
+	 * 
+	 * @param vehiculo
+	 * @return
+	 */
+	private ResponseEntity<VehiculoDTO> findActiveRoutes(Vehiculo vehiculo) {
+		
+		if (vehiculo != null) {
+			List<Ruta> rutas = rutaDao.findByStatusAndVehiculo(vehiculo.getId(), 1);
+			List<RutaDTO> rutasDto = new ArrayList<>();
+			rutas.forEach(y -> { 
+				rutasDto.add(AdapterUtil.buildRutaDTOView(y, edificioDao.findById(y.getOrigenId()).get(), edificioDao.findById(y.getDestinoId()).get()));
+			});
+			
+			VehiculoDTO vehiculoDto = AdapterUtil.convertirVehiculoToDto(vehiculo);
+			vehiculoDto.setRutas(rutasDto);
+			
+			return ResponseEntity.ok(vehiculoDto);
+		} else {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
 	}
 
 }

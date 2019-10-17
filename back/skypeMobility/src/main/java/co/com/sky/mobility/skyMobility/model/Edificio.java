@@ -31,6 +31,9 @@ public class Edificio implements Serializable {
 	@Column(name = "longitud", nullable = false, length = 50)
 	private String longitud;
 	
+	@Column(name = "direccion", nullable = false, length = 100)
+	private String direccion;
+	
 	public int getId() {
 		return id;
 	}
@@ -63,4 +66,19 @@ public class Edificio implements Serializable {
 		this.longitud = longitud;
 	}
 
+	/**
+	 * @return the direccion
+	 */
+	public String getDireccion() {
+		return direccion;
+	}
+
+	/**
+	 * @param direccion the direccion to set
+	 */
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	
 }

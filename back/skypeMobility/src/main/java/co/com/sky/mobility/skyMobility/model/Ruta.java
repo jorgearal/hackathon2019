@@ -45,6 +45,9 @@ public class Ruta implements Serializable {
 	@Column(name = "puntos")
 	private int puntos;
 	
+	@Column(name = "duracion")
+	private String duracion;
+	
 	public Ruta() {
 	}
 	
@@ -171,13 +174,20 @@ public class Ruta implements Serializable {
 	public void setPuntos(int puntos) {
 		this.puntos = puntos;
 	}
-	
-	
-	
-	
-	
-	
-	
+
+	/**
+	 * @return the duracion
+	 */
+	public String getDuracion() {
+		return duracion;
+	}
+
+	/**
+	 * @param duracion the duracion to set
+	 */
+	public void setDuracion(String duracion) {
+		this.duracion = duracion;
+	}
 	
 
 }

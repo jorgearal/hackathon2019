@@ -1,5 +1,7 @@
 package co.com.sky.mobility.skyMobility.dto;
 
+import java.util.List;
+
 public class VehiculoDTO {
 
 	private int id;
@@ -23,6 +25,8 @@ public class VehiculoDTO {
     private PersonaDTO persona;
     
     private String matricula;
+    
+    private List<RutaDTO> rutas;
 
 	public int getId() {
 		return id;
@@ -111,8 +115,20 @@ public class VehiculoDTO {
 	public void setMatricula(String matricula) {
 		this.matricula = matricula;
 	}
+
+	/**
+	 * @return the rutas
+	 */
+	public List<RutaDTO> getRutas() {
+		return rutas;
+	}
+
+	/**
+	 * @param rutas the rutas to set
+	 */
+	public void setRutas(List<RutaDTO> rutas) {
+		this.rutas = rutas;
+	}
     
-    
-	
 
 }

@@ -26,5 +26,8 @@ public interface IRutaDao extends JpaRepository<Ruta, Integer> {
 	
 	@Query("SELECT r FROM Ruta r where r.vehiculoId = ?1")
 	List<Ruta> findByVehiculo(int vehiculoId);
+	
+	@Query("SELECT r FROM Ruta r where r.vehiculoId = ?1 AND r.estado = ?2")
+	List<Ruta> findByStatusAndVehiculo(int vehiculoId, int estado);
 
 }
