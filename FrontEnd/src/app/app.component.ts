@@ -10,6 +10,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Storage } from '@ionic/storage';
 
 import { UserData } from './providers/user-data';
+import { Persona } from './models/persona-model';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,11 @@ import { UserData } from './providers/user-data';
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements OnInit {
+
+
+  persona:Persona;
+
+
   appPages = [
     {
       title: 'Buscar ruta',
@@ -72,6 +78,9 @@ export class AppComponent implements OnInit {
     private toastCtrl: ToastController,
   ) {
     this.initializeApp();
+    this.persona = new Persona();
+    this.persona.nombre="Carlos Cepeda";
+    this.persona.puntaje =4.9;
   }
 
   async ngOnInit() {

@@ -24,7 +24,7 @@ export class BienvenidoPage implements OnInit, AfterViewInit {
   markerDestination: google.maps.Marker;
   queryText: string;
   geocode: any;
-  destinoSeleccionado: boolean = true;
+  destinoSeleccionado = true;
   destino: Destino;
   map: google.maps.Map;
 
@@ -50,7 +50,7 @@ export class BienvenidoPage implements OnInit, AfterViewInit {
 
  buscarDireccion() {
     if (this.queryText) {
-      console.log("buscanado direccion: " + this.queryText);
+      console.log('buscanado direccion: ' + this.queryText);
       if (this.markerDestination) {
         this.markerDestination.setMap(null);
       }
@@ -84,7 +84,7 @@ export class BienvenidoPage implements OnInit, AfterViewInit {
   const googleMaps = await getGoogleMaps(
     'AIzaSyB8pf6ZdFQj5qw7rc_HSGrhUwQKfIe9ICw'
   );
-  
+
   this.confData.getMap().subscribe((mapData: any) => {
     const mapEle = this.mapElement.nativeElement;
 
@@ -103,7 +103,7 @@ export class BienvenidoPage implements OnInit, AfterViewInit {
       }
       this.markerDestination = placeMarkerAndPanTo(e.latLng, this.map);
 
-      if(!this.geocode) {
+      if (!this.geocode) {
         this.geocode = new google.maps.Geocoder();
       }
 
@@ -147,8 +147,9 @@ export class BienvenidoPage implements OnInit, AfterViewInit {
 }
 
 function codeAddress(direccion, funcRetorno) {
-  var geocoder = new google.maps.Geocoder();
-  var address = direccion;
+  // tslint:disable-next-line:prefer-const
+  const geocoder = new google.maps.Geocoder();
+  const address = direccion;
   geocoder.geocode({ 'address': address }, function (results, status) {
     if (status === google.maps.GeocoderStatus.OK) {
       funcRetorno(results[0].geometry.location);

@@ -35,7 +35,7 @@ export class CompartirVehiculoPage implements OnInit {
     console.log("******************");
     console.log(this.personaService.servicioPrueba());
     this.ruta = new Ruta();
-    this.registrar =true;
+    this.registrar = true;
   }
 
   ngOnInit() {
@@ -79,8 +79,7 @@ export class CompartirVehiculoPage implements OnInit {
       this.router.navigateByUrl('/iniciarViaje/' + this.ruta.id);
     } else {
       console.log(">>>> No hay ruta seleccionada..");
-      
-    }
+        }
 
 
     /*const alert = this.alertCtrl.create({
@@ -280,6 +279,7 @@ function agregarPuntoActual(latitud, longitud) {
   });
 }
 
+
 function setAllMap(map) {
   for (var i = 0; i < markers.length; i++) {
     markers[i].setMap(null);
@@ -290,12 +290,12 @@ function obtener() { navigator.geolocation.getCurrentPosition(mostrar, gestionar
 
 
 function mostrar(posicion) {
-  console.log("Latitud " + posicion.coords.latitude);
-  console.log("Longitud " + posicion.coords.longitude);
-  console.log("Longitud " + posicion.coords.accuracy);
+  console.log('Latitud ' + posicion.coords.latitude);
+  console.log('Longitud ' + posicion.coords.longitude);
+  console.log('Longitud ' + posicion.coords.accuracy);
   agregarPuntoActual(posicion.coords.latitude, posicion.coords.longitude);
 }
 
 function gestionarErrores(error) {
-  console.log("Error " + error);
+  console.log('Error ' + error);
 }
