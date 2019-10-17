@@ -8,3 +8,12 @@
 .primary{
   color: #00448d !important;
 }
+
+
+.gm-style .gm-style-iw-c {
+  visibility: hidden !important;
+}
+
+.gm-style .gm-style-iw-c ::after{
+  visibility: hidden !important;
+}

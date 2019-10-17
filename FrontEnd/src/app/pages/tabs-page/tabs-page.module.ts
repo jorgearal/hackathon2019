@@ -14,6 +14,7 @@ import { SpeakerListModule } from '../speaker-list/speaker-list.module';
 import { CompartirVehiculoPageModule } from '../compartir-vehiculo/compartir-vehiculo.module';
 import { BienvenidoPageModule } from '../bienvenido/bienvenido.module';
 import { PlanearPageModule } from '../planear/planear.module';
+import { BuscarRutaPageModule } from '../buscar-ruta/buscar-ruta.module';
 import { RegistrarPageModule } from '../registrar/registrar.module';
 import { RegistrarVehiculoPageModule } from '../registrar-vehiculo/registrar-vehiculo.module';
 import { IniciarViajePageModule } from '../iniciar-viaje/iniciar-viaje.module';
@@ -31,6 +32,7 @@ import { IniciarViajePageModule } from '../iniciar-viaje/iniciar-viaje.module';
     TabsPageRoutingModule,
     CompartirVehiculoPageModule,
     BienvenidoPageModule,
+    BuscarRutaPageModule,
     PlanearPageModule,
     RegistrarPageModule,
     RegistrarVehiculoPageModule,

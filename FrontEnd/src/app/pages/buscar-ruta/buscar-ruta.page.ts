@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Inject, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit,ViewChild, Inject, ElementRef, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, IonList, LoadingController, ModalController, ToastController, Config } from '@ionic/angular';
 import { ScheduleFilterPage } from '../schedule-filter/schedule-filter';
@@ -12,11 +12,11 @@ import { timeInterval } from 'rxjs/operators';
 import {} from 'googlemaps';
 
 @Component({
-  selector: 'bienvenido',
-  templateUrl: './bienvenido.page.html',
-  styleUrls: ['./bienvenido.page.scss'],
+  selector: 'buscarRuta',
+  templateUrl: './buscar-ruta.page.html',
+  styleUrls: ['./buscar-ruta.page.scss'],
 })
-export class BienvenidoPage implements OnInit, AfterViewInit {
+export class BuscarRutaPage implements OnInit, AfterViewInit {
 
  // Gets a reference to the list element
  @ViewChild('mapCanvas', { static: true }) mapElement: ElementRef;
@@ -137,9 +137,10 @@ function getGoogleMaps(apiKey: string): Promise<any> {
 }
 
 function placeMarkerAndPanTo(latLng, map, marker) {
-  if (marker) {
+  if(marker) {
     marker.setMap(null);
   }
+  
   map.panTo(latLng);
   return new google.maps.Marker({
     position: latLng,

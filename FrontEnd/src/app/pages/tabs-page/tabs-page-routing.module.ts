@@ -5,10 +5,10 @@ import { SchedulePage } from '../schedule/schedule';
 import { CompartirVehiculoPage } from '../compartir-vehiculo/compartir-vehiculo.page';
 import { BienvenidoPage } from '../bienvenido/bienvenido.page';
 import { PlanearPage } from '../planear/planear.page';
+import { BuscarRutaPage } from '../buscar-ruta/buscar-ruta.page';
 import { RegistrarPage } from '../registrar/registrar.page';
 import { RegistrarVehiculoPage } from '../registrar-vehiculo/registrar-vehiculo.page';
 import { IniciarViajePage } from '../iniciar-viaje/iniciar-viaje.page';
-
 
 const routes: Routes = [
   {
@@ -21,6 +21,19 @@ const routes: Routes = [
           {
             path: '',
             component: BienvenidoPage,
+          },
+          {
+            path: 'session/:sessionId',
+            loadChildren: () => import('../session-detail/session-detail.module').then(m => m.SessionDetailModule)
+          }
+        ]
+      },
+      {
+        path: 'buscarRuta',
+        children: [
+          {
+            path: '',
+            component: BuscarRutaPage,
           },
           {
             path: 'session/:sessionId',
