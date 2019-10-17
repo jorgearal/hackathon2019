@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { VerRutasServices } from '../../services/verRutas.services';
 
 @Component({
   selector: 'planear',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlanearPage implements OnInit {
 
-  constructor() { }
+  constructor(private verRutaService: VerRutasServices) { }
 
   ngOnInit() {
   }
 
+  verRutas() {
+    this.verRutaService.verRutasPorPersona('1').subscribe((resp) => {
+      
+    });
+  }
 }

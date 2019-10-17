@@ -11,6 +11,7 @@ import { Storage } from '@ionic/storage';
 
 import { UserData } from './providers/user-data';
 import { Persona } from './models/persona-model';
+import { PersonaService } from './providers/persona-service';
 
 @Component({
   selector: 'app-root',
@@ -43,6 +44,11 @@ export class AppComponent implements OnInit {
       icon: 'medal'
     },
     {
+      title: 'Confirmar viaje',
+      url: '/puntaje',
+      icon: 'ios-qr-scanner'
+    },
+    {
       title: 'Parqueadero',
       url: '/map',
       icon: 'map'
@@ -73,6 +79,7 @@ export class AppComponent implements OnInit {
     private userData: UserData,
     private swUpdate: SwUpdate,
     private toastCtrl: ToastController,
+<<<<<<< HEAD
   ) { }
 
   async ngOnInit() {
@@ -81,6 +88,14 @@ export class AppComponent implements OnInit {
     this.persona.nombre="Carlos Cepeda";
     this.persona.puntaje =4.9;
     
+=======
+    private personaService:PersonaService
+  ) {
+    this.initializeApp();
+  }
+
+  async ngOnInit() {
+>>>>>>> 499f05e15cb0b9e1603f945844889b67aab0124f
     this.checkLoginStatus();
     this.listenForLoginEvents();
 
@@ -99,6 +114,14 @@ export class AppComponent implements OnInit {
         .then(() => this.swUpdate.activateUpdate())
         .then(() => window.location.reload());
     });
+    //se consulta los datos de la persona
+    this.personaService.consultarInfoPersonaXId(1).subscribe((data)=>{
+      this.persona = data;
+      console.log(JSON.stringify(data));
+    }, (error)=>{
+      alert("Los servicios no se encuentran disponibles");
+    });
+    
   }
 
   initializeApp() {

@@ -3,11 +3,12 @@ import { Edificio } from './edificio-model';
 export class Persona{
     public id:number;
     public cedula:number;
-    public nombre: string;
+    public nombres: string;
+    public apellidos: string;
     public email:string;
     public celular:string;
-    public edificio: Edificio;
-    public apto:string;
-    public puntaje:number;
+    public puntaje: string;
+    public etiqueta:number;
+    public reputacion:number;
     public foto:string;
 }

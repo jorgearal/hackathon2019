@@ -40,7 +40,8 @@ const routes: Routes = [
   { path: 'registrarVehiculo', loadChildren: './pages/registrar-vehiculo/registrar-vehiculo.module#RegistrarVehiculoPageModule' },
   { path: 'iniciarViaje/:id', loadChildren: './pages/iniciar-viaje/iniciar-viaje.module#IniciarViajePageModule' },
   { path: 'puntaje', loadChildren: './pages/puntaje/puntaje.module#PuntajePageModule' },
-  { path: 'mis-rutas', loadChildren: './pages/mis-rutas/mis-rutas.module#MisRutasPageModule' },
+  { path: 'mis-rutas', loadChildren: './pages/mis-rutas/mis-rutas.module#MisRutasPageModule' },  { path: 'qr', loadChildren: './pages/qr/qr.module#QrPageModule' },
+
 
 
 
