@@ -158,4 +158,20 @@ export class ConferenceData {
       })
     );
   }
+
+  getTrivago() {
+    return this.load().pipe(
+      map((data: any) => {
+        return data.trivago;
+      })
+    );
+  }
+
+  getOtros() {
+    return this.load().pipe(
+      map((data: any) => {
+        return data.otros;
+      })
+    );
+  }
 }

@@ -11,37 +11,55 @@
 <ion-content>
   <div #mapCanvas class="map-canvas"></div>
 
-  <div [hidden]="!modo">
-    <ion-card>
-      <ion-card-header>
-        <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-        <ion-card-title>Card Title</ion-card-title>
-      </ion-card-header>
+  <div class="options">
+    <div [hidden]="!modo">
+      <ion-card *ngFor="let opcion of opciones">
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="10">
+                <strong>Destino: </strong>{{opcion.name}}
+                <p><b>Cupos disponibles:</b> {{opcion.cuposDisponibles}} + <b>Puntos:</b> {{opcion.puntos}}</p>
+              </ion-col>
+              <ion-col size="2">
+                <img src="{{opcion.imagen}}" alt="carro" class="imgCircular">
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </div>
     
-      <ion-card-content>
-        Keep close to Nature's heart... and break clear away, once in awhile,
-        and climb a mountain or spend a week in the woods. Wash your spirit clean.
-      </ion-card-content>
-    </ion-card>
+    <div [hidden]="modo">
+      <ion-card *ngFor="let opcion of opciones">
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="10">
+                <strong>{{opcion.name}}</strong>
+                <p><b>Precio:</b> {{opcion.basePrice}} + <b>Co2:</b> {{opcion.baseCo2}} g/km</p>
+              </ion-col>
+              <ion-col size="2">
+                <img src="{{opcion.imagen}}" alt="carro" class="pequeña">
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </div>
   </div>
-
-  <div [hidden]="modo">
-    Otros
-  </div>
-
-  <ion-tabs>
-    <ion-tab-bar slot="bottom">
-      <ion-tab-button tab="eco" [selected]="modo" (click)="cambiarModo('eco')">
-        <ion-icon name="leaf"></ion-icon>
-        <ion-label>Eco</ion-label>
-        <ion-badge>3</ion-badge>
-      </ion-tab-button>
-    
-      <ion-tab-button tab="otros" [selected]="!modo" (click)="cambiarModo('otros')">
-        <ion-icon name="cloud-outline"></ion-icon>
-        <ion-label>Otros</ion-label>
-        <ion-badge>5</ion-badge>
-      </ion-tab-button>
-    </ion-tab-bar>
-  </ion-tabs>
 </ion-content>
+
+<ion-tab-bar slot="bottom">
+  <ion-tab-button [selected]="modo" (click)="cambiarModo('eco')">
+    <ion-icon name="leaf"></ion-icon>
+    <ion-label>Eco</ion-label>
+    <ion-badge>3</ion-badge>
+  </ion-tab-button>
+
+  <ion-tab-button [selected]="!modo" (click)="cambiarModo('otros')">
+    <ion-icon name="cloud-outline"></ion-icon>
+    <ion-label>Otros</ion-label>
+    <ion-badge>5</ion-badge>
+  </ion-tab-button>
+</ion-tab-bar>

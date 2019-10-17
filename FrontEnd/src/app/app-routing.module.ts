@@ -25,24 +25,20 @@ const routes: Routes = [
     loadChildren: () => import('./pages/signup/signup.module').then(m => m.SignUpModule)
   },
   {
-    path: 'app',
-    loadChildren: () => import('./pages/tabs-page/tabs-page.module').then(m => m.TabsModule)
-  },
-  {
     path: 'tutorial',
     loadChildren: () => import('./pages/tutorial/tutorial.module').then(m => m.TutorialModule),
     canLoad: [CheckTutorial]
   },
-  { path: 'compartir-vehiculo', loadChildren: './pages/compartir-vehiculo/compartir-vehiculo.module#CompartirVehiculoPageModule' },
+  { path: 'compartirVehiculo', loadChildren: './pages/compartir-vehiculo/compartir-vehiculo.module#CompartirVehiculoPageModule' },
   { path: 'bienvenido', loadChildren: './pages/bienvenido/bienvenido.module#BienvenidoPageModule' },
-  { path: 'buscar-ruta', loadChildren: './pages/buscar-ruta/buscar-ruta.module#BuscarRutaPageModule' },
+  { path: 'buscarRuta', loadChildren: './pages/buscar-ruta/buscar-ruta.module#BuscarRutaPageModule' },
   { path: 'planear', loadChildren: './pages/planear/planear.module#PlanearPageModule' },
   { path: 'registrar', loadChildren: './pages/registrar/registrar.module#RegistrarPageModule' },
-  { path: 'registrar-vehiculo', loadChildren: './pages/registrar-vehiculo/registrar-vehiculo.module#RegistrarVehiculoPageModule' },
+  { path: 'registrarVehiculo', loadChildren: './pages/registrar-vehiculo/registrar-vehiculo.module#RegistrarVehiculoPageModule' },
   { path: 'beneficios', loadChildren: './pages/beneficios/beneficios.module#BeneficiosPageModule' },
   { path: 'registrar', loadChildren: './pages/registrar/registrar.module#RegistrarPageModule' },
-  { path: 'registrar-vehiculo', loadChildren: './pages/registrar-vehiculo/registrar-vehiculo.module#RegistrarVehiculoPageModule' },
-  { path: 'iniciar-viaje/:id', loadChildren: './pages/iniciar-viaje/iniciar-viaje.module#IniciarViajePageModule' },
+  { path: 'registrarVehiculo', loadChildren: './pages/registrar-vehiculo/registrar-vehiculo.module#RegistrarVehiculoPageModule' },
+  { path: 'iniciarViaje/:id', loadChildren: './pages/iniciar-viaje/iniciar-viaje.module#IniciarViajePageModule' },
   { path: 'puntaje', loadChildren: './pages/puntaje/puntaje.module#PuntajePageModule' },
 
 
