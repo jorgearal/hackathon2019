@@ -2,6 +2,7 @@ package co.com.sky.mobility.skyMobility.model;
 
 import java.sql.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,7 +27,7 @@ public class Ruta {
 	@Column(name = "fecha_hora_salida", nullable = false)
 	private Date fechaSalida;
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "id", insertable = false, updatable = false)
 	private Vehiculo vehiculo;
 	
@@ -36,11 +37,11 @@ public class Ruta {
 	@Column(name = "estado")
 	private int estado;
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "id", insertable = false, updatable = false)
 	private Edificio origen;
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "id", insertable = false, updatable = false)
 	private Edificio destino;
 	
