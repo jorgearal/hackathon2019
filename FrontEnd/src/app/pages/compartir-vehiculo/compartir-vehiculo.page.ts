@@ -89,13 +89,14 @@ export class CompartirVehiculoPage implements OnInit {
     if (this.queryText) {
       console.log("buscanado direccion: " + this.queryText);
 
-    codeAddress(map, this.queryText);
+      codeAddress(map, this.queryText);
 
     }
   }
 
 
   async ngAfterViewInit() {
+    
     const appEl = this.doc.querySelector('ion-app');
     let isDark = false;
     let style = [];
@@ -159,6 +160,8 @@ export class CompartirVehiculoPage implements OnInit {
     observer.observe(appEl, {
       attributes: true
     });
+
+    obtener();
   }
 
 }
@@ -199,19 +202,19 @@ function placeMarkerAndPanTo(latLng, map, marker) {
     map: map
   });
 }
-var markers=[];
+var markers = [];
 
 function codeAddress(map, direccion) {
   var geocoder;
   geocoder = new google.maps.Geocoder();
-  var address =direccion;
-  geocoder.geocode( { 'address': address}, function(results, status) {
+  var address = direccion;
+  geocoder.geocode({ 'address': address }, function (results, status) {
     if (status == 'OK') {
       setAllMap(map);
       map.setCenter(results[0].geometry.location);
       var marker = new google.maps.Marker({
-          map: map,
-          position: results[0].geometry.location
+        map: map,
+        position: results[0].geometry.location
       });
       markers.push(marker);
       console.log("Encontre!! la ruta");
@@ -221,9 +224,33 @@ function codeAddress(map, direccion) {
   });
 }
 
+function agregarPuntoActual(latitud, longitud) {
+  var marker = new google.maps.Marker({
+    map: map,
+    draggable: true,
+    animation: google.maps.Animation.DROP,
+    position: { lat:latitud, lng: longitud }
+  });
+}
 
 function setAllMap(map) {
   for (var i = 0; i < markers.length; i++) {
     markers[i].setMap(null);
-   }
+  }
 }
+
+function obtener() { navigator.geolocation.getCurrentPosition(mostrar, gestionarErrores); }
+
+
+function mostrar(posicion) {
+  console.log("Latitud " + posicion.coords.latitude);
+  console.log("Longitud " + posicion.coords.longitude);
+  console.log("Longitud " + posicion.coords.accuracy);
+  agregarPuntoActual(posicion.coords.latitude, posicion.coords.longitude);
+}
+
+function gestionarErrores(error) {
+  console.log("Error " + error);
+}
+
+

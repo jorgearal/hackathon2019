@@ -30,4 +30,4 @@ import { PersonaService } from './providers/persona-service';
   providers: [InAppBrowser, SplashScreen, StatusBar, PersonaService],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
