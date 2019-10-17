@@ -16,6 +16,7 @@ import { BienvenidoPageModule } from '../bienvenido/bienvenido.module';
 import { PlanearPageModule } from '../planear/planear.module';
 import { RegistrarPageModule } from '../registrar/registrar.module';
 import { RegistrarVehiculoPageModule } from '../registrar-vehiculo/registrar-vehiculo.module';
+import { IniciarViajePageModule } from '../iniciar-viaje/iniciar-viaje.module';
 
 @NgModule({
   imports: [
@@ -32,7 +33,8 @@ import { RegistrarVehiculoPageModule } from '../registrar-vehiculo/registrar-veh
     BienvenidoPageModule,
     PlanearPageModule,
     RegistrarPageModule,
-    RegistrarVehiculoPageModule
+    RegistrarVehiculoPageModule,
+    IniciarViajePageModule
   ],
   declarations: [
     TabsPage,

@@ -36,7 +36,9 @@ const routes: Routes = [
   { path: 'compartir-vehiculo', loadChildren: './pages/compartir-vehiculo/compartir-vehiculo.module#CompartirVehiculoPageModule' },
   { path: 'bienvenido', loadChildren: './pages/bienvenido/bienvenido.module#BienvenidoPageModule' },
   { path: 'planear', loadChildren: './pages/planear/planear.module#PlanearPageModule' },
-  { path: 'registrar', loadChildren: './pages/registrar/registrar.module#RegistrarPageModule' },  { path: 'registrar-vehiculo', loadChildren: './pages/registrar-vehiculo/registrar-vehiculo.module#RegistrarVehiculoPageModule' },
+  { path: 'registrar', loadChildren: './pages/registrar/registrar.module#RegistrarPageModule' },
+  { path: 'registrar-vehiculo', loadChildren: './pages/registrar-vehiculo/registrar-vehiculo.module#RegistrarVehiculoPageModule' },
+  { path: 'iniciar-viaje/:id', loadChildren: './pages/iniciar-viaje/iniciar-viaje.module#IniciarViajePageModule' },
 
 
 

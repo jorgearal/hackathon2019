@@ -7,6 +7,7 @@ import { BienvenidoPage } from '../bienvenido/bienvenido.page';
 import { PlanearPage } from '../planear/planear.page';
 import { RegistrarPage } from '../registrar/registrar.page';
 import { RegistrarVehiculoPage } from '../registrar-vehiculo/registrar-vehiculo.page';
+import { IniciarViajePage } from '../iniciar-viaje/iniciar-viaje.page';
 
 
 const routes: Routes = [
@@ -33,6 +34,19 @@ const routes: Routes = [
           {
             path: '',
             component: CompartirVehiculoPage,
+          },
+          {
+            path: 'session/:sessionId',
+            loadChildren: () => import('../session-detail/session-detail.module').then(m => m.SessionDetailModule)
+          }
+        ]
+      },
+      {
+        path: 'iniciarViaje/:id',
+        children: [
+          {
+            path: '',
+            component: IniciarViajePage,
           },
           {
             path: 'session/:sessionId',

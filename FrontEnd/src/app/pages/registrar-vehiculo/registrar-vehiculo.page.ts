@@ -9,7 +9,7 @@ import { RegistroVehiculo } from '../../interfaces/registro-vehiculo';
 export class RegistrarVehiculoPage implements OnInit {
 
   constructor() { }
-  formularioVehiculo: RegistroVehiculo = { color: '', marca: '', fotoMatricula: '', fotoVehiculo: '', modelo: 2019, placa: '', puestos: 4 };
+  //formularioVehiculo: RegistroVehiculo = { color: '', marca: '', fotoMatricula: '', fotoVehiculo: '', modelo: 2019, placa: '', puestos: 4 };
 
   ngOnInit() {
   }
