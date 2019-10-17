@@ -131,7 +131,7 @@ export class CompartirVehiculoPage implements OnInit {
     console.log("----------------------------------88 ------------------------------");
     directionsService.route(request, function (response, status) {
       console.log(">>>>>>>>> status : " + status);
-      if (status == 'OK') {
+      if (false) {
         directionsRenderer.setDirections(response);
       }
     });
