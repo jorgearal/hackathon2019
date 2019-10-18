@@ -13,6 +13,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { FormsModule } from '@angular/forms';
 import { PersonaService } from './providers/persona-service';
+import { DetalleRutaPageModule } from './pages/detalle-ruta/detalle-ruta.module';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { PersonaService } from './providers/persona-service';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    DetalleRutaPageModule,
     FormsModule,
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
@@ -29,6 +31,5 @@ import { PersonaService } from './providers/persona-service';
   ],
   declarations: [AppComponent],
   providers: [InAppBrowser, SplashScreen, StatusBar, PersonaService],
-  bootstrap: [AppComponent]
-})
+  bootstrap: [AppComponent]})
 export class AppModule { }

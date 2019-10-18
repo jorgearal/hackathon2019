@@ -1,0 +1,30 @@
+.textCenter{
+  text-align: center;
+}
+.map-canvas {
+    height: 100%;
+    width: 100%;
+  
+    background-color: transparent;
+  
+    opacity: 0;
+    transition: opacity 150ms ease-in;
+  }
+  
+  .show-map {
+    opacity: 1;
+  }
+
+  .imgCircular {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+
+  ion-tab-button{
+    font-size: 10px;
+    --background-focused: rgb(0, 170, 0);
+    --color-selected: rgb(0, 170, 0);
+    ion-icon{
+        font-size: 67.5px;
+    }}

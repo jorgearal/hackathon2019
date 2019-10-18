@@ -18,15 +18,13 @@ export class BuscarRutaPage implements OnInit, AfterViewInit {
 
  // Gets a reference to the list element
  @ViewChild('mapCanvas', { static: true }) mapElement: ElementRef;
-
   ios: boolean;
   markerDestination: google.maps.Marker;
   queryText: string;
   geocode: any;
   destinoSeleccionado: boolean = true;
   map: google.maps.Map;
-
-  modo: boolean = true; 
+  modo: boolean = true;
   opciones: any;
 
  constructor(
