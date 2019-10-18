@@ -6,47 +6,55 @@
 
     <ion-title>Compartir Ruta</ion-title>
   </ion-toolbar>
+  <ion-toolbar [hidden]="registrar">
+
+    <ion-grid>
+      <ion-row>
+        <ion-col text-center>
+          <ion-button fill="clear" (click)="presentConfirmStarRuta()" class="btn btn-primary_small">
+            Empezar viaje
+          </ion-button>
+        </ion-col>
+        <ion-col text-center>
+          <ion-button fill="clear" (click)="cancelarViaje()" class="btn btn-secondary_small">
+            Cancelar viaje
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+  </ion-toolbar>
 </ion-header>
 <ion-content>
 
-  <!--<div>
-      <ion-button fill="clear" (click)="calcularRuta()" class="center-block btn btn-primary">
-         Test
-        </ion-button>
-  </div>
-  <div>
-    <strong>Mode of Travel: </strong>
-    <select id="mode" (ionChange)="calcularRuta();">
-      <option value="DRIVING">Driving</option>
-      <option value="WALKING">Walking</option>
-      <option value="BICYCLING">Bicycling</option>
-      <option value="TRANSIT">Transit</option>
-    </select>
-  </div>-->
 
   <div class="centrado">
-    <div class="row">
-      <br>
-      <div class="col-sm-12">
-        <div class="col-sm-6">
+    <br>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
           <ion-label color="primary" stacked>Cupos</ion-label>
-        </div>
-        <div class="col-sm-6">
-          <ion-input type="text" maxlength="2" placeholder="Asientos disponibles" [(ngModel)]="cupos"></ion-input>
-        </div>
-      </div>
+        </ion-col>
+        <ion-col>
+          <ion-input type="text" maxlength="2" placeholder="Asientos disponibles" [(ngModel)]="cupos"
+            [disabled]="!registrar"></ion-input>
+        </ion-col>
+      </ion-row>
 
-
-    </div>
+    </ion-grid>
   </div>
 
   <div class="centrado" style="height:70%; padding-left: 20px; padding-right: 20px;">
 
 
 
-    <ion-toolbar>
-      <ion-searchbar [(ngModel)]="queryText" (ionChange)="buscarDireccion()" placeholder="A donde vas">
+    <ion-toolbar [hidden]="!registrar">
+      <ion-searchbar [(ngModel)]="queryText" (ionChange)="buscarDireccion()" placeholder="A donde vas"
+        [disabled]="disable">
       </ion-searchbar>
+    </ion-toolbar>
+    <ion-toolbar [hidden]="registrar">
+      Trayecto de la ruta
     </ion-toolbar>
     <div #mapCanvas class="map-canvas"></div>
   </div>
@@ -55,8 +63,6 @@
     <ion-button fill="clear" (click)="presentConfirm()" class="center-block btn btn-primary" [hidden]="!registrar">
       Registrar ruta
     </ion-button>
-    <ion-button fill="clear" (click)="presentConfirmStarRuta()" class="center-block btn btn-primary" [hidden]="registrar">
-      Empezar viaje
-    </ion-button>
+
   </div>
 </ion-content>

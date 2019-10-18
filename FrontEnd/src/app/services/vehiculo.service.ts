@@ -7,28 +7,22 @@ import { Ruta } from '../models/ruta-model';
 import { Constantes } from '../shared/constantes';
 
 @Injectable()
-export class RutaService {
+export class VehiculoService{
 
-    vehiculo: Vehiculo;
-    ruta: Ruta;
+    vehiculo:Vehiculo;
+    ruta:Ruta;
 
     constructor(private httpClient: HttpClient) {
-
+        
     }
 
-    consultarRutaXVehiculoId(id: number): Observable<any> {
+    consultarVehiculoXIdPersona(id: number): Observable<Vehiculo[]> {
         let headers = new HttpHeaders(
             {
                 'Referrer-Policy': 'origin-when-cross-origin'
             }
         );
-        return this.httpClient.get<any>(Constantes.URL_WS_CONSULTA_INFO_ULTIMA_RUTA + id, { headers });
+        return this.httpClient.get<Vehiculo[]>(Constantes.URL_WS_CONSULTA_VEHICULO_PERSONA + id, { headers });
     }
 
-    cambiarEstadoRuta(idRuta: number, idEstado: number) {
-        let obj: any = {};
-        obj.estado = idEstado;
-        obj.idRuta = idRuta;
-        return this.httpClient.post<any>(Constantes.URL_WS_CAMBIAR_ESTADO_RUTA, obj);
-    }
 }

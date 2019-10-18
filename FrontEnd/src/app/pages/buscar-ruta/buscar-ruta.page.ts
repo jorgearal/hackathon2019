@@ -18,15 +18,13 @@ export class BuscarRutaPage implements OnInit, AfterViewInit {
 
  // Gets a reference to the list element
  @ViewChild('mapCanvas', { static: true }) mapElement: ElementRef;
-
   ios: boolean;
   markerDestination: google.maps.Marker;
   queryText: string;
   geocode: any;
   destinoSeleccionado: boolean = true;
   map: google.maps.Map;
-
-  modo: boolean = true; 
+  modo: boolean = true;
   opciones: any;
 
  constructor(
@@ -194,6 +192,7 @@ function obtenerPosicionUsuario(map) {
   });
 }
 
+
 function trazarRuta(map) {
   console.log('INICIAR TRAZA');
   var directionsService = new google.maps.DirectionsService();
@@ -202,6 +201,7 @@ function trazarRuta(map) {
   });
   var destino = JSON.parse(localStorage.getItem('destino'));
 
+  
   var request = {
     origin: destino.lat + ', ' + destino.lng,
     destination: destino.latDest + ', ' + destino.lngDest,
