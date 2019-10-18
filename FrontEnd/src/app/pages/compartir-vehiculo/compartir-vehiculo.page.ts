@@ -15,8 +15,7 @@ import { RutaService } from '../../services/ruta.service';
 import { Persona } from '../../models/persona-model';
 import { VehiculoService } from '../../services/vehiculo.service';
 import { Constantes } from '../../shared/constantes';
-import { ThrowStmt } from '@angular/compiler';
-import Moment from 'moment'
+
 
 @Component({
   selector: 'compartir-vehiculo',
@@ -147,15 +146,15 @@ export class CompartirVehiculoPage implements OnInit {
     }
 
 
-   
-    console.log("Hora : "+this.horaSelected);
-    var res = this.horaSelected.substring(0, 16);
-    console.log("Hora 2 : "+res);
-    
-    this.newRuta.fechaSalida = res.replace("T", " ")+":00";
-      this.newRuta.estado = 0;
 
-    console.log('*** Registrando ruta ***'+this.newRuta.fechaSalida);
+    console.log("Hora : " + this.horaSelected);
+    var res = this.horaSelected.substring(0, 16);
+    console.log("Hora 2 : " + res);
+
+    this.newRuta.fechaSalida = res.replace("T", " ") + ":00";
+    this.newRuta.estado = 0;
+
+    console.log('*** Registrando ruta ***' + this.newRuta.fechaSalida);
     this.newRuta.numeroPersonas = this.cupos;
 
     var origen = {};
