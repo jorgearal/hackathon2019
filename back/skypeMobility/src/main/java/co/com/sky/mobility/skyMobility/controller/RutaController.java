@@ -168,7 +168,7 @@ public class RutaController {
 	@GetMapping(value="api/v1/mobility/vehiculoViajeActivo/{idVehiculo}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<VehiculoDTO> vehiculoViajeActivo(@PathVariable int idVehiculo){
 		Vehiculo vehiculo = vehiculoDao.findById(idVehiculo).get();
-		return findActiveRoutes(vehiculo);
+		return findRoutes(vehiculo, 1);
 	}
 	
 
@@ -180,7 +180,18 @@ public class RutaController {
 	@GetMapping(value="api/v1/mobility/vehiculoViajeActivo", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<VehiculoDTO> vehiculoViajeActivo(@RequestParam String placa){
 		Vehiculo vehiculo = vehiculoDao.findByTitle(placa).get(0);
-		return findActiveRoutes(vehiculo);
+		return findRoutes(vehiculo, 1);
+	}
+	
+	/**
+	 * 
+	 * @param idVehiculo
+	 * @return
+	 */
+	@GetMapping(value="api/v1/mobility/vehiculoViajePorEmpezar/{idVehiculo}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<VehiculoDTO> vehiculoViajePorEmpezar(@PathVariable int idVehiculo){
+		Vehiculo vehiculo = vehiculoDao.findById(idVehiculo).get();
+		return findRoutes(vehiculo, 0);
 	}
 	
 	/** 
@@ -211,10 +222,10 @@ public class RutaController {
 	 * @param vehiculo
 	 * @return
 	 */
-	private ResponseEntity<VehiculoDTO> findActiveRoutes(Vehiculo vehiculo) {
+	private ResponseEntity<VehiculoDTO> findRoutes(Vehiculo vehiculo, int estado) {
 		
 		if (vehiculo != null) {
-			List<Ruta> rutas = rutaDao.findByStatusAndVehiculo(vehiculo.getId(), 1);
+			List<Ruta> rutas = rutaDao.findByStatusAndVehiculo(vehiculo.getId(), estado);
 			List<RutaDTO> rutasDto = new ArrayList<>();
 			rutas.forEach(y -> { 
 				rutasDto.add(AdapterUtil.buildRutaDTOView(y, edificioDao.findById(y.getOrigenId()).get(), edificioDao.findById(y.getDestinoId()).get()));
