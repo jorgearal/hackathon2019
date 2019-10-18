@@ -3,7 +3,7 @@
   <ion-buttons slot="start">
     <ion-menu-button *ngIf="!registro_nuevo"></ion-menu-button>
   </ion-buttons>
-    <ion-title>Registrar persona</ion-title>
+    <ion-title>{{title}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -41,7 +41,7 @@
 
       <ion-item class="inputRegistro">
         <ion-label position="stacked" color="primary">Tipo de documento</ion-label>
-        <ion-select  [(ngModel)]="formularioPersona.tipoDocumento" name="tipoDocumento">
+        <ion-select  [(ngModel)]="formularioPersona.tipoDocumento" name="tipoDocumento" [compareWith]="compareFn">
           <ion-select-option value="1">Cedula de ciudadania</ion-select-option>
           <ion-select-option value="2">Tarjeta de identidad</ion-select-option>
         </ion-select>
