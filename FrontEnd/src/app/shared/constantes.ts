@@ -11,6 +11,8 @@ export class Constantes {
     public static URL_WS_MIS_RUTAS="http://ec2-3-90-224-58.compute-1.amazonaws.com:8080/api/v1/mobility/misRutas/";
 
     public static URL_WS_DETALLE_RUTA="http://ec2-3-90-224-58.compute-1.amazonaws.com:8080/api/v1/mobility/rutaPorId/";
+    public static URL_WS_DESPLAZAMIENTO_RUTA="http://ec2-3-90-224-58.compute-1.amazonaws.com:8080/api/v1/mobility/desplazamientoRuta/";
+
 
     public static MENSAJE_ERROR_SERVICIO ="Los servicios no se encuentras disponibles";
 }

@@ -8,6 +8,7 @@ import { DOCUMENT } from '@angular/common';
 import { darkStyle } from './map-dark-style';
 
 import {} from 'googlemaps';
+import { RutaService } from '../../services/ruta.service';
 
 @Component({
   selector: 'rutaActiva',
@@ -33,6 +34,7 @@ export class RutaActivaPage implements OnInit, AfterViewInit {
 
   puntos: number = 100;
   co2: number = 0;
+  paso: boolean = true;
 
   estaciones: any[] = new Array<any>();
   estacionesCard: any[] = new Array<any>();
@@ -49,6 +51,7 @@ export class RutaActivaPage implements OnInit, AfterViewInit {
    public toastCtrl: ToastController,
    public confData: ConferenceData,
    public user: UserData,
+   public rutaService: RutaService,
    public config: Config
  ) { }
 
@@ -165,17 +168,32 @@ export class RutaActivaPage implements OnInit, AfterViewInit {
          this.map.panTo(this.puntosRuta[this.contador]);
 
          if(this.contador === 40) {
-          this.estaciones[0].icon.url = this.iconVerdeUrl;
-          this.estacionesCard.push('Industriales');
-          this.puntos += 50;
-         }
-         if(this.contador === 50) {
-          this.estaciones[1].icon.url = this.iconVerdeUrl;
-          this.estacionesCard.push('Poblado');
-          this.puntos += 50;
+          this.paso = false;
+           this.rutaService.consultarDesplazamientoRutaId(17).subscribe((res: any[]) => {
+            if(res[res.length-1].latitud === this.puntosRuta[this.contador].lat().toString() && 
+              res[res.length-1].longitud === this.puntosRuta[this.contador].lng().toString()) {
+                this.estaciones[0].icon.url = this.iconVerdeUrl;
+                this.estacionesCard.push('Industriales');
+                this.puntos += 50;
+                this.contador++;
+                this.paso = true;
+            }
+           });
+         } else if(this.contador === 50) {
+          this.paso = false;
+          this.rutaService.consultarDesplazamientoRutaId(17).subscribe((res: any[]) => {
+            if(res[res.length-1].latitud === this.puntosRuta[this.contador].lat().toString() && 
+               res[res.length-1].longitud === this.puntosRuta[this.contador].lng().toString()) {
+                this.estaciones[1].icon.url = this.iconVerdeUrl;
+                this.estacionesCard.push('Poblado');
+                this.puntos += 50;
+                this.contador++;
+                this.paso = true;
+             }
+          });
          }
 
-         if(this.contador < this.puntosRuta.length - 1) {
+         if(this.contador < this.puntosRuta.length - 1 && this.paso) {
           this.puntos += 0.2;
           this.co2 -= 0.4 * (google.maps.geometry.spherical.computeDistanceBetween (this.puntosRuta[this.contador], this.puntosRuta[this.contador + 1])/1000);
           this.contador++;
