@@ -146,7 +146,6 @@ export class CompartirVehiculoPage implements OnInit {
     }
 
 
-
     console.log("Hora : " + this.horaSelected);
     var res = this.horaSelected.substring(0, 16);
     console.log("Hora 2 : " + res);

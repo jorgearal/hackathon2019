@@ -19,7 +19,7 @@ export class IniciarViajePage implements OnInit {
   ruta: Ruta;
   vehiculo: Vehiculo;
   listaPersonas: Persona[];
-  speakers: any[] = [{ 'profilePic': null, 'name': 'Carlos Javier Cepeda', 'confirmado': false }, { 'profilePic': null, 'name': 'Oscar Lopez', 'confirmado': true }, { 'profilePic': null, 'name': 'Lina Gonzales', 'confirmado': true }];
+  speakers: any[] = [{ 'profilePic': null, 'name': 'Carlos Javier Cepeda', 'confirmado': false }, { 'profilePic': null, 'name': 'Oscar Andres Lopez', 'confirmado': true }, { 'profilePic': null, 'name': 'Carina Dorado', 'confirmado': true }];
 
   infoRuta: any;
 
