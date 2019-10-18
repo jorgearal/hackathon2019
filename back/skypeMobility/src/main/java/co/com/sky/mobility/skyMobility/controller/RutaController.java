@@ -149,7 +149,7 @@ public class RutaController {
 		List<Vehiculo> vehiculosPersona = vehiculoDao.findByPersonaId(persona.getId());
 		
 		vehiculosPersona.forEach(x -> {
-			List<Ruta> vehiculoRutas = rutaDao.findByVehiculoEstado(x.getId(), 3); // 3 estado terminado
+			List<Ruta> vehiculoRutas = rutaDao.findByVehiculoEstado(x.getId()); 
 			vehiculoRutas.forEach(y -> { 
 				rutasDto.add(AdapterUtil.buildRutaDTOView(y, edificioDao.findById(y.getOrigenId()).get(), edificioDao.findById(y.getDestinoId()).get()));
 			});
