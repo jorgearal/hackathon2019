@@ -8,12 +8,55 @@
   <ion-content>
       <div #mapCanvas class="map-canvas"></div>
   </ion-content>    
-  <ion-row>
-      <ion-col text-center>
-        <ion-button (click)="closeModal()">Cerrar</ion-button>
-      </ion-col>
-    </ion-row>
-    
+    <ion-row>
+        <ion-col>
+       <b>Placa:</b>    
+        </ion-col>
+        <ion-col>
+           
+        </ion-col>    
+      </ion-row>
+      <ion-row>
+          <ion-col>
+         <b>Conductor:</b>    
+          </ion-col>
+          <ion-col>
+             
+          </ion-col>    
+        </ion-row>
+        <ion-row>
+            <ion-col>
+           <b>Fecha de Viaje:</b>    
+            </ion-col>
+            <ion-col>
+               
+            </ion-col>    
+          </ion-row>
+          <ion-row>
+              <ion-col>
+             <b>Pasajeros:</b>    
+              </ion-col>
+              <ion-col>
+                
+                <ion-row *ngFor="let pasajero of data.pasajeros; let i = index">
+
+                </ion-row>
+              </ion-col>    
+            </ion-row>
+            <ion-row>
+                <ion-col>
+               <b>Puntos por viaje:</b>    
+                </ion-col>
+                <ion-col>
+                   
+                </ion-col>    
+              </ion-row>
+                  <ion-row>
+                      <ion-col text-center>
+                        <ion-button (click)="closeModal()">Cerrar</ion-button>
+                      </ion-col>
+                    </ion-row>
+                                                                            
 
 <ion-content>
 
