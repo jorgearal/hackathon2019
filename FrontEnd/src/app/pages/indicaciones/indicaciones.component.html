@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Indicaciones para tu viaje</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div style="height: 30px; display: flex; justify-content: space-between;">
+    <ion-button color="medium" expand= "full" (click) = "moveToSlide(0)">
+      <ion-icon slot="icon-only" name="bicycle"></ion-icon>
+    </ion-button>
+    <ion-button color="medium" expand= "full" (click) = "moveToSlide(1)">
+      <ion-icon slot="icon-only" name="bus"></ion-icon>
+    </ion-button>
+    <ion-button color="medium" expand= "full" (click) = "moveToSlide(2)">
+      <ion-icon name="car"></ion-icon>
+    </ion-button>
+  </div>
+  <ion-slides [options]="slideOpts" pager="true" #slider>
+    <ion-slide style=" padding-bottom: 60px;">
+      <div>
+        <img src="assets/img/Indicaciones.png" alt="indicaciones" class="grande"
+          style="height: 100%; width: 100% !important;" />
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div>
+        <img src="assets/img/caminata.PNG" alt="indicaciones" class="grande"
+          style="height: 100%; width: 100% !important;" />
+      </div>
+    </ion-slide>
+    <ion-slide>
+        <div>
+          <img src="assets/img/indicacionesGeneral.PNG" alt="indicaciones" class="grande"
+            style="height: 100%; width: 100% !important;" />
+        </div>
+      </ion-slide>
+  </ion-slides>
+  <div class="row">
+  </div>
+</ion-content>
+

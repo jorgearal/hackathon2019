@@ -44,6 +44,7 @@ const routes: Routes = [
   { path: 'qr', loadChildren: './pages/qr/qr.module#QrPageModule' },
   { path: 'detalle-ruta', loadChildren: './pages/detalle-ruta/detalle-ruta.module#DetalleRutaPageModule' },
   { path: 'rutaActiva/:id', loadChildren: './pages/ruta-activa/ruta-activa.module#RutaActivaPageModule' },
+  { path: 'indicaciones', loadChildren: './pages/indicaciones/indicaciones.module#indicacionesModule'}
 ];
 
 @NgModule({
