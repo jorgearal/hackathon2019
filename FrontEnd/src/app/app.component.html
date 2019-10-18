@@ -17,7 +17,7 @@
                   <img src="assets/img/carro.png" alt="carro" class="pequeña">
                 </ion-avatar>
               </ion-col>
-              <ion-col size="9">
+              <ion-col size="9" *ngIf="persona">
                 &nbsp;{{persona.nombres}}
                 <p style="font-size: 11px;"> &nbsp;Calificación : <label
                     class="texto_verde">{{persona.reputacion}}</label></p>
@@ -45,7 +45,7 @@
           </ion-menu-toggle>
         </ion-list>
 
-        <ion-list *ngIf="loggedIn">
+        <ion-list *ngIf="persona">
           <ion-list-header>
             Cuenta
           </ion-list-header>
@@ -71,7 +71,7 @@
         </ion-list>
 
 
-        <ion-list>
+        <ion-list *ngIf="persona">
           <ion-list-header>
               &nbsp; &nbsp; &nbsp;Experiencia
           </ion-list-header>

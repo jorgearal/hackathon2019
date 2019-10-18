@@ -6,7 +6,7 @@ import { UserData } from '../../providers/user-data';
 
 import { UserOptions } from '../../interfaces/user-options';
 import { PersonaService } from '../../providers/persona-service';
-import { ToastController } from '@ionic/angular';
+import { ToastController, Events } from '@ionic/angular';
 
 
 
@@ -22,6 +22,7 @@ export class LoginPage {
   constructor(
     public userData: UserData,
     public router: Router,
+    private events: Events,
     private toastCtrl: ToastController,
     private personaService: PersonaService
   ) { }
@@ -33,6 +34,7 @@ export class LoginPage {
       this.personaService.login(this.login.username, this.login.password).subscribe((data) => {
         localStorage.clear();
         localStorage.setItem('usuario', JSON.stringify(data));
+        this.events.publish('user:signup');
         this.router.navigateByUrl('/bienvenido');
       }, (error) => {
         this.toastCtrl.create({
@@ -48,7 +50,6 @@ export class LoginPage {
   }
 
   registrarse() {
-    localStorage.setItem('registroNuevo', 'SI' );
     this.router.navigateByUrl('/registrar');
   }
 
