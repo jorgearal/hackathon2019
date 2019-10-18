@@ -153,6 +153,9 @@ export class CompartirVehiculoPage implements OnInit {
     this.newRuta.fechaSalida = res.replace("T", " ") + ":00";
     this.newRuta.estado = 0;
 
+
+
+    
     console.log('*** Registrando ruta ***' + this.newRuta.fechaSalida);
     this.newRuta.numeroPersonas = this.cupos;
 
