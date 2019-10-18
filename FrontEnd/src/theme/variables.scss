@@ -406,6 +406,29 @@
   padding-left: 10px;
 }
 
+.btn.btn-primary_small {
+  background:#9ACD32;
+  width: 80%;
+  color: #292929;
+  border-radius: 50px;
+  position: relative;
+  transition: 0.5s;
+  font-weight: bold;
+  padding-right: 22px;
+  padding-left: 10px;
+}
+
+.btn.btn-secondary_small {
+  background:rgb(233, 123, 49);
+  width: 80%;
+  color: #292929;
+  border-radius: 50px;
+  position: relative;
+  transition: 0.5s;
+  font-weight: bold;
+  padding-right: 22px;
+  padding-left: 10px;
+}
 
 .toolbar-container {
   background: rgba(0,68,140,0.9) !important;

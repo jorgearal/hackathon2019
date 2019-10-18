@@ -192,6 +192,7 @@ function obtenerPosicionUsuario(map) {
   });
 }
 
+
 function trazarRuta(map) {
   console.log('INICIAR TRAZA');
   var directionsService = new google.maps.DirectionsService();
@@ -200,6 +201,7 @@ function trazarRuta(map) {
   });
   var destino = JSON.parse(localStorage.getItem('destino'));
 
+  
   var request = {
     origin: destino.lat + ', ' + destino.lng,
     destination: destino.latDest + ', ' + destino.lngDest,

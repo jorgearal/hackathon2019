@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { PersonaService } from './providers/persona-service';
 import { DetalleRutaPageModule } from './pages/detalle-ruta/detalle-ruta.module';
 import { RutaService } from './services/ruta.service';
+import { VehiculoService } from './services/vehiculo.service';
 
 
 @NgModule({
@@ -31,7 +32,7 @@ import { RutaService } from './services/ruta.service';
     })
   ],
   declarations: [AppComponent],
-  providers: [InAppBrowser, SplashScreen, StatusBar, PersonaService, RutaService],
+  providers: [InAppBrowser, SplashScreen, StatusBar, PersonaService, RutaService,VehiculoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -12,6 +12,10 @@ import { Destino } from '../../interfaces/destino';
 import { } from 'googlemaps';
 import { DestinoMap } from '../../models/destino.model';
 import { RutaService } from '../../services/ruta.service';
+import { Persona } from '../../models/persona-model';
+import { VehiculoService } from '../../services/vehiculo.service';
+import { Constantes } from '../../shared/constantes';
+import { ThrowStmt } from '@angular/compiler';
 
 
 @Component({
@@ -34,23 +38,77 @@ export class CompartirVehiculoPage implements OnInit {
   destino: DestinoMap;
   origen: Destino;
 
+  infoVehiculo: any;
+  infoRuta: any;
+  infoUsuario: any;
+
+  visible: boolean = false;
+
   constructor(
     @Inject(DOCUMENT) private doc: Document,
     private personaService: PersonaService,
     public config: Config,
     public confData: ConferenceData,
-    private alertCtrl: AlertController, private router: Router,private rutaService:RutaService) {
+    private alertCtrl: AlertController,
+    private router: Router,
+    private rutaService: RutaService,
+    private vehiculoService: VehiculoService) {
 
     this.ruta = new Ruta();
     this.registrar = true;
     this.origen = new DestinoMap();
+
   }
 
   ngOnInit() {
     this.ios = this.config.get('mode') === 'ios';
     //consultar el ultimo viaje, para activar o desactivar el boton de inicial
+    this.cargarUsuarioSesion();
   }
 
+  cargarUsuarioSesion() {
+    this.infoUsuario = JSON.stringify(localStorage.getItem("usuario"));
+    if (this.infoUsuario && this.infoUsuario.id != null) {
+      this.consultarInfoVehiculo(this.infoUsuario.id);
+    } else {
+      this.consultarInfoVehiculo(1);
+    }
+  }
+
+  consultarInfoVehiculo(idPersona) {
+    this.vehiculoService.consultarVehiculoXIdPersona(idPersona).subscribe(
+      (data) => {
+        this.infoVehiculo = data[0];
+        console.log("=============== Vehiculo ===============");
+        console.log(JSON.stringify(this.infoVehiculo));
+        this.consultarRutaActiva(this.infoVehiculo.id);
+      },
+      (error) => {
+        this.mostrarMensaje(Constantes.MENSAJE_ERROR_SERVICIO);
+      });
+  }
+
+  consultarRutaActiva(idvehiculo) {
+    this.rutaService.consultarRutaXVehiculoId(idvehiculo).subscribe(
+      (data) => {
+        console.log("++++++++++++++++");
+
+        console.log(data);
+        if (data.rutas.length > 0) {
+          this.infoRuta = data.rutas[0];
+          this.visible = true;
+          this.mostrarMensaje("Ya tiene una ruta activa para la dirección " + this.infoRuta.destino.direccion + ".");
+          this.registrar = false;
+          this.pintarRutaViaje();
+        } else {
+          this.registrar = true;
+        }
+
+        console.log("=============== Ruta ===============");
+        console.log(JSON.stringify(this.infoRuta));
+      },
+      (error) => { this.mostrarMensaje(Constantes.MENSAJE_ERROR_SERVICIO); });
+  }
 
   registrarRuta() {
     console.log('*** Registrando ruta ***');
@@ -61,9 +119,34 @@ export class CompartirVehiculoPage implements OnInit {
     console.log("*** Iniciando viaje ***");
   }
 
-  cargarViajeActivo() {
-
+  cancelarViaje() {
+    const alert = this.alertCtrl.create({
+      message: 'Esta seguro de cancelar el viaje?',
+      subHeader: 'Confirmación',
+      buttons: [{
+        text: 'Aceptar', handler: () => {
+          this.confirmarCancelarViaje();
+        }
+      }, {
+        text: 'Cancel', handler: () => {
+          console.log("Cancelar viaje..");
+        }
+      }]
+    }).then(alert => alert.present());
   }
+
+  confirmarCancelarViaje() {
+    this.rutaService.cambiarEstadoRuta(this.infoRuta.id, 4).subscribe(
+      (data) => {
+        this.visible = false;
+        this.mostrarMensaje("El viaje se canceló exitosamente!!");
+        this.registrar = true;
+      },
+      (error) => {
+        this.mostrarMensaje(Constantes.MENSAJE_ERROR_SERVICIO);
+      })
+  }
+
 
   presentConfirm() {
     const alert = this.alertCtrl.create({
@@ -104,7 +187,7 @@ export class CompartirVehiculoPage implements OnInit {
       if (this.markerDestination) {
         this.markerDestination.setMap(null);
       }
-      codeAddress(this.map,this.queryText, (e) => {
+      codeAddress(this.map, this.queryText, (e) => {
         this.markerDestination = placeMarkerAndPanTo(e, this.map);
         if (this.markerDestination) {
           this.escribirDestino(this.queryText);
@@ -114,10 +197,44 @@ export class CompartirVehiculoPage implements OnInit {
     }
   }
 
+  pintarRutaViaje() {
+    var destino = {
+      lat: this.infoRuta.destino.latitud,
+      lng: this.infoRuta.destino.longitud,
+      direccion: this.infoRuta.destino.direccion
+    };
+    console.log(JSON.stringify(this.destino));
+    localStorage.setItem('destino', JSON.stringify(destino));
+
+
+    var origen = {
+      lat: this.infoRuta.origen.latitud,
+      lng: this.infoRuta.origen.longitud,
+      direccion: this.infoRuta.origen.direccion
+    };
+    localStorage.setItem('origen', JSON.stringify(origen));
+    setTimeout(() => {
+      trazarRuta(this.map);
+    }, 1000);
+
+  }
+
+
+  mostrarMensaje(texto) {
+    const alert = this.alertCtrl.create({
+      message: texto,
+      subHeader: 'Información',
+      buttons: [{
+        text: 'Aceptar', handler: () => {
+        }
+      }]
+    }).then(alert => alert.present());
+  }
+
 
   presentConfirmStarRuta() {
-    if (this.ruta.id) {
-      this.router.navigateByUrl('/iniciarViaje/' + this.ruta.id);
+    if (this.infoRuta.id) {
+      this.router.navigateByUrl('/iniciarViaje/' + this.infoRuta.id);
     } else {
       console.log(">>>> No hay ruta seleccionada..");
     }
@@ -137,12 +254,6 @@ export class CompartirVehiculoPage implements OnInit {
       }]
     }).then(alert => alert.present());*/
   }
-
-
-  cargarMapa(){
-    
-  }
-
 
   async ngAfterViewInit() {
     const appEl = this.doc.querySelector('ion-app');
@@ -294,7 +405,7 @@ function trazarRuta(map) {
   var directionsService = new google.maps.DirectionsService();
   //directionsService.set('directions', null);
   var directionsRenderer = new google.maps.DirectionsRenderer({
-    suppressMarkers: true,directions:null
+    suppressMarkers: true, directions: null
   });
   var origen = JSON.parse(localStorage.getItem('origen'));
   var destino = JSON.parse(localStorage.getItem('destino'));
