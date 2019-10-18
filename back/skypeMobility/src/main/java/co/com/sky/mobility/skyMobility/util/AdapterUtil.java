@@ -1,14 +1,18 @@
 package co.com.sky.mobility.skyMobility.util;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang.StringUtils;
 
+import co.com.sky.mobility.skyMobility.dto.DesplazamientoDTO;
 import co.com.sky.mobility.skyMobility.dto.EdificioDTO;
 import co.com.sky.mobility.skyMobility.dto.PersonaDTO;
 import co.com.sky.mobility.skyMobility.dto.RutaDTO;
 import co.com.sky.mobility.skyMobility.dto.VehiculoDTO;
+import co.com.sky.mobility.skyMobility.model.Desplazamiento;
 import co.com.sky.mobility.skyMobility.model.Edificio;
 import co.com.sky.mobility.skyMobility.model.Persona;
 import co.com.sky.mobility.skyMobility.model.PersonaRuta;
@@ -409,6 +413,21 @@ public class AdapterUtil {
 		
 		return rutaDto;
 		
+	}
+	
+	/**
+	 * 
+	 * @param desplazamiento
+	 * @return
+	 */
+	public static DesplazamientoDTO convertToDto(Desplazamiento desplazamiento) {
+		DesplazamientoDTO desplazamientoDto = new DesplazamientoDTO();
+		try {
+			PropertyUtils.copyProperties(desplazamientoDto, desplazamiento);
+		} catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+			e.printStackTrace();
+		}
+		return desplazamientoDto;
 	}
 
 }
