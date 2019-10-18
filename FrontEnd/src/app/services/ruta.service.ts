@@ -31,4 +31,17 @@ export class RutaService {
         obj.idRuta = idRuta;
         return this.httpClient.post<any>(Constantes.URL_WS_CAMBIAR_ESTADO_RUTA, obj);
     }
+
+    registrarRuta(ruta: any) {
+        return this.httpClient.post<any>(Constantes.URL_WS_CREAR_RUTA, ruta);
+    }
+
+    consultarDetalleRuntaXId(id){
+        let headers = new HttpHeaders(
+            {
+                'Referrer-Policy': 'origin-when-cross-origin'
+            }
+        );
+        return this.httpClient.get<any>(Constantes.URL_WS_DETALLE_RUTA + id, { headers });
+    }
 }

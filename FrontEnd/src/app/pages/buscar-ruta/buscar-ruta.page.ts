@@ -196,7 +196,6 @@ function obtenerPosicionUsuario(map) {
   });
 }
 
-
 function trazarRuta(map) {
   var directionsService = new google.maps.DirectionsService();
   var directionsRenderer = new google.maps.DirectionsRenderer({

@@ -13,6 +13,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/registrar/registrar.module').then(m => m.RegistrarPageModule)
   },
   {
+    path: 'vehiculo',
+    loadChildren: () => import('./pages/registrar-vehiculo/registrar-vehiculo.module').then(m => m.RegistrarVehiculoPageModule)
+  },
+  {
     path: 'support',
     loadChildren: () => import('./pages/support/support.module').then(m => m.SupportModule)
   },

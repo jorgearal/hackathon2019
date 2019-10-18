@@ -10,10 +10,10 @@
   </ion-toolbar>
    <ion-toolbar>
       <div class="centrado">
-          <ion-button fill="clear" (click)="presentConfirm()" class="center-block btn btn-primary" [hidden]="!iniciar">
+          <ion-button fill="clear" (click)="presentConfirmStarRuta()" class="center-block btn btn-primary" [hidden]="!iniciar">
             Comenzar
           </ion-button>
-          <ion-button fill="clear" (click)="presentConfirmStarRuta()" class="center-block btn btn-primary" [hidden]="iniciar">
+          <ion-button fill="clear" (click)="presentFinalizarViajeRuta()" class="btn btn-secondary_small" [hidden]="iniciar">
             Terminar
           </ion-button>
         </div>
