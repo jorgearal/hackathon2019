@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BuscarRutaPage } from './buscar-ruta.page';
+import { RutaActivaPage } from './ruta-activa.page';
 
-describe('BuscarRutaPage', () => {
-  let component: BuscarRutaPage;
-  let fixture: ComponentFixture<BuscarRutaPage>;
+describe('RutaActivaPage', () => {
+  let component: RutaActivaPage;
+  let fixture: ComponentFixture<RutaActivaPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BuscarRutaPage ],
+      declarations: [ RutaActivaPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BuscarRutaPage);
+    fixture = TestBed.createComponent(RutaActivaPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
