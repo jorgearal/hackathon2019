@@ -47,11 +47,12 @@ export class QrPage implements OnInit {
     this.viajeService.consultarRutaPasajero(this.infoPersona.id).subscribe(
       (data) => {
         if (data) {
+          this.objViaje.id= data.id;
           this.infoConsulta = data;
           //console.log(JSON.stringify(this.infoConsulta));
           this.infoRuta = data.ruta;
           this.suscrito = true;
-          this.confirmaViaje = 0;// this.infoConsulta.confirmaViaje;
+          this.confirmaViaje = this.infoConsulta.confirmaViaje;
           if (this.infoConsulta.confirmaViaje == 0) {
             this.confirmado = false;
           } else if (this.infoConsulta.confirmaViaje == 1) {
@@ -61,8 +62,6 @@ export class QrPage implements OnInit {
             this.confirmado = true;
             this.mensaje = "Usted realizó la cancelación del viaje.";
           }
-          //BORRAR ESTE!!!!!!!!!!!!!!!!!!!!!!!!!!!
-          this.confirmado = false;
         } else {
           this.suscrito = false;
         }
@@ -82,21 +81,21 @@ export class QrPage implements OnInit {
       this.confirmado = true;
       this.confirmaViaje = 1;
       this.objViaje = data;
-    }, (error) => { });
-    this.mostrarMensaje(Constantes.MENSAJE_ERROR_SERVICIO);
+    }, (error) => {this.mostrarMensaje(Constantes.MENSAJE_ERROR_SERVICIO); });
+    
   }
 
   cancelarViaje() {
     this.objViaje.rutaDto = this.infoRuta;
     this.objViaje.personaDto = this.infoPersona;
-    this.objViaje.confirmaViaje = 1;
+    this.objViaje.confirmaViaje = 2;
     this.viajeService.suscribirARuta(this.objViaje).subscribe((data) => {
       this.mostrarMensaje("Haz realizado la cancelación de tu puesto en la ruta. Te esperamos pronto!!");
       this.confirmado = true;
       this.confirmaViaje = 2;
       this.objViaje = data;
-    }, (error) => { });
-    this.mostrarMensaje(Constantes.MENSAJE_ERROR_SERVICIO);
+    }, (error) => {this.mostrarMensaje(Constantes.MENSAJE_ERROR_SERVICIO); });
+    
   }
 
   mostrarMensaje(texto) {
