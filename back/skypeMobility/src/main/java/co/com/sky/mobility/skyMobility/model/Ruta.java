@@ -38,10 +38,10 @@ public class Ruta implements Serializable {
 	private int estado;
 	
 	@Column(name = "edificio_origen_id")
-	private int origenId;
+	private Integer origenId;
 	
 	@Column(name = "edificio_destino_id")
-	private int destinoId;
+	private Integer destinoId;
 	
 	@Column(name = "cupo")
 	private int cupo;
@@ -67,7 +67,7 @@ public class Ruta implements Serializable {
 	 * @param cupo
 	 * @param puntos
 	 */
-	public Ruta(Date fechaPublicacion, Date fechaSalida, int vehiculoId, int numeroPersonas, int estado, int origenId, int destinoId, int cupo, int puntos) {
+	public Ruta(Date fechaPublicacion, Date fechaSalida, int vehiculoId, int numeroPersonas, int estado, Integer origenId, Integer destinoId, int cupo, int puntos) {
 		this.fechaPublicacion = fechaPublicacion; 
 		this.fechaSalida = fechaSalida;
 		this.vehiculoId = vehiculoId; 
@@ -134,32 +134,31 @@ public class Ruta implements Serializable {
 		this.estado = estado;
 	}
 
-	
 	/**
 	 * @return the origenId
 	 */
-	public int getOrigenId() {
+	public Integer getOrigenId() {
 		return origenId;
 	}
 
 	/**
 	 * @param origenId the origenId to set
 	 */
-	public void setOrigenId(int origenId) {
+	public void setOrigenId(Integer origenId) {
 		this.origenId = origenId;
 	}
 
 	/**
 	 * @return the destinoId
 	 */
-	public int getDestinoId() {
+	public Integer getDestinoId() {
 		return destinoId;
 	}
 
 	/**
 	 * @param destinoId the destinoId to set
 	 */
-	public void setDestinoId(int destinoId) {
+	public void setDestinoId(Integer destinoId) {
 		this.destinoId = destinoId;
 	}
 

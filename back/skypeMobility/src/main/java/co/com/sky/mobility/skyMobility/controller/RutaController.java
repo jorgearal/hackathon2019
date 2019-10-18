@@ -144,7 +144,7 @@ public class RutaController {
 		List<Vehiculo> vehiculosPersona = vehiculoDao.findByPersonaId(persona.getId());
 		
 		vehiculosPersona.forEach(x -> {
-			List<Ruta> vehiculoRutas = rutaDao.findByVehiculo(x.getId());
+			List<Ruta> vehiculoRutas = rutaDao.findByVehiculoEstado(x.getId(), 3); // 3 estado terminado
 			vehiculoRutas.forEach(y -> { 
 				rutasDto.add(AdapterUtil.buildRutaDTOView(y, edificioDao.findById(y.getOrigenId()).get(), edificioDao.findById(y.getDestinoId()).get()));
 			});
@@ -179,7 +179,7 @@ public class RutaController {
 	}
 	
 	/** 
-	 * @param idVehiculo
+	 * @param idVehiculo placa, nombre conductor, lista pasajeros, 
 	 * @return
 	 */
 	@GetMapping(value="api/v1/mobility/rutaPorId/{idRuta}", produces = MediaType.APPLICATION_JSON_VALUE)
