@@ -39,11 +39,11 @@
    
     <ion-item>
         <ion-label position="floating">Fecha del viaje</ion-label>
-        <ion-datetime displayFormat="MM/DD/YYYY" min="2019-01-01" max="2019-12-31" [(ngModel)]="fechaSelected"></ion-datetime>
+        <ion-datetime displayFormat="MM/DD/YYYY" pickerFormat="MM/DD/YYYY" min="2019-01-01" max="2019-12-31" [(ngModel)]="fechaSelected"></ion-datetime>
       </ion-item>
     <ion-item>
         <ion-label>Hora del servicio</ion-label>
-        <ion-datetime displayFormat="HH:mm" [(ngModel)]="horaSelected"></ion-datetime>
+        <ion-datetime displayFormat="HH:mm" pickerFormat="HH:mm" [(ngModel)]="horaSelected"></ion-datetime>
       </ion-item>
     <ion-item [hidden]="!registrar">
       <ion-searchbar [(ngModel)]="queryText" (ionChange)="buscarDireccion()" placeholder="A donde vamos?"

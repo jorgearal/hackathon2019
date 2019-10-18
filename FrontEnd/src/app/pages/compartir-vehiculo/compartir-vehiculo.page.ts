@@ -16,7 +16,7 @@ import { Persona } from '../../models/persona-model';
 import { VehiculoService } from '../../services/vehiculo.service';
 import { Constantes } from '../../shared/constantes';
 import { ThrowStmt } from '@angular/compiler';
-
+import Moment from 'moment'
 
 @Component({
   selector: 'compartir-vehiculo',
@@ -145,13 +145,17 @@ export class CompartirVehiculoPage implements OnInit {
       this.mostrarMensaje("Debe ingresar información en los campos marcados como obligatorios");
       return;
     }
-    var fechaRuta = new Date(this.fechaSelected + " " + this.horaSelected);
 
 
-    this.newRuta.fechaSalida = 
-    this.newRuta.estado = 0;
+   
+    console.log("Hora : "+this.horaSelected);
+    var res = this.horaSelected.substring(0, 16);
+    console.log("Hora 2 : "+res);
+    
+    this.newRuta.fechaSalida = res.replace("T", " ")+":00";
+      this.newRuta.estado = 0;
 
-    console.log('*** Registrando ruta ***');
+    console.log('*** Registrando ruta ***'+this.newRuta.fechaSalida);
     this.newRuta.numeroPersonas = this.cupos;
 
     var origen = {};
@@ -170,13 +174,13 @@ export class CompartirVehiculoPage implements OnInit {
     console.log(JSON.stringify(this.newRuta));
     this.rutaService.registrarRuta(this.newRuta).subscribe((data) => {
       this.mostrarMensaje("La Ruta se registró exitosamente.");
-      this. consultarRutaActiva(this.infoVehiculo.id);
+      this.consultarRutaActiva(this.infoVehiculo.id);
     }, (error) => {
       this.mostrarMensaje(Constantes.MENSAJE_ERROR_SERVICIO);
     });
   }
 
-  limpiarYCargarMapa(){
+  limpiarYCargarMapa() {
 
   }
 
@@ -493,4 +497,17 @@ function setAllMap(map) {
   for (var i = 0; i < markers.length; i++) {
     markers[i].setMap(null);
   }
+}
+
+function stringToDate(_date, _format, _delimiter) {
+  var formatLowerCase = _format.toLowerCase();
+  var formatItems = formatLowerCase.split(_delimiter);
+  var dateItems = _date.split(_delimiter);
+  var monthIndex = formatItems.indexOf("mm");
+  var dayIndex = formatItems.indexOf("dd");
+  var yearIndex = formatItems.indexOf("yyyy");
+  var month = parseInt(dateItems[monthIndex]);
+  month -= 1;
+  var formatedDate = new Date(dateItems[yearIndex], month, dateItems[dayIndex]);
+  return formatedDate;
 }
