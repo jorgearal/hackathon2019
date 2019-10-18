@@ -36,8 +36,9 @@ public class VehiculoController {
 
 	
 	@GetMapping(value="api/v1/mobility/buscarVehiculoPersona/{idPersona}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Vehiculo>> buscarVehiculo(@PathVariable int idPersona){
-		return ResponseEntity.ok(vehiculoDao.findByPersonaId(idPersona));
+	public ResponseEntity<List<VehiculoDTO>> buscarVehiculo(@PathVariable int idPersona){
+		List<VehiculoDTO> vehiculosDto = AdapterUtil.convertirVehiculosToDto(vehiculoDao.findByPersonaId(idPersona));
+		return ResponseEntity.ok(vehiculosDto);
 		
 		
 	}
