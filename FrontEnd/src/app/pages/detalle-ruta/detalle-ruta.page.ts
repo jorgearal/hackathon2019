@@ -183,13 +183,14 @@ export class DetalleRutaPage implements OnInit {
      suppressMarkers: true
    });
    const destino = JSON.parse(localStorage.getItem('destino'));
-   const request = {
-     origin: destino.lat + ', ' + destino.lng,
-     destination: destino.latDest + ', ' + destino.lngDest,
-     travelMode: 'DRIVING'
-   };
+   const request = <google.maps.DirectionsRequest>{};
+   
+   request.origin = destino.lat + ', ' + destino.lng,
+   request.destination =  destino.latDest + ', ' + destino.lngDest,
+   request.travelMode = google.maps.TravelMode.DRIVING;
+
    directionsService.route(request, function(result, status) {
-     if (status === 'OK') {
+     if (status === google.maps.DirectionsStatus.OK) {
        directionsRenderer.setDirections(result);
        directionsRenderer.setMap(map);
      }

@@ -409,18 +409,14 @@ function trazarRuta(map) {
   });
   var origen = JSON.parse(localStorage.getItem('origen'));
   var destino = JSON.parse(localStorage.getItem('destino'));
-  console.log("Dibujando :" + JSON.stringify(destino));
-
-  var request = {
-    origin: origen.lat + ', ' + origen.lng,
-    destination: destino.lat + ', ' + destino.lng,
-    travelMode: 'DRIVING'
-  };
-
-  console.log('PETICION');
+  const request = <google.maps.DirectionsRequest>{};
+   
+  request.origin = origen.lat + ', ' + origen.lng,
+  request.destination =  destino.lat + ', ' + destino.lng,
+  request.travelMode = google.maps.TravelMode.DRIVING;
 
   directionsService.route(request, function (result, status) {
-    if (status === 'OK') {
+    if (status === google.maps.DirectionsStatus.OK) {
       directionsRenderer.setDirections(null);
       directionsRenderer.setDirections(result);
       directionsRenderer.setMap(map);
