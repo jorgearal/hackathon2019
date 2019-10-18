@@ -33,9 +33,9 @@
         <ion-item>
           <ion-label position="stacked" color="primary">Marca</ion-label>
           <ion-select  [(ngModel)]="formularioVehiculo.marca" name="marca">
-            <ion-select-option value="1">HYUNDAI</ion-select-option>
-            <ion-select-option value="1">MAZDA</ion-select-option>
-            <ion-select-option value="2">TOYOTA</ion-select-option>
+            <ion-select-option value="HYUNDAI">HYUNDAI</ion-select-option>
+            <ion-select-option value="MAZDA">MAZDA</ion-select-option>
+            <ion-select-option value="CHEVROLET">CHEVROLET</ion-select-option>
           </ion-select>
          </ion-item>
   
@@ -65,12 +65,12 @@
         <ion-item>
           <ion-label position="stacked" color="primary">Color</ion-label>          
           <ion-select  [(ngModel)]="formularioVehiculo.color" name="color"  #color="ngModel" >
-            <ion-select-option value="1">NEGRO</ion-select-option>
-            <ion-select-option value="2">BLANCO</ion-select-option>
-            <ion-select-option value="3">GRIS</ion-select-option>
-            <ion-select-option value="4">ROJO</ion-select-option>
-            <ion-select-option value="5">AZUL</ion-select-option>
-            <ion-select-option value="6">CAFE</ion-select-option>
+            <ion-select-option value="NEGRO">NEGRO</ion-select-option>
+            <ion-select-option value="BLANCO">BLANCO</ion-select-option>
+            <ion-select-option value="GRIS">GRIS</ion-select-option>
+            <ion-select-option value="ROJO">ROJO</ion-select-option>
+            <ion-select-option value="AZUL">AZUL</ion-select-option>
+            <ion-select-option value="CAFE">CAFE</ion-select-option>
           </ion-select>
         </ion-item>
         <ion-text color="danger">

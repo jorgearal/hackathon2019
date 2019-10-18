@@ -10,11 +10,11 @@ import { darkStyle } from './map-dark-style';
 import {} from 'googlemaps';
 
 @Component({
-  selector: 'buscarRuta',
-  templateUrl: './buscar-ruta.page.html',
-  styleUrls: ['./buscar-ruta.page.scss'],
+  selector: 'rutaActiva',
+  templateUrl: './ruta-activa.page.html',
+  styleUrls: ['./ruta-activa.page.scss'],
 })
-export class BuscarRutaPage implements OnInit, AfterViewInit {
+export class RutaActivaPage implements OnInit, AfterViewInit {
 
  // Gets a reference to the list element
  @ViewChild('mapCanvas', { static: true }) mapElement: ElementRef;
@@ -213,8 +213,6 @@ function trazarRuta(map) {
   request.origin = destino.lat + ', ' + destino.lng,
   request.destination =  destino.latDest + ', ' + destino.lngDest,
   request.travelMode = google.maps.TravelMode.DRIVING;
-
-  console.log('PETICION');
 
   directionsService.route(request, function(result, status) {
     if (status === google.maps.DirectionsStatus.OK) {

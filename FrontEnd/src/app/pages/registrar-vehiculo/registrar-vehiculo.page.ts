@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RegistroVehiculo } from '../../interfaces/registro-vehiculo';
+import { VehiculoService } from '../../services/vehiculo.service';
 
 @Component({
   selector: 'registrar-vehiculo',
@@ -8,8 +9,9 @@ import { RegistroVehiculo } from '../../interfaces/registro-vehiculo';
 })
 export class RegistrarVehiculoPage implements OnInit {
   registro_nuevo: boolean;
+  infoVehiculo: any;
 
-  constructor() { }
+  constructor(private vehiculoService: VehiculoService) { }
   // tslint:disable-next-line:max-line-length
   formularioVehiculo: RegistroVehiculo = {
     color: '',
@@ -27,18 +29,19 @@ export class RegistrarVehiculoPage implements OnInit {
 
   ngOnInit() {
     const usuario = JSON.parse(localStorage.getItem('usuario'));
-
-      this.title = 'Actualizar datos';
-      this.formularioVehiculo.color = usuario.apellidos;
-      this.formularioVehiculo.fechaSoat = usuario.celular;
-      this.formularioVehiculo.fechaTecnicoMecanica = usuario.nombres;
-      this.formularioVehiculo.fotoMatricula = usuario.correo;
-      this.formularioVehiculo.fotoVehiculo = usuario.cedula;
-      this.formularioVehiculo.marca = usuario.cedula;
-      this.formularioVehiculo.modelo = usuario.cedula;
-      this.formularioVehiculo.placa = usuario.cedula;
-      this.formularioVehiculo.puestos = usuario.cedula;
-      this.formularioVehiculo.referencia = usuario.cedula;
+    if (usuario) {
+        this.vehiculoService.consultarVehiculoXIdPersona(usuario.id).subscribe((resp) => {
+        this.infoVehiculo = resp;
+        console.log(this.infoVehiculo[0]);
+        this.title = 'Actualizar datos';
+        this.formularioVehiculo.color = this.infoVehiculo[0].color.toUpperCase();
+        this.formularioVehiculo.marca = this.infoVehiculo[0].marca;
+        this.formularioVehiculo.modelo = this.infoVehiculo[0].modelo;
+        this.formularioVehiculo.placa = this.infoVehiculo[0].placa;
+        this.formularioVehiculo.puestos = this.infoVehiculo[0].numeroPuestos;
+        this.formularioVehiculo.referencia = this.infoVehiculo[0].referencia;
+      });
+    }
   }
 
   guardarDatosVehiculo() {

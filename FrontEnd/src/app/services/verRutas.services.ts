@@ -14,16 +14,6 @@ constructor(private httpClient: HttpClient) {
 
    }
 
-    /*verRutasPorPersona(idPersona: string): Observable<any> {
-        const urlCompleta = this.url  + idPersona;
-        return this.httpClient.request('GET', urlCompleta)
-        .pipe(
-            timeout(5000),
-            map((result: HttpResponse<any>) => {
-                return result;
-            }), );
-            }*/
-
             verRutasPorPersona(idPersona: string): Observable<any> {
                 const headers = new HttpHeaders(
                     {
@@ -41,15 +31,4 @@ constructor(private httpClient: HttpClient) {
                 );
                 return this.httpClient.get<any>(Constantes.URL_WS_RUTA_POR_ID_VIAJE + idViaje, { headers });
             }
-
-            /*
-            verRutaPorId(idViaje: string): Observable<any> {
-                const urlCompleta = this.url2  + idViaje;
-                return this.httpClient.request('GET', urlCompleta)
-                .pipe(
-                    timeout(5000),
-                    map((result: HttpResponse<any>) => {
-                        return result;
-                    }), );
-                    }*/
-        }
+    }
