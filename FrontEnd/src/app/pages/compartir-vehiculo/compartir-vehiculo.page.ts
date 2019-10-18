@@ -16,7 +16,7 @@ import { Persona } from '../../models/persona-model';
 import { VehiculoService } from '../../services/vehiculo.service';
 import { Constantes } from '../../shared/constantes';
 import { ThrowStmt } from '@angular/compiler';
-
+import Moment from 'moment'
 
 @Component({
   selector: 'compartir-vehiculo',
@@ -43,6 +43,13 @@ export class CompartirVehiculoPage implements OnInit {
   infoUsuario: any;
 
   visible: boolean = false;
+
+  newRuta: any = { "numeroPersonas": "7" };
+  maxcupos: number = 5;
+
+  fechaSelected: string;
+  horaSelected: string;
+  showError: boolean = false;
 
   constructor(
     @Inject(DOCUMENT) private doc: Document,
@@ -79,7 +86,11 @@ export class CompartirVehiculoPage implements OnInit {
     this.vehiculoService.consultarVehiculoXIdPersona(idPersona).subscribe(
       (data) => {
         this.infoVehiculo = data[0];
-        console.log("=============== Vehiculo ===============");
+        this.maxcupos = this.infoVehiculo.numeroPuestos;
+        this.newRuta.numeroPersonas = this.maxcupos;
+        this.newRuta.vehiculo = this.infoVehiculo;
+        this.newRuta.cupo = this.maxcupos;
+        console.log("=============== Vehiculo 7777 ===============" + this.infoVehiculo.numeroPuestos);
         console.log(JSON.stringify(this.infoVehiculo));
         this.consultarRutaActiva(this.infoVehiculo.id);
       },
@@ -91,9 +102,9 @@ export class CompartirVehiculoPage implements OnInit {
   consultarRutaActiva(idvehiculo) {
     this.rutaService.consultarRutaXVehiculoId(idvehiculo).subscribe(
       (data) => {
-        console.log("++++++++++++++++");
+        console.log("++++++++++++++++1111111");
 
-        console.log(data);
+        console.log(">>>>>>>>>>>>>>>>2222222" + JSON.stringify(data));
         if (data.rutas.length > 0) {
           this.infoRuta = data.rutas[0];
           this.visible = true;
@@ -110,8 +121,66 @@ export class CompartirVehiculoPage implements OnInit {
       (error) => { this.mostrarMensaje(Constantes.MENSAJE_ERROR_SERVICIO); });
   }
 
+  cambiarPasajeros(ev: any) {
+    console.log(ev.detail.value);
+    this.newRuta.numeroPersonas = ev.detail.value;
+  }
+
+
   registrarRuta() {
-    console.log('*** Registrando ruta ***');
+    var error = false;
+    if (!this.fechaSelected) {
+      error = true;
+    }
+
+    if (!this.destino) {
+      error = true;
+    }
+
+    if (!this.origen) {
+      error = true;
+    }
+
+    if (error) {
+      this.mostrarMensaje("Debe ingresar información en los campos marcados como obligatorios");
+      return;
+    }
+
+
+   
+    console.log("Hora : "+this.horaSelected);
+    var res = this.horaSelected.substring(0, 16);
+    console.log("Hora 2 : "+res);
+    
+    this.newRuta.fechaSalida = res.replace("T", " ")+":00";
+      this.newRuta.estado = 0;
+
+    console.log('*** Registrando ruta ***'+this.newRuta.fechaSalida);
+    this.newRuta.numeroPersonas = this.cupos;
+
+    var origen = {};
+    origen.latitud = this.origen.lat;
+    origen.longitud = this.origen.lng;
+    origen.direccion = this.origen.direccion;
+    this.newRuta.origen = origen;
+
+    var destino = {};
+    destino.latitud = this.destino.lat;
+    destino.longitud = this.destino.lng;
+    destino.direccion = this.destino.direccion;
+    this.newRuta.destino = destino;
+
+
+    console.log(JSON.stringify(this.newRuta));
+    this.rutaService.registrarRuta(this.newRuta).subscribe((data) => {
+      this.mostrarMensaje("La Ruta se registró exitosamente.");
+      this.consultarRutaActiva(this.infoVehiculo.id);
+    }, (error) => {
+      this.mostrarMensaje(Constantes.MENSAJE_ERROR_SERVICIO);
+    });
+  }
+
+  limpiarYCargarMapa() {
 
   }
 
@@ -410,10 +479,10 @@ function trazarRuta(map) {
   var origen = JSON.parse(localStorage.getItem('origen'));
   var destino = JSON.parse(localStorage.getItem('destino'));
   const request = <google.maps.DirectionsRequest>{};
-   
+
   request.origin = origen.lat + ', ' + origen.lng,
-  request.destination =  destino.lat + ', ' + destino.lng,
-  request.travelMode = google.maps.TravelMode.DRIVING;
+    request.destination = destino.lat + ', ' + destino.lng,
+    request.travelMode = google.maps.TravelMode.DRIVING;
 
   directionsService.route(request, function (result, status) {
     if (status === google.maps.DirectionsStatus.OK) {
@@ -428,4 +497,17 @@ function setAllMap(map) {
   for (var i = 0; i < markers.length; i++) {
     markers[i].setMap(null);
   }
+}
+
+function stringToDate(_date, _format, _delimiter) {
+  var formatLowerCase = _format.toLowerCase();
+  var formatItems = formatLowerCase.split(_delimiter);
+  var dateItems = _date.split(_delimiter);
+  var monthIndex = formatItems.indexOf("mm");
+  var dayIndex = formatItems.indexOf("dd");
+  var yearIndex = formatItems.indexOf("yyyy");
+  var month = parseInt(dateItems[monthIndex]);
+  month -= 1;
+  var formatedDate = new Date(dateItems[yearIndex], month, dateItems[dayIndex]);
+  return formatedDate;
 }

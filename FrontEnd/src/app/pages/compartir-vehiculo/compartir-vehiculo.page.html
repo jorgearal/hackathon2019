@@ -27,42 +27,57 @@
 </ion-header>
 <ion-content>
 
+  <ion-list>
+    <ion-item>N° de cupos
+        <ion-range class="ion-color-secondary-temp" [(ngModel)]="newRuta.numeroPersonas" min="1" [max]="maxcupos"
+        (onChange)="cambiarPasajeros($event)" [disabled]="!registrar">
+        <ion-label slot="start">1</ion-label>
+        <ion-label slot="end">{{maxcupos}}</ion-label>
+      </ion-range>
+    </ion-item>
 
-  <div class="centrado">
-    <br>
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <ion-label color="primary" stacked>Cupos</ion-label>
-        </ion-col>
-        <ion-col>
-          <ion-input type="text" maxlength="2" placeholder="Asientos disponibles" [(ngModel)]="cupos"
-            [disabled]="!registrar"></ion-input>
-        </ion-col>
-      </ion-row>
-
-    </ion-grid>
-  </div>
-
-  <div class="centrado" style="height:70%; padding-left: 20px; padding-right: 20px;">
-
-
-
-    <ion-toolbar [hidden]="!registrar">
-      <ion-searchbar [(ngModel)]="queryText" (ionChange)="buscarDireccion()" placeholder="A donde vas"
+   
+    <ion-item  [hidden]="!registrar">
+        <ion-label position="floating">Fecha del viaje</ion-label>
+        <ion-datetime displayFormat="MM/DD/YYYY" pickerFormat="MM/DD/YYYY" min="2019-01-01" max="2019-12-31" [(ngModel)]="fechaSelected"></ion-datetime>
+      </ion-item>
+    <ion-item  [hidden]="!registrar">
+        <ion-label>Hora del servicio</ion-label>
+        <ion-datetime displayFormat="HH:mm" pickerFormat="HH:mm" [(ngModel)]="horaSelected"></ion-datetime>
+      </ion-item>
+    <ion-item [hidden]="!registrar">
+      <ion-searchbar [(ngModel)]="queryText" (ionChange)="buscarDireccion()" placeholder="A donde vamos?"
         [disabled]="disable">
       </ion-searchbar>
-    </ion-toolbar>
+    </ion-item>
+  </ion-list>
+
+  <div class="centrado" style="height:70%; padding-left: 20px; padding-right: 20px;">
     <ion-toolbar [hidden]="registrar">
       Trayecto de la ruta
     </ion-toolbar>
+    
+    <label
+        class="texto_verde"><ion-icon ios="ios-people" md="md-people"></ion-icon><strong>{{newRuta.numeroPersonas}}</strong></label>
     <div #mapCanvas class="map-canvas"></div>
-  </div>
-  <br>
-  <div class="centrado">
-    <ion-button fill="clear" (click)="presentConfirm()" class="center-block btn btn-primary" [hidden]="!registrar">
-      Registrar ruta
-    </ion-button>
 
+    <div class="centrado" style="padding-top: 320px;">
+      <ion-button fill="clear" (click)="presentConfirm()" class="center-block btn btn-primary" [hidden]="!registrar">
+        Registrar ruta
+      </ion-button>
+    </div>
+    <br> <br>
+    <ion-chip>
+      <ion-avatar>
+        <img src="assets/img/planta/planta1.PNG">
+      </ion-avatar>
+      <ion-label>Comparta su vehículo y lo exoneramos del pico y placa</ion-label>
+
+    </ion-chip>
+
+
+    <br><br>
+    <img src="assets/img/picoplaca.jpg" alt="carro">
   </div>
+
 </ion-content>
