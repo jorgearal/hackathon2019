@@ -31,4 +31,8 @@ export class RutaService {
         obj.idRuta = idRuta;
         return this.httpClient.post<any>(Constantes.URL_WS_CAMBIAR_ESTADO_RUTA, obj);
     }
+
+    registrarRuta(){
+
+    }
 }
