@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import co.com.sky.mobility.skyMobility.dao.IEdificioDao;
 import co.com.sky.mobility.skyMobility.dao.IPersonaDAO;
+import co.com.sky.mobility.skyMobility.dao.IPersonaRuta;
 import co.com.sky.mobility.skyMobility.dao.IRutaDao;
 import co.com.sky.mobility.skyMobility.dao.IVehiculoDao;
 import co.com.sky.mobility.skyMobility.dto.EdificioDTO;
@@ -25,6 +26,7 @@ import co.com.sky.mobility.skyMobility.dto.RutaDTO;
 import co.com.sky.mobility.skyMobility.dto.VehiculoDTO;
 import co.com.sky.mobility.skyMobility.model.Edificio;
 import co.com.sky.mobility.skyMobility.model.Persona;
+import co.com.sky.mobility.skyMobility.model.PersonaRuta;
 import co.com.sky.mobility.skyMobility.model.Ruta;
 import co.com.sky.mobility.skyMobility.model.Vehiculo;
 import co.com.sky.mobility.skyMobility.util.AdapterUtil;
@@ -46,6 +48,9 @@ public class RutaController {
 	
 	@Autowired
 	private IEdificioDao edificioDao;
+	
+	@Autowired
+	private IPersonaRuta personaRutaDao;
 
 	/**
 	 * 
@@ -183,8 +188,22 @@ public class RutaController {
 	 * @return
 	 */
 	@GetMapping(value="api/v1/mobility/rutaPorId/{idRuta}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Ruta> rutaPorId(@PathVariable int idRuta){
-		return ResponseEntity.ok(rutaDao.findById(idRuta).get());
+	public ResponseEntity<RutaDTO> rutaPorId(@PathVariable int idRuta){
+		
+		RutaDTO rutaDto = new RutaDTO();
+		
+		if (idRuta > 0) {
+			Ruta ruta = rutaDao.findById(idRuta).get();
+			if (ruta != null && ruta.getId()  > 0) {
+				Vehiculo vehiculo = vehiculoDao.findById(ruta.getVehiculoId()).get();
+				Persona conductor = personaDao.findById(vehiculo.getPersonaId()).get();
+				
+				List<PersonaRuta> pasajeros = personaRutaDao.findByIdRuta(idRuta);
+				rutaDto = AdapterUtil.buildRutaDTOViewPasajeros(ruta, edificioDao.findById(ruta.getOrigenId()).get(), edificioDao.findById(ruta.getDestinoId()).get(), vehiculo, conductor, pasajeros);
+				
+			}
+		}
+		return ResponseEntity.ok(rutaDto);
 	}
 	
 	/**

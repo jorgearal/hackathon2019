@@ -21,7 +21,7 @@ public class PersonaRutaController {
 	@GetMapping(value="api/v1/mobility/buscarPasajerosRuta", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<PersonaRuta>> buscarPasajerosRuta(int idRuta){
 		
-		List<PersonaRuta>personaRuta =personaRutaDao.findByIdRuta(idRuta);
+		List<PersonaRuta>personaRuta = personaRutaDao.findByIdRuta(idRuta);
 		
 		return ResponseEntity.ok((personaRuta));
 		

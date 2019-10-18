@@ -1,6 +1,6 @@
 package co.com.sky.mobility.skyMobility.dto;
 
-
+import java.util.List;
 
 public class RutaDTO {
 	
@@ -23,6 +23,8 @@ public class RutaDTO {
     private int cupo;
     
     private String duracion;
+    
+    private List<PersonaDTO> pasajeros;
 
 	public int getId() {
 		return id;
@@ -114,6 +116,20 @@ public class RutaDTO {
 	 */
 	public void setDuracion(String duracion) {
 		this.duracion = duracion;
+	}
+
+	/**
+	 * @return the pasajeros
+	 */
+	public List<PersonaDTO> getPasajeros() {
+		return pasajeros;
+	}
+
+	/**
+	 * @param pasajeros the pasajeros to set
+	 */
+	public void setPasajeros(List<PersonaDTO> pasajeros) {
+		this.pasajeros = pasajeros;
 	}
 	
 }

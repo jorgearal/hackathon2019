@@ -11,6 +11,7 @@ import co.com.sky.mobility.skyMobility.dto.RutaDTO;
 import co.com.sky.mobility.skyMobility.dto.VehiculoDTO;
 import co.com.sky.mobility.skyMobility.model.Edificio;
 import co.com.sky.mobility.skyMobility.model.Persona;
+import co.com.sky.mobility.skyMobility.model.PersonaRuta;
 import co.com.sky.mobility.skyMobility.model.Ruta;
 import co.com.sky.mobility.skyMobility.model.Vehiculo;
 
@@ -137,6 +138,23 @@ public class AdapterUtil {
 
 		return personaDto;
 	}
+	
+	/**
+	 * 
+	 * @param pasajeros
+	 * @return
+	 */
+	public static List<PersonaDTO> convertirPasajerosToDtoList(List<PersonaRuta> pasajeros) {
+
+		List<PersonaDTO> pasajerosDto = new ArrayList<>();
+		
+		for (PersonaRuta pr : pasajeros) {
+			PersonaDTO personaDto = convertirPersonaToDto(pr.getPersona());
+			pasajerosDto.add(personaDto);
+		}
+
+		return pasajerosDto;
+	}
 
 	/**
 	 * 
@@ -239,6 +257,35 @@ public class AdapterUtil {
 	
 	/**
 	 * 
+	 * @param vehiculo
+	 * @param conductor
+	 * @return
+	 */
+	public static VehiculoDTO convertirVehiculoConductorToDto(Vehiculo vehiculo, Persona conductor) {
+
+		VehiculoDTO vehiculoDto = new VehiculoDTO();
+
+		vehiculoDto.setColor(vehiculo.getColor());
+		vehiculoDto.setDescripcion(vehiculo.getDescripcion());
+		vehiculoDto.setImagen(vehiculo.getFoto());
+		vehiculoDto.setId(vehiculo.getId());
+		vehiculoDto.setMarca(vehiculo.getMarca());
+		vehiculoDto.setMatricula(vehiculo.getMatricula());
+		vehiculoDto.setModelo(vehiculo.getModelo());
+		vehiculoDto.setNumPuestos(vehiculo.getNumeroPuestos());
+		
+		PersonaDTO conductorDto = convertirPersonaToDto(conductor);
+		
+		vehiculoDto.setPersona(conductorDto);
+		vehiculoDto.setPlaca(vehiculo.getPlaca());
+		vehiculoDto.setReferencia(vehiculo.getReferencia());
+
+		return vehiculoDto;
+
+	}
+	
+	/**
+	 * 
 	 * @param result
 	 * @return
 	 */
@@ -308,6 +355,43 @@ public class AdapterUtil {
 		ruta.setVehiculoId(rutaDto.getVehiculo().getId());
 		
 		return ruta;
+		
+	}
+	
+	
+	
+	
+	/**
+	 * 
+	 * @param ruta
+	 * @param origen
+	 * @param destino
+	 * @param vehiculo
+	 * @param persona
+	 * @param pasajeros
+	 * @return
+	 */
+	public static RutaDTO buildRutaDTOViewPasajeros(Ruta ruta, Edificio origen, Edificio destino, Vehiculo vehiculo, Persona conductor, List<PersonaRuta> pasajeros) {
+		
+		RutaDTO rutaDto = new RutaDTO();
+		rutaDto.setCupo(ruta.getCupo());
+		rutaDto.setEstado(ruta.getEstado());
+		rutaDto.setFechaReg(ruta.getFechaPublicacion().toString());
+		rutaDto.setFechaSalida(ruta.getFechaSalida().toString());
+		rutaDto.setId(ruta.getId());
+		rutaDto.setNumPersonas(ruta.getNumeroPersonas());
+		rutaDto.setDuracion(ruta.getDuracion());
+		
+		VehiculoDTO vehiculoDto = convertirVehiculoConductorToDto(vehiculo, conductor);
+		rutaDto.setVehiculo(vehiculoDto);
+		
+		rutaDto.setOrigen(convertirEdificioToDto(origen));
+		rutaDto.setDestino(convertirEdificioToDto(destino));
+		
+		List<PersonaDTO> pasajerosDto = convertirPasajerosToDtoList(pasajeros);
+		rutaDto.setPasajeros(pasajerosDto);
+		
+		return rutaDto;
 		
 	}
 
