@@ -16,7 +16,7 @@ public class PersonaRutaDTO {
 
 	public void setId(int id) {
 		this.id = id;
-	}
+	}	
 
 	public RutaDTO getRutaDto() {
 		return rutaDto;

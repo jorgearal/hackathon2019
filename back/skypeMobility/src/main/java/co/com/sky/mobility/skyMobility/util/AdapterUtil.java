@@ -10,6 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import co.com.sky.mobility.skyMobility.dto.DesplazamientoDTO;
 import co.com.sky.mobility.skyMobility.dto.EdificioDTO;
 import co.com.sky.mobility.skyMobility.dto.PersonaDTO;
+import co.com.sky.mobility.skyMobility.dto.PersonaRutaDTO;
 import co.com.sky.mobility.skyMobility.dto.RutaDTO;
 import co.com.sky.mobility.skyMobility.dto.VehiculoDTO;
 import co.com.sky.mobility.skyMobility.model.Desplazamiento;
@@ -428,6 +429,46 @@ public class AdapterUtil {
 			e.printStackTrace();
 		}
 		return desplazamientoDto;
+	}
+	
+	/**
+	 * 
+	 * @param personaRutaDto
+	 * @return
+	 */
+	public static PersonaRuta convertToEntity(PersonaRutaDTO personaRutaDto) {
+		
+		PersonaRuta personaRuta = new PersonaRuta();
+		personaRuta.setConfirmaViaje(personaRutaDto.getConfirmaViaje());
+		personaRuta.setId(personaRutaDto.getId());
+		
+		personaRuta.setPersona(new Persona());
+		personaRuta.getPersona().setId(personaRutaDto.getPersonaDto().getId());
+		
+		personaRuta.setRuta(new Ruta());
+		personaRuta.getRuta().setId(personaRutaDto.getRutaDto().getId());
+		
+		return personaRuta;
+	}
+	
+	/**
+	 * 
+	 * @param personaRutaDto
+	 * @return
+	 */
+	public static PersonaRutaDTO convertToDTO(PersonaRuta personaRuta) {
+		
+		PersonaRutaDTO personaRutaDto = new PersonaRutaDTO();
+		personaRutaDto.setConfirmaViaje(personaRuta.getConfirmaViaje());
+		personaRutaDto.setId(personaRuta.getId());
+		
+		personaRutaDto.setPersonaDto(new PersonaDTO());
+		personaRutaDto.getPersonaDto().setId(personaRuta.getPersona().getId());
+		
+		personaRutaDto.setRutaDto(new RutaDTO());
+		personaRutaDto.getRutaDto().setId(personaRuta.getRuta().getId());
+		
+		return personaRutaDto;
 	}
 
 }
