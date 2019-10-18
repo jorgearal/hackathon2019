@@ -6,15 +6,49 @@
     </ion-toolbar>
   </ion-header>
   <ion-content>
-      <div #mapCanvas class="map-canvas"></div>
+      <div  #mapCanvas class="map-canvas"></div>
   </ion-content>    
-  <ion-row>
-      <ion-col text-center>
-        <ion-button (click)="closeModal()">Cerrar</ion-button>
-      </ion-col>
-    </ion-row>
-    
-
+    <ion-row *ngIf="data">
+        <ion-col>
+       <b>Placa:</b>    
+        </ion-col>
+        <ion-col>
+           {{data.vehiculo.placa}}
+        </ion-col>    
+      </ion-row >
+      <ion-row  *ngIf="data">
+          <ion-col>
+         <b>Conductor:</b>    
+          </ion-col>
+          <ion-col>
+              {{data.vehiculo.persona.nombres}} {{data.vehiculo.persona.apellidos}}
+          </ion-col>    
+        </ion-row >
+        <ion-row  *ngIf="data">
+            <ion-col>
+           <b>Fecha de Viaje:</b>    
+            </ion-col>
+            <ion-col  *ngIf="data">
+                {{data.fechaSalida}} 
+            </ion-col>    
+          </ion-row>
+          <ion-row  *ngIf="data">
+              <ion-col>
+             <b>Pasajeros:</b>    
+             </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col *ngIf="data">
+                <ion-row *ngFor="let pas of data.pasajeros; let i = index">
+                    {{pas.nombres}} {{pas.apellidos}}
+                </ion-row>
+              </ion-col>    
+            </ion-row>
+                  <ion-row>
+                      <ion-col>
+                        <ion-button (click)="closeModal()">Cerrar</ion-button>
+                      </ion-col>
+                    </ion-row>
 <ion-content>
 
 </ion-content>

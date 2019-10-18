@@ -26,7 +26,8 @@ export class DetalleRutaPage implements OnInit {
    modo = true;
    opciones: any;
    idViaje: string;
-  datosViaje: any;
+   data: any;
+
   constructor(
    @Inject(DOCUMENT) private doc: Document,
     public alertCtrl: AlertController,
@@ -73,7 +74,6 @@ export class DetalleRutaPage implements OnInit {
 
    this.confData.getMap().subscribe((mapData: any) => {
      const mapEle = this.mapElement.nativeElement;
-
      this.map = new googleMaps.Map(mapEle, {
        streetViewControl: false,
        fullscreenControl: false,
@@ -82,13 +82,17 @@ export class DetalleRutaPage implements OnInit {
        zoom: 11,
        styles: style
      });
+     this.verRutaService.verRutaPorId('1').subscribe((resp) => {
+       this.data = resp;
+       obtenerPosicionUsuario(this.map);
+       placeMarkerAndPanTo(this.map, this.data.destino.latitud, this.data.destino.longitud);
 
-     obtenerPosicionUsuario(this.map);
-     placeMarkerAndPanTo(this.map);
+       setTimeout(() => {
+          trazarRuta(this.map, this.data);
+        }, 2000);
+     });
 
-     setTimeout(() => {
-       trazarRuta(this.map);
-     }, 1000);
+
 
      googleMaps.event.addListenerOnce(this.map, 'idle', () => {
        mapEle.classList.add('show-map');
@@ -138,12 +142,11 @@ export class DetalleRutaPage implements OnInit {
    });
  }
 
- function placeMarkerAndPanTo(map) {
-   const destino = JSON.parse(localStorage.getItem('destino'));
+ function placeMarkerAndPanTo(map, latitud, longitud) {
    return new google.maps.Marker({
      position: {
-       'lat': destino.lat,
-       'lng': destino.lng
+       'lat': parseFloat(latitud),
+       'lng': parseFloat(longitud)
      },
      map: map,
      icon: {
@@ -154,39 +157,33 @@ export class DetalleRutaPage implements OnInit {
  }
 
  function obtenerPosicionUsuario(map) {
-   navigator.geolocation.getCurrentPosition((posicion) => {
+  navigator.geolocation.getCurrentPosition((posicion) => {
+    // tslint:disable-next-line:no-unused-expression
+    new google.maps.Marker({
+      position: {
+        'lat': posicion.coords.latitude,
+        'lng': posicion.coords.longitude
+      }, map: map,
+      icon: {
+        url: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAAABmJLR0QA/wD/AP+gvaeTAAAI6UlEQVR4nO2ce3AV1R3HP2fPJoSQB0mAPCxICEHGV6kKiAraAZVB6ZRSy5TBqh1E7IC1tnSwWvBVoa22YNWCQd4g0hQ7PCqCVEAlQFCxiRoSCAHyuISQ3Lxz793d0z8iTil4H+TuvbGzn7/u3Pz29/2d75w9m/3t2QsODg4ODg4ODg4ODg4ODg4OISCiXcD/0AsYCVwBDAASv/y+GTgJlAAHgdaoVNdNSQSmI/W9COEDlNCkFZPczxuXmeOJy8zxxCT38wpNswCFED4h5R7gp0BCVCsnujMwHviV0ORjSllJibkjrZTr7pCJuSOIy8hBSP28YGUadLiO0Vx6gIZPdpjNZQc1IbQmZZkvAC8C7dEYRLQMvF1ocgVCZPa9ZYqWfseD9Ei7LKQEnrpKTu9cxpn337RAVSnLfADYZU+5X0+kDRTAfBDzEgcPty6/9zkZl57dpYQdrnIq1jxhthz7SAM1H3gOUOEoNhhkpIQADbQ8UL/IuvsRkX3fAk1PSO1yUj0hhbRRkzSUJVrKCr8LZAHbiJCJkTTwJQQPDfzJQpE+9n4Q4Zv8QmgkXTGK2JRM3EX/ug5IAbaHTcAPkTLwYeDpy6c+I/re8iPbROIHXIWe0Fs0Fu8ZCVQDH9sm9iWRMPBKhPaPvmOmaFl3P2L7mttr4LfxNtSotsqSO0HlA3V26ml2JgcEQi6JTc0S/e95MmIXrAFT5onYlAwppFxit5bdg5oAbMudlUfy1bcFdYDZ1kjD4Z00H9mP0VADgJ6SSeIVo0gZNg4ZnxxUHve/d3H01ZkA44F3LqX4YLD1FBZSXx7f/8qs/pPnBp7pysK1I4+KvNnUf7ydoRmJ3HRNLkOyUjHqTlDyzlrO7l2PEpKEQcMCXoTi0gfhPrzLMFobBqKslWEa0gXogUMumcHKNG5OH/dAwFmuDC/H8x7BXbyb2bNmMXfuXDIyMs6LqampYeHChbz8ygu0lX9E9vTFCD3Wb970cffrx1f+ejSQDRzvymC+DjvXwMlaTA8rZdjtAQNPrHuS1iP72LZ1K4sWLbrAPIDMzEwWL17Mls2baS35kBPrfxswb8p37kTosQqYfCkDCAbbDBRCjk0YfIPQYnv6jWss3k1dwVssf30Z48ePD5h3woQJLMt7jbp9m2j8bK/fWK1HPAk51yOEHBdS8SFg3wzUxPCEnOsD5q99+1VG33orU6dODTr1tGnTuGX0GGrffiVgbOLg6zU0MTzo5CFil4GpyjR6x2UM8hvkdZ+mqfwwM2fMCFngoRkP0njsE3zuWr9xcRk5KNNIBXqHLBIEdhnYByAmqY/foPbKL1BKMXr06JAFxowZA0rRVlXiNy4mKe3cxzR/cZeKXQb2BAi0/hnN9QD069cvZIH09PTOHE3+bzS02PhzH21pvtplYAuA5WnzGyTjkwBwu90hC9TXd5ove/k/M03PV93/ppBFgsAuAxsAzPZmv0Fx6Z1r5KFDh0IWOHdMoH7if9VQH7JIENhloBshDG99jd+guIxB9MrMZs3atSELrFmzloSsnIAGeutrQGg+vmEz0BJSP9JeUxYwsO/Y6WzcuJGCgoKgk3/wwQfk5/+NPuOmB4xtry5FSPkZNjVYbfs/UBm+g60VxUaguLSbJpOUcx3fn/QDysoCG15aWsrkH95Dcu5w0m6cFDC+9WSxTxm+wuCqDh07b+UK26s+l4HWQaFJsme8TJueyA0jRrJq1Sosy7ogzrIsVqxYwQ0jRtCmJzHwwb8gNP+9EKO1kfbKIzoQ+iIbJHa2s7KB8sE/W0Lva8cGDDY7Wji1fh5nC7eSedm3mHjXBIYMGQJ0zrot2/5JTVUlaSO+R/8fP42M6xUwZ8PH2zn22mwFXA6c6tpwLo6t/UChxx5JGz5xyMD7FgZ9TOuJIs4WvEX70QN01FUBENfnMnrm3kifUZOIH3B10LnKX39MNXyy/TNl+K4Jufggsbuh+rzsET9n2IuFeqDWU7ixvO0c/uUI0/J1PAc8ZZeO3S39VaanTbqL3rNZ5kLch9/F8nVowGo7dew28IiQ+sHa99aaNutcgOvdFaaQ+l6g3E4duw1EmcZfm0sPyA6XreM4j+ayQtpOFkllGkvt1rLdQGC9kNLl2rksAlKduHbkKaHJGiDfbq1IGOhTpvGnswWbLG99le1iHaeP01i8G2WZzwM+u/UiYSDAUqClZvtrtgu5ti9VQmgNwHLbxYicgU3KMp8/8/4G1V4d+HbtUmmrLKFu/1soy3wa8N9LCxORMhDgJSGEq3LT7227IlfmLzCFENV0zviIEEkD25Vlzmss3iObvtgX9uSNRbtpKtknlWXOBTxhF/gaImkgwHKEPHDyjad8ygrfRFSWyan8BT6E/BBYF7bEQRBpAy2U+VDHmQrtzJ7wjbN210o6aisEypxBBHenQuQNBPgUpV6q3PQHy1PX9QaJp66Sqs1/NlHWH4HPu15eaETDQID5yjRqK1Y/bqK6MGGUomL146YyzdPA78JWXQhEy8BmZZmzmksPyLqCTZec5Mz7G2gu3S+VZcwkSi/fRMtAgL+DtuHUxmcNb4Mr5IM9Z6s4lb/AAFYCW8JdXLBE00DAmmn5PKfLlz1qhnJVVpZJ+bJHTWUa1cDP7asvMJHcpX8xPCjroNftekCTMSIxN7g9QNVbFlN/aKvCMu8Cjtlbon+ibSB0vkTYs6Xs4M1JQ28SsalZfoNbjh6iYvVvFEo9A4T+QDnMdJe3NWMQsiAmOe3aq57YEqMnXvwFHF/TGT5/dqLha3EXoswxQMDHpnYT5TXwK3woc5LRdLbl6JKHLWVc2IVSpsGxpbMto9XdiDLvoRuYB93jFD5HE0oVet2ue81Wt5Z8zW3n/fHkG/Nxf/quhbLuAoqiUuFF6E4GQudGcE/riaJxMb3T6fXlI8y6gk1Ub14EMAfYEMX6vhEIYIOQujl0zptq6Jw3ldB0E7R1dJ81u9sTh5T79YRUr56Q4hNS3wf0iHZR3zTShIw5LjR5Egh9C6sDAEPp/AEKBwcHBwcHBwcHBwcHBwcHh/8P/gPurTTVfNSrzwAAAABJRU5ErkJggg==',
+        scaledSize: new google.maps.Size(50, 50)
+      }
+    });
+  }, (e) => {
+    console.log('Error ' + e);
+  });
+}
 
-     const destino = JSON.parse(localStorage.getItem('destino'));
-     destino.latDest = posicion.coords.latitude;
-     destino.lngDest = posicion.coords.longitude;
-     localStorage.setItem('destino', JSON.stringify(destino));
 
-     // tslint:disable-next-line:no-unused-expression
-     new google.maps.Marker({
-       position: {
-         'lat': posicion.coords.latitude,
-         'lng': posicion.coords.longitude
-       }, map: map,
-       icon: {
-         url: 'data:image/png;base64,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',
-         scaledSize: new google.maps.Size(50, 50)
-       }
-     });
-   }, (e) => {
-     console.log('Error ' + e);
-   });
- }
 
- function trazarRuta(map) {
+ function trazarRuta(map, data) {
    const directionsService = new google.maps.DirectionsService();
    const directionsRenderer = new google.maps.DirectionsRenderer({
      suppressMarkers: true
    });
-   const destino = JSON.parse(localStorage.getItem('destino'));
    const request = <google.maps.DirectionsRequest>{};
-   
-   request.origin = destino.lat + ', ' + destino.lng,
-   request.destination =  destino.latDest + ', ' + destino.lngDest,
+   request.origin = data.origen.latitud + ', ' + data.origen.longitud,
+   request.destination =  data.destino.longitud + ', ' + data.destino.longitud,
    request.travelMode = google.maps.TravelMode.DRIVING;
 
    directionsService.route(request, function(result, status) {

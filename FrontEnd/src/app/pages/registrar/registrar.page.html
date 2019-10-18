@@ -8,8 +8,8 @@
 </ion-header>
 
 <ion-content>
-  <div class="about-header">
-    <img src="assets/img/ecosistema.png" alt="ionic logo">
+  <div class="about-header ">
+    <img src="assets/img/community-hero.png" class="personImage" alt="ionic logo">
   </div>
 
   <form #loginForm="ngForm" novalidate>
@@ -90,10 +90,4 @@
       </ion-col>
     </ion-row>
   </form>
-  <br>
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="mostrarVehiculo">
-    <ion-fab-button>
-      <ion-fab-button (click)="diligenciarVehiculo()"><ion-icon name="car"></ion-icon></ion-fab-button>
-    </ion-fab-button>
-  </ion-fab>
 </ion-content>

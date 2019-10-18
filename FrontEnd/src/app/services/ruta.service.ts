@@ -16,6 +16,15 @@ export class RutaService {
 
     }
 
+    consultarDesplazamientoRutaId(id: number): Observable<any> {
+        let headers = new HttpHeaders(
+            {
+                'Referrer-Policy': 'origin-when-cross-origin'
+            }
+        );
+        return this.httpClient.get<any>(Constantes.URL_WS_DESPLAZAMIENTO_RUTA + id, { headers });
+    } 
+
     consultarRutaXVehiculoId(id: number): Observable<any> {
         let headers = new HttpHeaders(
             {

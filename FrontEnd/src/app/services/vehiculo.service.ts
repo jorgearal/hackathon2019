@@ -7,17 +7,16 @@ import { Ruta } from '../models/ruta-model';
 import { Constantes } from '../shared/constantes';
 
 @Injectable()
-export class VehiculoService{
+export class VehiculoService {
 
-    vehiculo:Vehiculo;
-    ruta:Ruta;
+    vehiculo: Vehiculo;
+    ruta: Ruta;
 
     constructor(private httpClient: HttpClient) {
-        
     }
 
     consultarVehiculoXIdPersona(id: number): Observable<Vehiculo[]> {
-        let headers = new HttpHeaders(
+        const headers = new HttpHeaders(
             {
                 'Referrer-Policy': 'origin-when-cross-origin'
             }
