@@ -8,5 +8,7 @@ export class Constantes {
     public static URL_WS_CAMBIAR_ESTADO_RUTA="http://ec2-3-90-224-58.compute-1.amazonaws.com:8080/api/v1/mobility/cambiarEstadoRuta";
     public static URL_WS_CREAR_RUTA="http://ec2-3-90-224-58.compute-1.amazonaws.com:8080/api/v1/mobility/crearRuta";
 
+    public static URL_WS_DETALLE_RUTA="http://ec2-3-90-224-58.compute-1.amazonaws.com:8080/api/v1/mobility/rutaPorId/";
+
     public static MENSAJE_ERROR_SERVICIO ="Los servicios no se encuentras disponibles";
 }
