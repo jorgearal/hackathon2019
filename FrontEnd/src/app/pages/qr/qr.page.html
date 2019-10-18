@@ -1,13 +1,70 @@
 <ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-  
-      <ion-title>Confirmar Cupo</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>Confirmar Cupo</ion-title>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content>
+
+
+
+  <br> <br>
+  <ion-grid>
+    <ion-row [hidden]="!suscrito">
+      <ion-col text-center>
+        <div class="centrado">
+          <img src="assets/img/ok.png" alt="ok" class="pequeña" *ngIf="confirmaViaje ==1">
+          <img src="assets/img/pending.png" alt="pending" *ngIf="confirmaViaje == 0" class="pequeña">
+          <img src="assets/img/cancel.jpg" alt="carro" class="pequeña" *ngIf="confirmaViaje == 2">
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row [hidden]="!suscrito">
+      <ion-col text-center>
+        <div class="centrado">
+          <img src="assets/img/qr.png" alt="carro">
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row [hidden]="!suscrito">
+      <ion-col text-center *ngIf="!confirmado">
+        <ion-button fill="clear" (click)="confirmarViaje()" class="btn btn-primary_small">
+          Confirmar Viaje
+        </ion-button>
+      </ion-col>
+      <ion-col text-center *ngIf="!confirmado">
+        <ion-button fill="clear" (click)="cancelarViaje()" class="btn btn-secondary_small">
+          Cancelar Viaje
+        </ion-button>
+      </ion-col>
+      <ion-col text-center *ngIf="confirmado">
+          <p>{{mensaje}}</p>
+        </ion-col>
+    </ion-row>
+    <ion-row [hidden]="!suscrito">
+      <ion-col text-center>
+        <br>
+        <p>Una vez ingrese al vehículo, por favor confirme su viaje, con el objetivo de reservar su cupo en el vehículo
+          y el conductor pueda realizar el viaje sin inconvenientes</p>
+      </ion-col>
+    </ion-row>
+    <ion-row [hidden]="suscrito">
+      <ion-col text-center>
+        <br>
+        <p>Usted no se ha suscrito a una ruta.</p>
+        <img src="assets/img/tuto.gif" alt="gif" width="250">
+        
+      </ion-col>
+    </ion-row>
+    <ion-row [hidden]="suscrito">
+        <ion-col text-center>
+            <p>Viajar y ganar al mismo tiempo nunca fué tan fácil. Entre más puntos, más experiencia y más beneficios obtendrás.</p>
+        </ion-col>
+      </ion-row>
+  </ion-grid>
 
 </ion-content>
