@@ -19,7 +19,7 @@ export class RegistrarPage implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    let usuario = JSON.parse(localStorage.getItem('usuario'));
+    const usuario = JSON.parse(localStorage.getItem('usuario'));
     if (usuario) {
       this.title = 'Actualizar datos';
       this.formularioPersona.apellidos = usuario.apellidos;
@@ -38,10 +38,6 @@ export class RegistrarPage implements OnInit {
 guardarDatosPersonales() {
   this.mostrarVehiculo = true;
 }
-
-  diligenciarVehiculo() {
-    this.router.navigateByUrl('/registrarVehiculo');
-  }
 
   salir() {
     if (this.registro_nuevo) {

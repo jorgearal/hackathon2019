@@ -1,7 +1,7 @@
 <ion-header>
     <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button *ngIf="registro_nuevo"></ion-menu-button>
+      <ion-menu-button></ion-menu-button>
     </ion-buttons>
   
     
@@ -11,7 +11,7 @@
   
   <ion-content>
     <div class="about-header">
-      <img src="assets/img/ecosistema.png" alt="ionic logo">
+      <img src="assets/img/car-head.png"  class="imgagenVehiculo" alt="ionic logo">
     </div>
   
   
@@ -78,33 +78,21 @@
             El telefono celular es necesario
           </p>
         </ion-text>
-  
-        <ion-item>
-          <ion-label position="stacked" color="primary">Foto vehiculo</ion-label>
-          <ion-input [(ngModel)]="formularioVehiculo.fotoVehiculo" name="fotoVehiculo" type="text" maxlength="50" #fotoVehiculo="ngModel" required>
-          </ion-input>
-        </ion-item>
       </ion-list>
-      <ion-item>
-          <ion-label position="stacked" color="primary">Foto matricula</ion-label>
-          <ion-input [(ngModel)]="formularioVehiculo.fotoMatricula" name="fotoMatricula" type="text" maxlength="50" #fotoMatricula="ngModel" required>
-          </ion-input>
-        </ion-item>
         
       <ion-item>
           <ion-label position="stacked" color="primary">Fecha de Soat</ion-label>
           <ion-datetime displayFormat="MM DD YY"   [(ngModel)]="formularioVehiculo.fechaSoat" name="fechaSoat" placeholder="Ingrese Fecha" required></ion-datetime>
         </ion-item>
-
-
       <ion-item>
           <ion-label position="stacked" color="primary">Fecha de tecnico-mecanica</ion-label>
           <ion-datetime  [(ngModel)]="formularioVehiculo.fotoMatricula" name="fotoMatricula" displayFormat="MM DD YY"  placeholder="Ingrese Fecha" required></ion-datetime>
         </ion-item>
+        <br>
       <ion-row>
         <ion-col>
-          <ion-button (click)="guardarDatosVehiculo(loginForm)" type="submit" expand="block">Guardar</ion-button><br>
-          <ion-button (click)="salir()" color="light" expand="block"> Salir</ion-button><br>
+          <ion-button (click)="guardarDatosVehiculo(loginForm)" class="btnRegistro" type="submit" expand="block">Guardar</ion-button><br>
+          <ion-button (click)="salir()" color="light" class="btnRegistro" expand="block"> Salir</ion-button><br>
         </ion-col>
       </ion-row>
     </form>

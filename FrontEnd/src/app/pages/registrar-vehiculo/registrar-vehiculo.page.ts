@@ -23,16 +23,22 @@ export class RegistrarVehiculoPage implements OnInit {
     fechaSoat: '',
     fechaTecnicoMecanica: ''};
 
-  ngOnInit() {
-    localStorage.getItem('registroNuevo');
-    if ( localStorage.getItem('registroNuevo') !== null && localStorage.getItem('registroNuevo') !== undefined) {
-      if (localStorage.getItem('registroNuevo')  === 'SI') {
-          this.registro_nuevo = true;
-      } else {
-        this.registro_nuevo = false;
-      }
-    }
+    title = 'Registrar vehiculos';
 
+  ngOnInit() {
+    const usuario = JSON.parse(localStorage.getItem('usuario'));
+
+      this.title = 'Actualizar datos';
+      this.formularioVehiculo.color = usuario.apellidos;
+      this.formularioVehiculo.fechaSoat = usuario.celular;
+      this.formularioVehiculo.fechaTecnicoMecanica = usuario.nombres;
+      this.formularioVehiculo.fotoMatricula = usuario.correo;
+      this.formularioVehiculo.fotoVehiculo = usuario.cedula;
+      this.formularioVehiculo.marca = usuario.cedula;
+      this.formularioVehiculo.modelo = usuario.cedula;
+      this.formularioVehiculo.placa = usuario.cedula;
+      this.formularioVehiculo.puestos = usuario.cedula;
+      this.formularioVehiculo.referencia = usuario.cedula;
   }
 
   guardarDatosVehiculo() {

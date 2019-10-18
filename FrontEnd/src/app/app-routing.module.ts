@@ -13,6 +13,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/registrar/registrar.module').then(m => m.RegistrarPageModule)
   },
   {
+    path: 'vehiculo',
+    loadChildren: () => import('./pages/registrar-vehiculo/registrar-vehiculo.module').then(m => m.RegistrarVehiculoPageModule)
+  },
+  {
     path: 'support',
     loadChildren: () => import('./pages/support/support.module').then(m => m.SupportModule)
   },
@@ -40,7 +44,8 @@ const routes: Routes = [
   { path: 'registrarVehiculo', loadChildren: './pages/registrar-vehiculo/registrar-vehiculo.module#RegistrarVehiculoPageModule' },
   { path: 'iniciarViaje/:id', loadChildren: './pages/iniciar-viaje/iniciar-viaje.module#IniciarViajePageModule' },
   { path: 'puntaje', loadChildren: './pages/puntaje/puntaje.module#PuntajePageModule' },
-  { path: 'mis-rutas', loadChildren: './pages/mis-rutas/mis-rutas.module#MisRutasPageModule' },  { path: 'qr', loadChildren: './pages/qr/qr.module#QrPageModule' },
+  { path: 'mis-rutas', loadChildren: './pages/mis-rutas/mis-rutas.module#MisRutasPageModule' },
+  { path: 'qr', loadChildren: './pages/qr/qr.module#QrPageModule' },
   { path: 'detalle-ruta', loadChildren: './pages/detalle-ruta/detalle-ruta.module#DetalleRutaPageModule' },
 
 

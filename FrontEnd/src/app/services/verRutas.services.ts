@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { timeout, map } from 'rxjs/operators';
+import { Constantes } from '../shared/constantes';
 
 @Injectable()
 export class VerRutasServices {
@@ -10,11 +11,10 @@ export class VerRutasServices {
     public url2: string;
 
 constructor(private httpClient: HttpClient) {
-    this.url = 'http://ec2-3-90-224-58.compute-1.amazonaws.com:8080/api/v1/mobility/misRutas/';
-    this.url2 = 'http://ec2-3-90-224-58.compute-1.amazonaws.com:8080/api/v1/mobility/rutaPorId/';
-    }
 
-    verRutasPorPersona(idPersona: string): Observable<any> {
+   }
+
+    /*verRutasPorPersona(idPersona: string): Observable<any> {
         const urlCompleta = this.url  + idPersona;
         return this.httpClient.request('GET', urlCompleta)
         .pipe(
@@ -22,9 +22,27 @@ constructor(private httpClient: HttpClient) {
             map((result: HttpResponse<any>) => {
                 return result;
             }), );
+            }*/
+
+            verRutasPorPersona(idPersona: string): Observable<any> {
+                const headers = new HttpHeaders(
+                    {
+                        'Referrer-Policy': 'origin-when-cross-origin'
+                    }
+                );
+                return this.httpClient.get<any>(Constantes.URL_WS_MIS_RUTAS + idPersona, { headers });
             }
 
+            verRutaPorId(idViaje: string): Observable<any> {
+                const headers = new HttpHeaders(
+                    {
+                        'Referrer-Policy': 'origin-when-cross-origin'
+                    }
+                );
+                return this.httpClient.get<any>(Constantes.URL_WS_RUTA_POR_ID_VIAJE + idViaje, { headers });
+            }
 
+            /*
             verRutaPorId(idViaje: string): Observable<any> {
                 const urlCompleta = this.url2  + idViaje;
                 return this.httpClient.request('GET', urlCompleta)
@@ -33,5 +51,5 @@ constructor(private httpClient: HttpClient) {
                     map((result: HttpResponse<any>) => {
                         return result;
                     }), );
-                    }
+                    }*/
         }

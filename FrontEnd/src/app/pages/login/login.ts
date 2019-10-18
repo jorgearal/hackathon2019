@@ -15,6 +15,7 @@ import { ToastController, Events } from '@ionic/angular';
   templateUrl: 'login.html',
   styleUrls: ['./login.scss'],
 })
+
 export class LoginPage {
   login: UserOptions = { username: '', password: '' };
   submitted = false;
