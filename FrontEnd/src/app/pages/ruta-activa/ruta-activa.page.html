@@ -4,7 +4,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
 
-    <ion-title>EcoMobi</ion-title>
+    <ion-title>EcoMovi</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -12,54 +12,73 @@
   <div #mapCanvas class="map-canvas"></div>
 
   <div class="options"> 
-    <div [hidden]="!modo">
-      <ion-card *ngFor="let opcion of opciones" routerLink="/detalleRuta/{{opcion.id}}">
-        <ion-card-content>
-          <ion-grid>
-            <ion-row>
-              <ion-col size="10">
-                <strong>Destino: </strong>{{opcion.name}}
-                <p><b>Cupos disponibles:</b> {{opcion.cuposDisponibles}} + <b>Puntos:</b> {{opcion.puntos}}</p>
-              </ion-col>
-              <ion-col size="2">
-                <img src="{{opcion.imagen}}" alt="carro" class="imgCircular">
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-card-content>
-      </ion-card>
-    </div>
-    
-    <div [hidden]="modo">
-      <ion-card *ngFor="let opcion of opciones">
-        <ion-card-content>
-          <ion-grid>
-            <ion-row>
-              <ion-col size="10">
-                <strong>{{opcion.name}}</strong>
-                <p><b>Precio:</b> {{opcion.basePrice}} + <b>Co2:</b> {{opcion.baseCo2}} g/km</p>
-              </ion-col>
-              <ion-col size="2">
-                <img src="{{opcion.imagen}}" alt="carro" class="pequeña">
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-card-content>
-      </ion-card>
-    </div>
+    <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-card>
+              <ion-card-content>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col size="10">
+                      <strong>Personas</strong>
+                      <p>Jorge</p>
+                      <p>Rafael</p>
+                      <p>Andres</p>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+          <ion-col>
+            <ion-card>
+              <ion-card-content>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col size="10">
+                      <strong>Estaciones</strong>
+                      <p *ngFor="let estacion of estacionesCard">{{estacion}}</p>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+              <ion-card>
+                <ion-card-content>
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col><strong>Puntos</strong></ion-col>
+                    </ion-row>
+                    <ion-row>
+                      <ion-col>
+                        <p class="puntosStyle">+{{puntos | number : '1.0-0'}}</p>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </ion-card-content>
+              </ion-card>
+          </ion-col>
+          <ion-col>
+            <ion-card>
+              <ion-card-content>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col><strong>Co2</strong></ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col>
+                      <p class="co2Style">{{co2 | number : '1.1-1'}} g/km</p>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
   </div>
 </ion-content>
-
-<ion-tab-bar slot="bottom">
-  <ion-tab-button [selected]="modo" (click)="cambiarModo('eco')">
-    <ion-icon name="leaf"></ion-icon>
-    <ion-label>Eco</ion-label>
-    <ion-badge>3</ion-badge>
-  </ion-tab-button>
-
-  <ion-tab-button [selected]="!modo" (click)="cambiarModo('otros')">
-    <ion-icon name="cloud-outline"></ion-icon>
-    <ion-label>Otros</ion-label>
-    <ion-badge>5</ion-badge>
-  </ion-tab-button>
-</ion-tab-bar>

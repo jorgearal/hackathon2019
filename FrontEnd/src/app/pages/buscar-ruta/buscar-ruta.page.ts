@@ -176,10 +176,6 @@ function placeMarkerAndPanTo(map) {
 
 function obtenerPosicionUsuario(map) {
   navigator.geolocation.getCurrentPosition((posicion) => {
-    console.log('----------> Latitud ' + posicion.coords.latitude);
-    console.log('----------> Longitud ' + posicion.coords.longitude);
-    console.log('----------> Presicion ' + posicion.coords.accuracy);
-
     let destino = JSON.parse(localStorage.getItem('destino'));
     destino.latDest = posicion.coords.latitude;
     destino.lngDest = posicion.coords.longitude;
@@ -202,7 +198,6 @@ function obtenerPosicionUsuario(map) {
 
 
 function trazarRuta(map) {
-  console.log('INICIAR TRAZA');
   var directionsService = new google.maps.DirectionsService();
   var directionsRenderer = new google.maps.DirectionsRenderer({
     suppressMarkers: true
@@ -210,11 +205,9 @@ function trazarRuta(map) {
   var destino = JSON.parse(localStorage.getItem('destino'));
   const request = <google.maps.DirectionsRequest>{};
    
-  request.origin = destino.lat + ', ' + destino.lng,
-  request.destination =  destino.latDest + ', ' + destino.lngDest,
+  request.destination = destino.lat + ', ' + destino.lng,
+  request.origin =  destino.latDest + ', ' + destino.lngDest,
   request.travelMode = google.maps.TravelMode.DRIVING;
-
-  console.log('PETICION');
 
   directionsService.route(request, function(result, status) {
     if (status === google.maps.DirectionsStatus.OK) {
