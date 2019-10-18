@@ -84,9 +84,8 @@ export class AppComponent implements OnInit {
 
   async ngOnInit() {
     this.initializeApp();
-    this.persona = new Persona();
-    this.persona.nombres = 'Carlos Cepeda';
-    this.persona.puntaje = '4.9';
+    this.persona = JSON.parse(localStorage.getItem('usuario'));
+
     this.checkLoginStatus();
     this.listenForLoginEvents();
 
@@ -104,14 +103,6 @@ export class AppComponent implements OnInit {
         .onDidDismiss()
         .then(() => this.swUpdate.activateUpdate())
         .then(() => window.location.reload());
-    });
-
-    // se consulta los datos de la persona
-    this.personaService.consultarInfoPersonaXId(1).subscribe((data) => {
-      this.persona = data;
-      console.log(JSON.stringify(data));
-    }, (error) => {
-      alert('Los servicios no se encuentran disponibles');
     });
   }
 
