@@ -44,8 +44,12 @@ export class CompartirVehiculoPage implements OnInit {
 
   visible: boolean = false;
 
-  newRuta:any={"numeroPersonas":"7"};
-  maxcupos:number =5;
+  newRuta: any = { "numeroPersonas": "7" };
+  maxcupos: number = 5;
+
+  fechaSelected: string;
+  horaSelected: string;
+  showError: boolean = false;
 
   constructor(
     @Inject(DOCUMENT) private doc: Document,
@@ -85,7 +89,8 @@ export class CompartirVehiculoPage implements OnInit {
         this.maxcupos = this.infoVehiculo.numeroPuestos;
         this.newRuta.numeroPersonas = this.maxcupos;
         this.newRuta.vehiculo = this.infoVehiculo;
-        console.log("=============== Vehiculo 7777 ==============="+this.infoVehiculo.numeroPuestos);
+        this.newRuta.cupo = this.maxcupos;
+        console.log("=============== Vehiculo 7777 ===============" + this.infoVehiculo.numeroPuestos);
         console.log(JSON.stringify(this.infoVehiculo));
         this.consultarRutaActiva(this.infoVehiculo.id);
       },
@@ -99,7 +104,7 @@ export class CompartirVehiculoPage implements OnInit {
       (data) => {
         console.log("++++++++++++++++1111111");
 
-        console.log(">>>>>>>>>>>>>>>>2222222"+JSON.stringify(data));
+        console.log(">>>>>>>>>>>>>>>>2222222" + JSON.stringify(data));
         if (data.rutas.length > 0) {
           this.infoRuta = data.rutas[0];
           this.visible = true;
@@ -116,18 +121,63 @@ export class CompartirVehiculoPage implements OnInit {
       (error) => { this.mostrarMensaje(Constantes.MENSAJE_ERROR_SERVICIO); });
   }
 
-  cambiarPasajeros(ev: any){
+  cambiarPasajeros(ev: any) {
     console.log(ev.detail.value);
     this.newRuta.numeroPersonas = ev.detail.value;
   }
 
 
   registrarRuta() {
+    var error = false;
+    if (!this.fechaSelected) {
+      error = true;
+    }
+
+    if (!this.destino) {
+      error = true;
+    }
+
+    if (!this.origen) {
+      error = true;
+    }
+
+    if (error) {
+      this.mostrarMensaje("Debe ingresar información en los campos marcados como obligatorios");
+      return;
+    }
+    var fechaRuta = new Date(this.fechaSelected + " " + this.horaSelected);
+
+
+    this.newRuta.fechaSalida = 
+    this.newRuta.estado = 0;
+
     console.log('*** Registrando ruta ***');
     this.newRuta.numeroPersonas = this.cupos;
 
+    var origen = {};
+    origen.latitud = this.origen.lat;
+    origen.longitud = this.origen.lng;
+    origen.direccion = this.origen.direccion;
+    this.newRuta.origen = origen;
+
+    var destino = {};
+    destino.latitud = this.destino.lat;
+    destino.longitud = this.destino.lng;
+    destino.direccion = this.destino.direccion;
+    this.newRuta.destino = destino;
+
 
     console.log(JSON.stringify(this.newRuta));
+    this.rutaService.registrarRuta(this.newRuta).subscribe((data) => {
+      this.mostrarMensaje("La Ruta se registró exitosamente.");
+      this. consultarRutaActiva(this.infoVehiculo.id);
+    }, (error) => {
+      this.mostrarMensaje(Constantes.MENSAJE_ERROR_SERVICIO);
+    });
+  }
+
+  limpiarYCargarMapa(){
+
   }
 
   iniciarViaje() {
@@ -425,10 +475,10 @@ function trazarRuta(map) {
   var origen = JSON.parse(localStorage.getItem('origen'));
   var destino = JSON.parse(localStorage.getItem('destino'));
   const request = <google.maps.DirectionsRequest>{};
-   
+
   request.origin = origen.lat + ', ' + origen.lng,
-  request.destination =  destino.lat + ', ' + destino.lng,
-  request.travelMode = google.maps.TravelMode.DRIVING;
+    request.destination = destino.lat + ', ' + destino.lng,
+    request.travelMode = google.maps.TravelMode.DRIVING;
 
   directionsService.route(request, function (result, status) {
     if (status === google.maps.DirectionsStatus.OK) {

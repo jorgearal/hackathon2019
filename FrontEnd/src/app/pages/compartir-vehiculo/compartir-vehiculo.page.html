@@ -28,16 +28,23 @@
 <ion-content>
 
   <ion-list>
-    <ion-item>N° de cupos disponibles &nbsp;<label
-        class="texto_verde"><strong>{{newRuta.numeroPersonas}}</strong></label></ion-item>
-
-    <ion-item>
-      <ion-range class="ion-color-secondary-temp" [(ngModel)]="newRuta.numeroPersonas" min="1" [max]="maxcupos"
+    <ion-item>N° de cupos
+        <ion-range class="ion-color-secondary-temp" [(ngModel)]="newRuta.numeroPersonas" min="1" [max]="maxcupos"
         (onChange)="cambiarPasajeros($event)" [disabled]="!registrar">
         <ion-label slot="start">1</ion-label>
         <ion-label slot="end">{{maxcupos}}</ion-label>
       </ion-range>
     </ion-item>
+
+   
+    <ion-item>
+        <ion-label position="floating">Fecha del viaje</ion-label>
+        <ion-datetime displayFormat="MM/DD/YYYY" min="2019-01-01" max="2019-12-31" [(ngModel)]="fechaSelected"></ion-datetime>
+      </ion-item>
+    <ion-item>
+        <ion-label>Hora del servicio</ion-label>
+        <ion-datetime displayFormat="HH:mm" [(ngModel)]="horaSelected"></ion-datetime>
+      </ion-item>
     <ion-item [hidden]="!registrar">
       <ion-searchbar [(ngModel)]="queryText" (ionChange)="buscarDireccion()" placeholder="A donde vamos?"
         [disabled]="disable">
@@ -49,6 +56,9 @@
     <ion-toolbar [hidden]="registrar">
       Trayecto de la ruta
     </ion-toolbar>
+    
+    <label
+        class="texto_verde"><ion-icon ios="ios-people" md="md-people"></ion-icon><strong>{{newRuta.numeroPersonas}}</strong></label>
     <div #mapCanvas class="map-canvas"></div>
 
     <div class="centrado" style="padding-top: 320px;">
@@ -62,10 +72,10 @@
         <img src="assets/img/planta/planta1.PNG">
       </ion-avatar>
       <ion-label>Comparta su vehículo y lo exoneramos del pico y placa</ion-label>
-     
+
     </ion-chip>
 
-    
+
     <br><br>
     <img src="assets/img/picoplaca.jpg" alt="carro">
   </div>
