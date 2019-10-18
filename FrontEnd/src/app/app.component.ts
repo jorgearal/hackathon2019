@@ -29,6 +29,11 @@ export class AppComponent implements OnInit {
       icon: 'car'
     },
     {
+      title: 'Seguir ruta',
+      url: '/rutaActiva/17',
+      icon: 'search'
+    },
+    {
       title: 'Compartir Ruta',
       url: '/compartirVehiculo',
       icon: 'add'
