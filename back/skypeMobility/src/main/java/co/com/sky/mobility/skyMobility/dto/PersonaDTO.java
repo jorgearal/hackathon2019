@@ -23,6 +23,8 @@ public class PersonaDTO {
 	 private int etiqueta;
 	 
 	 private double reputacion;
+	 
+	 private int confirmaViaje;
 
 	public int getId() {
 		return id;
@@ -123,6 +125,19 @@ public class PersonaDTO {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	 
+
+	/**
+	 * @return the confirmaViaje
+	 */
+	public int getConfirmaViaje() {
+		return confirmaViaje;
+	}
+
+	/**
+	 * @param confirmaViaje the confirmaViaje to set
+	 */
+	public void setConfirmaViaje(int confirmaViaje) {
+		this.confirmaViaje = confirmaViaje;
+	}
 
 }

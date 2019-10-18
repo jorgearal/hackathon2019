@@ -155,6 +155,7 @@ public class AdapterUtil {
 		
 		for (PersonaRuta pr : pasajeros) {
 			PersonaDTO personaDto = convertirPersonaToDto(pr.getPersona());
+			personaDto.setConfirmaViaje(pr.getConfirmaViaje());
 			pasajerosDto.add(personaDto);
 		}
 
