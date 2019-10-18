@@ -78,8 +78,7 @@ export class AppComponent implements OnInit {
     private storage: Storage,
     private userData: UserData,
     private swUpdate: SwUpdate,
-    private toastCtrl: ToastController,
-    private personaService: PersonaService
+    private toastCtrl: ToastController
   ) { }
 
   async ngOnInit() {
@@ -127,6 +126,7 @@ export class AppComponent implements OnInit {
 
   listenForLoginEvents() {
     this.events.subscribe('user:login', () => {
+      this.persona = JSON.parse(localStorage.getItem('usuario'));
       this.updateLoggedInStatus(true);
     });
 
@@ -141,6 +141,7 @@ export class AppComponent implements OnInit {
 
   logout() {
     this.userData.logout().then(() => {
+      localStorage.clear();
       return this.router.navigateByUrl('/login');
     });
   }

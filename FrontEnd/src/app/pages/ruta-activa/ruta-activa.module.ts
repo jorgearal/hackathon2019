@@ -5,13 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { PlanearPage } from './planear.page';
-import { VerRutasServices } from '../../services/verRutas.services';
+import { RutaActivaPage } from './ruta-activa.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: PlanearPage
+    component: RutaActivaPage
   }
 ];
 
@@ -22,8 +21,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-providers: [ VerRutasServices],
-
-  declarations: [PlanearPage],
+  declarations: [RutaActivaPage]
 })
-export class PlanearPageModule {}
+export class RutaActivaPageModule {}

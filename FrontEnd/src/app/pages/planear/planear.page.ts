@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { VerRutasServices } from '../../services/verRutas.services';
-import { DatosRuta } from '../../models/datosRuta';
+import { ModalController } from '@ionic/angular';
+import { DetalleRutaPage } from '../detalle-ruta/detalle-ruta.page';
 
 @Component({
   selector: 'planear',
@@ -9,12 +10,37 @@ import { DatosRuta } from '../../models/datosRuta';
 })
 export class PlanearPage implements OnInit {
   datosRutas: any;
-  constructor(private verRutaService: VerRutasServices) { }
+  dataReturned: any;
+
+  constructor(private verRutaService: VerRutasServices, private modalController: ModalController) { }
 
   ngOnInit() {
     this.verRutaService.verRutasPorPersona('1').subscribe((resp) => {
       this.datosRutas = resp;
-      console.log('--------->', this.datosRutas);
     });
   }
+
+  verDetalleRuta() {
+//    const modal = this.modal.create();
+  //  modal.present();
+  }
+
+
+  async openModal() {
+    const modal = await this.modalController.create({
+      component: DetalleRutaPage,
+      componentProps: {
+        'idViaje': 1
+      }
+    });
+
+    modal.onDidDismiss().then((dataReturned) => {
+      if (dataReturned !== null) {
+        this.dataReturned = dataReturned.data;
+      }
+    });
+
+    return await modal.present();
+  }
+
 }

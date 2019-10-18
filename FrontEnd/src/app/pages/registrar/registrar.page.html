@@ -3,9 +3,7 @@
   <ion-buttons slot="start">
     <ion-menu-button *ngIf="!registro_nuevo"></ion-menu-button>
   </ion-buttons>
-
-  
-    <ion-title>Registrar persona</ion-title>
+    <ion-title>{{title}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -14,12 +12,12 @@
     <img src="assets/img/ecosistema.png" alt="ionic logo">
   </div>
 
-
   <form #loginForm="ngForm" novalidate>
+    <br>
     <ion-list>
-      <ion-item>
+      <ion-item class="inputRegistro">
         <ion-label position="stacked" color="primary">Nombres</ion-label>
-        <ion-input [(ngModel)]="formularioPersona.nombres" name="nombres"  maxlength="20" type="text" #nombres="ngModel" spellcheck="false" autocapitalize="off"
+        <ion-input [(ngModel)]="formularioPersona.nombres" name="nombres" maxlength="20" type="text" #nombres="ngModel" spellcheck="false" autocapitalize="off"
           required>
         </ion-input>
       </ion-item>
@@ -30,29 +28,26 @@
         </p>
       </ion-text>
 
-      <ion-item>
+      <ion-item class="inputRegistro">
         <ion-label position="stacked" color="primary">Apellidos</ion-label>
         <ion-input [(ngModel)]="formularioPersona.apellidos" maxlength="20" name="password" type="text" #apellidos="ngModel" required>
         </ion-input>
       </ion-item>
-
       <ion-text color="danger">
         <p [hidden]="apellidos.valid || apellidos.untouched || submitted == false" class="ion-padding-start">
           Los apellidos son requeridos
         </p>
       </ion-text>
 
-
-      <ion-item>
+      <ion-item class="inputRegistro">
         <ion-label position="stacked" color="primary">Tipo de documento</ion-label>
-        <ion-select  [(ngModel)]="formularioPersona.tipoDocumento" name="tipoDocumento">
+        <ion-select  [(ngModel)]="formularioPersona.tipoDocumento" name="tipoDocumento" [compareWith]="compareFn">
           <ion-select-option value="1">Cedula de ciudadania</ion-select-option>
           <ion-select-option value="2">Tarjeta de identidad</ion-select-option>
         </ion-select>
       </ion-item>
 
-
-      <ion-item>
+      <ion-item class="inputRegistro">
         <ion-label position="stacked" color="primary">Documento</ion-label>
         <ion-input [(ngModel)]="formularioPersona.cedula" name="cedula" type="number" maxlength="12"  #cedula="ngModel" required>
         </ion-input>
@@ -63,7 +58,7 @@
         </p>
       </ion-text>
 
-      <ion-item>
+      <ion-item class="inputRegistro">
         <ion-label position="stacked" color="primary">Celular</ion-label>
         <ion-input [(ngModel)]="formularioPersona.celular" name="celular" type="number"  maxlength="10" #celular="ngModel" required>
         </ion-input>
@@ -74,7 +69,7 @@
         </p>
       </ion-text>
 
-      <ion-item>
+      <ion-item class="inputRegistro">
         <ion-label position="stacked" color="primary">Correo Electronico</ion-label>
         <ion-input [(ngModel)]="formularioPersona.correo" name="correo" type="text" maxlength="50" #correo="ngModel" required>
         </ion-input>
@@ -88,17 +83,17 @@
 
     <ion-row>
       <ion-col>
-        <ion-button (click)="guardarDatosPersonales(loginForm)" type="submit" expand="block">Guardar</ion-button><br>
-        <ion-button (click)="salir()" color="light" expand="block"> Salir</ion-button><br>
+          <div class="centrado">
+            <ion-button (click)="guardarDatosPersonales(loginForm)" class="btnRegistro" type="submit" expand="block">Guardar</ion-button><br>
+            <ion-button (click)="salir()" class="btnRegistro" color="light" expand="block"> Salir</ion-button><br>
+          </div>
       </ion-col>
     </ion-row>
   </form>
-<br><br>
+  <br>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="mostrarVehiculo">
     <ion-fab-button>
       <ion-fab-button (click)="diligenciarVehiculo()"><ion-icon name="car"></ion-icon></ion-fab-button>
     </ion-fab-button>
   </ion-fab>
-
-
 </ion-content>
