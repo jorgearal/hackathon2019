@@ -14,4 +14,7 @@ public interface IPersonaRuta extends JpaRepository<PersonaRuta, Integer> {
 	
 	@Query("SELECT r FROM PersonaRuta r where r.ruta.id = ?1")
 	List<PersonaRuta> findByIdRuta(int rutaId);
+	
+	@Query("SELECT r FROM PersonaRuta r where r.persona.id = ?1 AND r.ruta.estado = 0")
+	PersonaRuta findByIdPersonaEstado(int idPersona);
 }

@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,5 +43,16 @@ public class PersonaRutaController {
 	public ResponseEntity<PersonaRutaDTO> suscribir(@RequestBody PersonaRutaDTO personaRutaDto) {
 		PersonaRuta personaRuta = personaRutaDao.save(AdapterUtil.convertToEntity(personaRutaDto));
 		return ResponseEntity.ok(AdapterUtil.convertToDTO(personaRuta));
+	}
+	
+	/**
+	 * 
+	 * @param idRuta
+	 * @param idPersona
+	 * @return
+	 */
+	@GetMapping(value="api/v1/mobility/rutaSuscrita", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<PersonaRuta> rutaSuscrita(@RequestParam int idPersona) {
+		return ResponseEntity.ok(personaRutaDao.findByIdPersonaEstado(idPersona));
 	}
 }
