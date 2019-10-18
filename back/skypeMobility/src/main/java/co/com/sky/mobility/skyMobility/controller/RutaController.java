@@ -19,13 +19,16 @@ import co.com.sky.mobility.skyMobility.dao.IEdificioDao;
 import co.com.sky.mobility.skyMobility.dao.IPersonaDAO;
 import co.com.sky.mobility.skyMobility.dao.IRutaDao;
 import co.com.sky.mobility.skyMobility.dao.IVehiculoDao;
+import co.com.sky.mobility.skyMobility.dto.EdificioDTO;
 import co.com.sky.mobility.skyMobility.dto.EstadoDTO;
 import co.com.sky.mobility.skyMobility.dto.RutaDTO;
 import co.com.sky.mobility.skyMobility.dto.VehiculoDTO;
+import co.com.sky.mobility.skyMobility.model.Edificio;
 import co.com.sky.mobility.skyMobility.model.Persona;
 import co.com.sky.mobility.skyMobility.model.Ruta;
 import co.com.sky.mobility.skyMobility.model.Vehiculo;
 import co.com.sky.mobility.skyMobility.util.AdapterUtil;
+import co.com.sky.mobility.skyMobility.util.DateUtil;
 
 
 @RestController
@@ -72,10 +75,39 @@ public class RutaController {
 	 * @return
 	 */
 	@PostMapping(value="api/v1/mobility/crearRuta", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity crearRuta(@RequestBody Ruta ruta){
-		rutaDao.save(ruta);
-		return ResponseEntity.ok().build();
+	public ResponseEntity crearRuta(@RequestBody RutaDTO rutaDto){
+
+		try {
+			rutaDto.setFechaReg(DateUtil.tomarFechaActualString());
+			rutaDto.setDuracion(DateUtil.estimarTiempoRuta());
+
+			EdificioDTO origenDto = rutaDto.getOrigen();
+			EdificioDTO destinoDto = rutaDto.getDestino();
+			Ruta rutaToSave = AdapterUtil.rutaDtoToEntity(rutaDto);
 			
+			int idOrigen = origenDto.getNumber();
+			int idDestino = destinoDto.getNumber();
+
+			if (origenDto.getNumber() == 0) {
+				Edificio origen = edificioDao.save(AdapterUtil.edificioDtoToEntity(origenDto));
+				idOrigen = origen.getId();
+			}
+
+			if (destinoDto.getNumber() == 0) {
+				Edificio destino = edificioDao.save(AdapterUtil.edificioDtoToEntity(destinoDto));
+				idDestino = destino.getId();
+			}
+			
+			rutaToSave.setOrigenId(idOrigen);
+			rutaToSave.setDestinoId(idDestino);
+
+			rutaDao.save(rutaToSave);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
+		return ResponseEntity.ok().build();
+
 	}
 	
 	/**

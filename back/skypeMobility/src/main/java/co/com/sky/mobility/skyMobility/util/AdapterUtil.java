@@ -3,6 +3,8 @@ package co.com.sky.mobility.skyMobility.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
+
 import co.com.sky.mobility.skyMobility.dto.EdificioDTO;
 import co.com.sky.mobility.skyMobility.dto.PersonaDTO;
 import co.com.sky.mobility.skyMobility.dto.RutaDTO;
@@ -50,18 +52,19 @@ public class AdapterUtil {
 
 	}
 
-	public static EdificioDTO edificioToDto(Edificio edificio) {
+	public static Edificio edificioDtoToEntity(EdificioDTO edificioDto) {
 
-		EdificioDTO edificioDto = new EdificioDTO();
+		Edificio edificio = new Edificio();
 
-		edificioDto.setNumber(edificio.getId());
-		edificioDto.setNombre(edificio.getNombre());
-		edificioDto.setLongitud(edificio.getLongitud());
-		edificioDto.setLatitud(edificio.getLatitud());
-		edificioDto.setDireccion(edificio.getDireccion());
+		if (edificioDto.getNumber() > 0)
+			edificio.setId(edificioDto.getNumber());
+		
+		edificio.setNombre(StringUtils.isEmpty(edificioDto.getNombre()) ? "No registra": edificioDto.getNombre());
+		edificio.setLongitud(edificioDto.getLongitud());
+		edificio.setLatitud(edificioDto.getLatitud());
+		edificio.setDireccion(StringUtils.isEmpty(edificioDto.getDireccion()) ? "No registra" : edificioDto.getDireccion());
 
-		return edificioDto;
-
+		return edificio;
 	}
 
 	public static List<RutaDTO> convertirRutasToDto(List<Ruta> rutas) {
@@ -280,6 +283,31 @@ public class AdapterUtil {
 		rutaDto.setDestino(convertirEdificioToDto(destino));
 		
 		return rutaDto;
+		
+	}
+	
+	/**
+	 * 
+	 * @param ruta
+	 * @param origen
+	 * @param destino
+	 * @return
+	 */
+	public static Ruta rutaDtoToEntity(RutaDTO rutaDto) {
+		
+		Ruta ruta = new Ruta();
+		
+		ruta.setCupo(rutaDto.getCupo());
+		ruta.setEstado(rutaDto.getEstado());
+		ruta.setFechaPublicacion(DateUtil.stringToDate(rutaDto.getFechaReg()));
+		ruta.setFechaSalida(DateUtil.stringToDate(rutaDto.getFechaSalida()));
+		ruta.setId(rutaDto.getId());
+		ruta.setNumeroPersonas(rutaDto.getNumPersonas());
+		ruta.setDuracion(rutaDto.getDuracion());
+		
+		ruta.setVehiculoId(rutaDto.getVehiculo().getId());
+		
+		return ruta;
 		
 	}
 
