@@ -9,44 +9,50 @@
       <div  #mapCanvas class="map-canvas"></div>
   </ion-content>    
     <ion-row *ngIf="data">
-        <ion-col>
-       <b>Placa:</b>    
-        </ion-col>
-        <ion-col>
-           {{data.vehiculo.placa}}
-        </ion-col>    
-      </ion-row >
-      <ion-row  *ngIf="data">
-          <ion-col>
-         <b>Conductor:</b>    
-          </ion-col>
-          <ion-col>
-              {{data.vehiculo.persona.nombres}} {{data.vehiculo.persona.apellidos}}
-          </ion-col>    
-        </ion-row >
-        <ion-row  *ngIf="data">
-            <ion-col>
-           <b>Fecha de Viaje:</b>    
-            </ion-col>
-            <ion-col  *ngIf="data">
-                {{data.fechaSalida}} 
-            </ion-col>    
-          </ion-row>
-          <ion-row  *ngIf="data">
-              <ion-col>
-             <b>Pasajeros:</b>    
-             </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col *ngIf="data">
-                <ion-row *ngFor="let pas of data.pasajeros; let i = index">
-                    {{pas.nombres}} {{pas.apellidos}}
+        <ion-card style="width: 100%;">
+            <ion-card-content>
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="10">
+                    <b>Conductor:</b>
+                    <p>{{data.vehiculo.persona.nombres}} {{data.vehiculo.persona.apellidos}}</p>
+                  </ion-col>
+                  <ion-col size="2">
+                    <img src="assets/img/insignia.png" alt="carro" class="pequeña">
+                  </ion-col>
                 </ion-row>
-              </ion-col>    
-            </ion-row>
+<br><br>
+                <ion-row>
+                    <ion-col size="10">
+                       <b>Placa:</b>  <br>{{data.vehiculo.placa}}
+                      <p>
+                        Marca : spark<br> 
+                        Modelo: 2006<br> Matrìcula: 4544444</p>
+                    </ion-col>
+                    <ion-col size="2">
+                        <ion-avatar item-start><br>
+                          <img src="assets/img/carro.png" alt="carro" class="center">
+                        </ion-avatar>
+                      </ion-col>
+                  </ion-row>
+<br><br>
+<ion-row>
+    <b>Pasajeros:</b> 
+  <br><ion-col size="12"  *ngFor="let pas of data.pasajeros; let i = index">
+      {{pas.nombre}} {{pas.apellidos}}
+      <p>
+        <ion-icon name="star"></ion-icon>
+        <ion-icon name="star"></ion-icon>
+        <ion-icon name="star"></ion-icon>
+        <ion-icon name="star"></ion-icon>
+        <ion-icon name="star-half"></ion-icon>
+      </p>    <br>
+    </ion-col>
+
+  </ion-row>
                   <ion-row>
                       <ion-col>
-                        <ion-button (click)="closeModal()">Cerrar</ion-button>
+                        <ion-button (click)="closeModal()" expand="full">Cerrar</ion-button>
                       </ion-col>
                     </ion-row>
 <ion-content>

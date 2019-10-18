@@ -8,8 +8,8 @@
   </ion-header>
   
 
-<ion-content>
-  <ion-item>
+<ion-content >
+  <ion-item *ngIf="datosRutas?.length > 0">
       <ion-slides pager="true">
           <ion-slide *ngFor="let dato of datosRutas; let i = index" style=" padding-bottom: 60px;">
               <ion-card class="clash-card barbarian"
@@ -45,4 +45,12 @@
             </ion-slide>
           </ion-slides>
   </ion-item>
+  <ion-item  *ngIf="datosRutas?.length == 0">
+    <img src="../../../assets/img/car2.png" class="center">
+  </ion-item>
+
+  <ion-item  *ngIf="datosRutas?.length == 0">
+      <p class="letraAlta">No tienes rutas para ver</p>
+    </ion-item>
+
 </ion-content>

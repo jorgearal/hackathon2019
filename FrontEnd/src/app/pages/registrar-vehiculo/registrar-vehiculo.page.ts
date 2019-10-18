@@ -38,8 +38,10 @@ export class RegistrarVehiculoPage implements OnInit {
         this.formularioVehiculo.marca = this.infoVehiculo[0].marca;
         this.formularioVehiculo.modelo = this.infoVehiculo[0].modelo;
         this.formularioVehiculo.placa = this.infoVehiculo[0].placa;
-        this.formularioVehiculo.puestos = this.infoVehiculo[0].numeroPuestos;
+        this.formularioVehiculo.puestos = this.infoVehiculo[0].numPuestos;
         this.formularioVehiculo.referencia = this.infoVehiculo[0].referencia;
+        this.formularioVehiculo.fechaSoat = this.infoVehiculo[0].fechaSoat;
+        this.formularioVehiculo.fechaTecnicoMecanica = this.infoVehiculo[0].fechaTecnicoMecanica;
       });
     }
   }

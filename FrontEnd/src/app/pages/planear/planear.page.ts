@@ -30,7 +30,7 @@ export class PlanearPage implements OnInit {
     const modal = await this.modalController.create({
       component: DetalleRutaPage,
       componentProps: {
-        'idViaje': 1
+        'idViaje': 17
       }
     });
 
