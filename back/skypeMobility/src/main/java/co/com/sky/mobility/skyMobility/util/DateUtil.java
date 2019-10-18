@@ -103,6 +103,15 @@ public class DateUtil {
 		return DATETIME_STANDARD_FORMAT.format(Calendar.getInstance().getTime());
 	}
 
+	
+	/**
+	 * 
+	 * @param date
+	 * @return
+	 */
+	public static String date2String(Date date) {
+		return DATETIME_STANDARD_FORMAT.format(date);
+	}
 
 	/**
 	 * 

@@ -204,6 +204,10 @@ public class AdapterUtil {
 			vehiculo.setPersona(new PersonaDTO());
 			vehiculo.getPersona().setId(vehiculoEntity.getPersonaId());
 			vehiculo.setMatricula(vehiculoEntity.getMatricula());
+			
+			vehiculo.setTag(vehiculoEntity.getTag());
+			vehiculo.setFechaSoat(vehiculoEntity.getFechaSoat() != null ? DateUtil.date2String(vehiculoEntity.getFechaSoat()) : null);
+			vehiculo.setFechaTecnicoMecanica(vehiculoEntity.getFechaTecnicoMecanica() != null ? DateUtil.date2String(vehiculoEntity.getFechaTecnicoMecanica()) : null);
 
 			vehiculosDto.add(vehiculo);
 		}
@@ -228,6 +232,10 @@ public class AdapterUtil {
 
 		vehiculo.setPlaca(vehiculoDto.getPlaca());
 		vehiculo.setReferencia(vehiculoDto.getReferencia());
+		
+		vehiculo.setTag(vehiculoDto.getTag());
+		vehiculo.setFechaSoat(StringUtils.isEmpty(vehiculoDto.getFechaSoat()) ? DateUtil.stringToDate(vehiculoDto.getFechaSoat()) : null);
+		vehiculo.setFechaTecnicoMecanica(StringUtils.isEmpty(vehiculoDto.getFechaTecnicoMecanica()) ? DateUtil.stringToDate(vehiculoDto.getFechaTecnicoMecanica()) : null);
 
 		return vehiculo;
 
@@ -250,6 +258,10 @@ public class AdapterUtil {
 
 		vehiculoDto.setPlaca(vehiculo.getPlaca());
 		vehiculoDto.setReferencia(vehiculo.getReferencia());
+		
+		vehiculoDto.setTag(vehiculo.getTag());
+		vehiculoDto.setFechaSoat(vehiculo.getFechaSoat() != null ? DateUtil.date2String(vehiculo.getFechaSoat()) : null);
+		vehiculoDto.setFechaTecnicoMecanica(vehiculo.getFechaTecnicoMecanica() != null ? DateUtil.date2String(vehiculo.getFechaTecnicoMecanica()) : null);
 
 		return vehiculoDto;
 
@@ -279,6 +291,10 @@ public class AdapterUtil {
 		vehiculoDto.setPersona(conductorDto);
 		vehiculoDto.setPlaca(vehiculo.getPlaca());
 		vehiculoDto.setReferencia(vehiculo.getReferencia());
+		
+		vehiculoDto.setTag(vehiculo.getTag());
+		vehiculoDto.setFechaSoat(vehiculo.getFechaSoat() != null ? DateUtil.date2String(vehiculo.getFechaSoat()) : null);
+		vehiculoDto.setFechaTecnicoMecanica(vehiculo.getFechaTecnicoMecanica() != null ? DateUtil.date2String(vehiculo.getFechaTecnicoMecanica()) : null);
 
 		return vehiculoDto;
 

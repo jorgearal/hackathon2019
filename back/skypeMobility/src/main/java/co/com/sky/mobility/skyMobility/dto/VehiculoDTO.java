@@ -27,6 +27,12 @@ public class VehiculoDTO {
     private String matricula;
     
     private List<RutaDTO> rutas;
+    
+	private int tag;
+	
+	private String fechaSoat;
+	
+	private String fechaTecnicoMecanica;
 
 	public int getId() {
 		return id;
@@ -128,6 +134,48 @@ public class VehiculoDTO {
 	 */
 	public void setRutas(List<RutaDTO> rutas) {
 		this.rutas = rutas;
+	}
+
+	/**
+	 * @return the tag
+	 */
+	public int getTag() {
+		return tag;
+	}
+
+	/**
+	 * @param tag the tag to set
+	 */
+	public void setTag(int tag) {
+		this.tag = tag;
+	}
+
+	/**
+	 * @return the fechaSoat
+	 */
+	public String getFechaSoat() {
+		return fechaSoat;
+	}
+
+	/**
+	 * @param fechaSoat the fechaSoat to set
+	 */
+	public void setFechaSoat(String fechaSoat) {
+		this.fechaSoat = fechaSoat;
+	}
+
+	/**
+	 * @return the fechaTecnicoMecanica
+	 */
+	public String getFechaTecnicoMecanica() {
+		return fechaTecnicoMecanica;
+	}
+
+	/**
+	 * @param fechaTecnicoMecanica the fechaTecnicoMecanica to set
+	 */
+	public void setFechaTecnicoMecanica(String fechaTecnicoMecanica) {
+		this.fechaTecnicoMecanica = fechaTecnicoMecanica;
 	}
     
 
