@@ -14,6 +14,7 @@ import { environment } from '../environments/environment';
 import { FormsModule } from '@angular/forms';
 import { PersonaService } from './providers/persona-service';
 import { DetalleRutaPageModule } from './pages/detalle-ruta/detalle-ruta.module';
+import { RutaService } from './services/ruta.service';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { DetalleRutaPageModule } from './pages/detalle-ruta/detalle-ruta.module'
     })
   ],
   declarations: [AppComponent],
-  providers: [InAppBrowser, SplashScreen, StatusBar, PersonaService],
-  bootstrap: [AppComponent]})
+  providers: [InAppBrowser, SplashScreen, StatusBar, PersonaService, RutaService],
+  bootstrap: [AppComponent]
+})
 export class AppModule { }

@@ -19,6 +19,21 @@ export class PersonaService {
         return "hola";
     }
 
+    login(usuario: string, password: string) {
+        let headers = new HttpHeaders(
+            {
+                'Referrer-Policy': 'origin-when-cross-origin'
+            }
+        );
+        return this.httpClient.post<any>(
+            this.api + Constantes.URL_WS_AUTENTICAR,
+            {
+                'email': usuario,
+                'password': password
+            }, {
+                headers 
+            });
+    }
 
     consultarInfoVehiculo(idPersona: number): Observable<any> {
         let headers = new HttpHeaders(

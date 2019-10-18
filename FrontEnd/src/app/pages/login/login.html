@@ -1,35 +1,43 @@
 <ion-content>
+  <div class="background">
+    <div class="backgroundOpacity">
+      <form #loginForm="ngForm" class="login-form">
+        <h1>EcoMobi</h1>
 
-  <form #loginForm="ngForm" class="login-form">
-    <h1>Login</h1>
+        <h5>Inicio de sesión</h5>
+        <div class="txtb">
+          <input type="text" [(ngModel)]="login.username" name="username" type="text" #username="ngModel" placeholder="Usuario">
+        </div>
 
-    <div class="txtb">
-      <input type="text" [(ngModel)]="login.username" name="username" type="text" #username="ngModel" placeholder="Usuario">
+        <div class="txtb">
+          <input [(ngModel)]="login.password" name="password" type="password" #password="ngModel" required placeholder="Contraseña">
+        </div>
+
+        <input (click)="onLogin(loginForm)" type="submit" class="logbtn" value="Login">
+
+        <br>
+
+        <input class="fbbtn" value="Login con Facebook">
+
+        <br>
+
+        <input class="twbtn" value="Login con Twitter">
+
+        <div class="bottom-text"> 
+          ¿No tienes cuenta? <a  (click)="registrarse()" >Registrate</a>
+        </div>
+      </form>
     </div>
+  </div>
+</ion-content>
 
-    <div class="txtb">
-      <input [(ngModel)]="login.password" name="password" type="password" #password="ngModel" required placeholder="Contraseña">
-    </div>
-
-    <input  (click)="onLogin(loginForm)" type="submit" class="logbtn" value="Login">
-
-    <div class="bottom-text"> 
-      ¿No tienes cuenta? <a  (click)="registrarse()" >Registrate</a>
-    </div>
-
-  </form>
-
-  <script type="text/javascript">
-  $(".txtb input").on("focus",function(){
+<script type="text/javascript">
+  $(".txtb input").on("focus",function() {
     $(this).addClass("focus");
   });
 
-  $(".txtb input").on("blur",function(){
+  $(".txtb input").on("blur",function() {
     if($(this).val() == "")
     $(this).removeClass("focus");
   });
-
-  </script>
-
-
-</ion-content>
+</script>
