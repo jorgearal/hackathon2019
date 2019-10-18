@@ -32,7 +32,7 @@ export class RutaService {
         return this.httpClient.post<any>(Constantes.URL_WS_CAMBIAR_ESTADO_RUTA, obj);
     }
 
-    registrarRuta(){
-
+    registrarRuta(ruta: any) {
+        return this.httpClient.post<any>(Constantes.URL_WS_CREAR_RUTA, ruta);
     }
 }

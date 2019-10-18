@@ -44,6 +44,9 @@ export class CompartirVehiculoPage implements OnInit {
 
   visible: boolean = false;
 
+  newRuta:any={"numeroPersonas":"7"};
+  maxcupos:number =5;
+
   constructor(
     @Inject(DOCUMENT) private doc: Document,
     private personaService: PersonaService,
@@ -79,7 +82,10 @@ export class CompartirVehiculoPage implements OnInit {
     this.vehiculoService.consultarVehiculoXIdPersona(idPersona).subscribe(
       (data) => {
         this.infoVehiculo = data[0];
-        console.log("=============== Vehiculo ===============");
+        this.maxcupos = this.infoVehiculo.numeroPuestos;
+        this.newRuta.numeroPersonas = this.maxcupos;
+        this.newRuta.vehiculo = this.infoVehiculo;
+        console.log("=============== Vehiculo 7777 ==============="+this.infoVehiculo.numeroPuestos);
         console.log(JSON.stringify(this.infoVehiculo));
         this.consultarRutaActiva(this.infoVehiculo.id);
       },
@@ -91,9 +97,9 @@ export class CompartirVehiculoPage implements OnInit {
   consultarRutaActiva(idvehiculo) {
     this.rutaService.consultarRutaXVehiculoId(idvehiculo).subscribe(
       (data) => {
-        console.log("++++++++++++++++");
+        console.log("++++++++++++++++1111111");
 
-        console.log(data);
+        console.log(">>>>>>>>>>>>>>>>2222222"+JSON.stringify(data));
         if (data.rutas.length > 0) {
           this.infoRuta = data.rutas[0];
           this.visible = true;
@@ -110,9 +116,18 @@ export class CompartirVehiculoPage implements OnInit {
       (error) => { this.mostrarMensaje(Constantes.MENSAJE_ERROR_SERVICIO); });
   }
 
+  cambiarPasajeros(ev: any){
+    console.log(ev.detail.value);
+    this.newRuta.numeroPersonas = ev.detail.value;
+  }
+
+
   registrarRuta() {
     console.log('*** Registrando ruta ***');
+    this.newRuta.numeroPersonas = this.cupos;
 
+
+    console.log(JSON.stringify(this.newRuta));
   }
 
   iniciarViaje() {
