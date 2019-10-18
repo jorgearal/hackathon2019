@@ -21,10 +21,8 @@
     border-radius: 50%;
   }
 
-  ion-tab-button{
-    font-size: 10px;
-    --background-focused: rgb(0, 170, 0);
-    --color-selected: rgb(0, 170, 0);
-    ion-icon{
-        font-size: 67.5px;
-    }}
+  .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }

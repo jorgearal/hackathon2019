@@ -54,20 +54,10 @@ export class AppComponent implements OnInit {
       icon: 'ios-qr-scanner'
     },
     {
-      title: 'Parqueadero',
-      url: '/map',
-      icon: 'map'
-    },
-    {
       title: 'Meta Mensual',
       url: '/beneficios',
       icon: 'trending-up'
-    },
-    {
-      title: 'Ayuda',
-      url: '/about',
-      icon: 'information-circle'
-    },
+    }
 
   ];
   loggedIn = false;

@@ -46,7 +46,8 @@ export class DetalleRutaPage implements OnInit {
 
   ngOnInit() {
     this.idViaje = this.navParams.data.idViaje;
-     this.loadingCtrl.create({
+    console.log(this.idViaje);
+    this.loadingCtrl.create({
        duration: 3000,
        message: 'Cargando rutas',
      }).then((a) => {
@@ -82,7 +83,7 @@ export class DetalleRutaPage implements OnInit {
        zoom: 11,
        styles: style
      });
-     this.verRutaService.verRutaPorId('1').subscribe((resp) => {
+     this.verRutaService.verRutaPorId(this.idViaje).subscribe((resp) => {
        this.data = resp;
        obtenerPosicionUsuario(this.map);
        placeMarkerAndPanTo(this.map, this.data.destino.latitud, this.data.destino.longitud);

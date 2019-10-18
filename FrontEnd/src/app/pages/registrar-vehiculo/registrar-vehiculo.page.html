@@ -50,7 +50,7 @@
           <ion-label position="stacked" color="primary">Modelo</ion-label>
               <ion-range min="2005" max="2019"   [(ngModel)]="formularioVehiculo.modelo"  name="modelo" color="secondary">
                 <ion-label slot="start"></ion-label>
-                <ion-label slot="end">{{formularioVehiculo.modelo}}</ion-label>
+                <ion-label slot="end"> &nbsp;&nbsp;&nbsp; {{formularioVehiculo.modelo}}</ion-label>
               </ion-range>
         </ion-item>
   
@@ -58,7 +58,7 @@
           <ion-label position="stacked" color="primary" name="numeroPuestos">puestos</ion-label>
           <ion-range min="1" max="4" step="1" [(ngModel)]="formularioVehiculo.puestos"  name="puestos" color="secondary">
               <ion-label slot="start"></ion-label>
-              <ion-label slot="end" >{{formularioVehiculo.puestos}} </ion-label> 
+              <ion-label slot="end" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{formularioVehiculo.puestos}} </ion-label> 
             </ion-range>
         </ion-item>
   
@@ -86,7 +86,7 @@
         </ion-item>
       <ion-item>
           <ion-label position="stacked" color="primary">Fecha de tecnico-mecanica</ion-label>
-          <ion-datetime  [(ngModel)]="formularioVehiculo.fotoMatricula" name="fotoMatricula" displayFormat="MM DD YY"  placeholder="Ingrese Fecha" required></ion-datetime>
+          <ion-datetime  [(ngModel)]="formularioVehiculo.fechaTecnicoMecanica" name="fechaTecnicoMecanica" displayFormat="MM DD YY"  placeholder="Ingrese Fecha" required></ion-datetime>
         </ion-item>
         <br>
       <ion-row>

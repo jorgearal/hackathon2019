@@ -42,6 +42,7 @@ export class CompartirVehiculoPage implements OnInit {
   infoUsuario: any;
 
   visible: boolean = false;
+  
 
   newRuta: any = { "numeroPersonas": "7" };
   maxcupos: number = 5;
