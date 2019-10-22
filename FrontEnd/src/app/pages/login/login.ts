@@ -6,7 +6,7 @@ import { UserData } from '../../providers/user-data';
 
 import { UserOptions } from '../../interfaces/user-options';
 import { PersonaService } from '../../providers/persona-service';
-import { ToastController, Events } from '@ionic/angular';
+import { AlertController, Events } from '@ionic/angular';
 
 
 
@@ -24,11 +24,12 @@ export class LoginPage {
     public userData: UserData,
     public router: Router,
     private events: Events,
-    private toastCtrl: ToastController,
+    private alertCtrl: AlertController,
     private personaService: PersonaService
   ) { }
 
   onLogin(form: NgForm) {
+    console.log("login!!!");
     this.submitted = true;
 
     if (form.valid) {
@@ -38,17 +39,22 @@ export class LoginPage {
         this.events.publish('user:signup');
         this.router.navigateByUrl('/bienvenido');
       }, (error) => {
-        this.toastCtrl.create({
-          message: '<br>Credenciales invalidas<br><br>',
-          duration: 3000,
-          color: 'danger',
-          position: 'middle'
-        }).then((e) => {
-          e.present();
-        });
-      });;
+        this.mostrarMensaje("Credenciales invalidas");
+      });
     }
   }
+
+  mostrarMensaje(texto) {
+    const alert = this.alertCtrl.create({
+      message: texto,
+      subHeader: 'Información',
+      buttons: [{
+        text: 'Aceptar', handler: () => {
+        }
+      }]
+    }).then(alert => alert.present());
+  }
+
 
   registrarse() {
     this.router.navigateByUrl('/registrar');
