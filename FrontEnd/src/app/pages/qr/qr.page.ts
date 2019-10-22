@@ -110,7 +110,7 @@ export class QrPage implements OnInit {
   }
 
 
-  leerCodigo() {
+  /*leerCodigo() {
     // Pedir permiso de utilizar la camara
     this.qrScanner.prepare().then((status: QRScannerStatus) => {
       if (status.authorized) {
@@ -131,6 +131,6 @@ export class QrPage implements OnInit {
         // el permiso no fue otorgado de forma temporal. Puedes pedir permiso de en cualquier otro momento
       }
     }).catch((e: any) => console.log('El error es: ', e));
-  }
+  }*/
 
 }

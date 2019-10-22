@@ -13,7 +13,7 @@
 
   <div class="options">
     <div [hidden]="!modo">
-      <ion-card *ngFor="let opcion of opciones" routerLink="/detalleRuta/{{opcion.id}}">
+      <ion-card *ngFor="let opcion of opciones" routerLink="/rutaActiva/{{opcion.id}}">
         <ion-card-content>
           <ion-grid>
             <ion-row>

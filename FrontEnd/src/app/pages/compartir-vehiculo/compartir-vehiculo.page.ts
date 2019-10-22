@@ -51,6 +51,9 @@ export class CompartirVehiculoPage implements OnInit {
   horaSelected: string;
   showError: boolean = false;
 
+  destinoTemp:any;
+  origenTemp:any;
+
   constructor(
     @Inject(DOCUMENT) private doc: Document,
     private personaService: PersonaService,
@@ -156,21 +159,20 @@ export class CompartirVehiculoPage implements OnInit {
 
 
 
-    
     console.log('*** Registrando ruta ***' + this.newRuta.fechaSalida);
     this.newRuta.numeroPersonas = this.cupos;
 
-    var origen = {};
-    origen.latitud = this.origen.lat;
-    origen.longitud = this.origen.lng;
-    origen.direccion = this.origen.direccion;
-    this.newRuta.origen = origen;
+    this.origenTemp = {};
+    this.origenTemp.latitud = this.origen.lat;
+    this.origenTemp.longitud = this.origen.lng;
+    this.origenTemp.direccion = this.origen.direccion;
+    this.newRuta.origen = this.origenTemp;
 
-    var destino = {};
-    destino.latitud = this.destino.lat;
-    destino.longitud = this.destino.lng;
-    destino.direccion = this.destino.direccion;
-    this.newRuta.destino = destino;
+    this.destinoTemp = {};
+    this.destinoTemp.latitud = this.destino.lat;
+    this.destinoTemp.longitud = this.destino.lng;
+    this.destinoTemp.direccion = this.destino.direccion;
+    this.newRuta.destino = this.destinoTemp;
 
 
     console.log(JSON.stringify(this.newRuta));

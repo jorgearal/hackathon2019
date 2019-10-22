@@ -16,7 +16,6 @@ import { PersonaService } from './providers/persona-service';
 import { DetalleRutaPageModule } from './pages/detalle-ruta/detalle-ruta.module';
 import { RutaService } from './services/ruta.service';
 import { VehiculoService } from './services/vehiculo.service';
-import { QRScanner } from '@ionic-native/qr-scanner/ngx';
 import { ViajeService } from './services/viaje.service';
 
 
@@ -34,7 +33,7 @@ import { ViajeService } from './services/viaje.service';
     })
   ],
   declarations: [AppComponent],
-  providers: [InAppBrowser, SplashScreen, StatusBar, PersonaService, RutaService,VehiculoService, QRScanner, ViajeService],
+  providers: [InAppBrowser, SplashScreen, StatusBar, PersonaService, RutaService,VehiculoService, ViajeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

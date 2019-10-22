@@ -457,18 +457,18 @@
 
   "otros" : [
     {
+      "id": 17,
+      "name": "Viva Envigado",
+      "imagen": "assets/img/logan.webp",
+      "cuposDisponibles": "2",
+      "puntos": 6
+    },
+    {
       "id": 1,
       "name": "Parque de Sabaneta",
       "imagen": "assets/img/picanto.jpg",
       "cuposDisponibles": "2",
       "puntos": 3
-    },
-    {
-      "id": 2,
-      "name": "Viva Envigado",
-      "imagen": "assets/img/logan.webp",
-      "cuposDisponibles": "4",
-      "puntos": 6
     }
   ]
 }
